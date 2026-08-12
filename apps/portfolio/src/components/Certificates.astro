@@ -1,0 +1,87 @@
+---
+import { data } from "../data/resume";
+
+const certificates = data.certificates ?? [];
+---
+
+<section
+  id="certificates"
+  class="section-shell reveal py-24"
+>
+
+  <div class="mb-12">
+
+    <p class="font-mono text-xs uppercase tracking-widest text-neutral-500">
+      Learning
+    </p>
+
+    <h2
+      class="
+        mt-3
+        text-3xl
+        font-semibold
+        text-neutral-950
+        dark:text-white
+      "
+    >
+      Certificates
+    </h2>
+
+  </div>
+
+  <div class="space-y-4">
+
+    {
+      certificates.map((certificate) => (
+
+        <article
+          class="
+            motion-card
+            flex
+            flex-col
+            justify-between
+            gap-4
+            rounded-2xl
+            border
+            border-black/10
+            bg-black/[0.02]
+            p-6
+
+            dark:border-white/10
+            dark:bg-white/[0.025]
+
+            md:flex-row
+            md:items-center
+          "
+        >
+
+          <div>
+
+            <h3
+              class="
+                font-medium
+                text-neutral-950
+                dark:text-white
+              "
+            >
+              {certificate.name}
+            </h3>
+
+            <p class="mt-1 text-sm text-neutral-500">
+              {certificate.issuer}
+            </p>
+
+          </div>
+
+          <div class="font-mono text-xs text-neutral-500">
+            {certificate.status ?? certificate.date}
+          </div>
+
+        </article>
+
+      ))
+    }
+
+  </div>
+
+</section>

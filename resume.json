@@ -1,0 +1,331 @@
+{
+  "basics": {
+    "name": "Sina Fateh",
+    "label": "Python Backend Developer | Network & IT Support",
+    "email": "sinafateh1382@gmail.com",
+    "phone": "+989122638978",
+    "url": "https://sinafateh.ir/",
+    "about": "Python Backend Developer with hands-on experience in Django, REST APIs, Linux, Docker, and networking.",
+    "summary": "Python Backend Developer with hands-on experience building web applications and RESTful APIs using Python, Django, and Django REST Framework. Experienced with JWT authentication, role-based access control, WebSockets, background tasks, caching, automated testing, CI/CD, and Docker-based deployment through production-style projects. Previous technical support experience in an ISP environment provides practical knowledge of FTTH, ADSL, VDSL, PTP, TCP/IP, IP configuration, routing, DNS, DHCP, troubleshooting, and customer support workflows. Comfortable working with Linux and Ubuntu Server, and currently pursuing an M.Sc. in Computer Engineering with a specialization in Computer Networks.",
+    "location": {
+      "city": "Tehran",
+      "countryCode": "IR"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "cnafateh",
+        "url": "https://github.com/cnafateh/"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "cnafateh",
+        "url": "https://www.linkedin.com/in/cnafateh/"
+      }
+    ]
+  },
+
+  "work": [
+  {
+    "name": "Shatel",
+    "url": "https://www.shatel.ir/",
+    "position": "Technical Support Specialist",
+    "startDate": "2025-04",
+    "endDate": "2025-09",
+    "summary": "Provided technical support for internet services in a large ISP environment.",
+    "highlights": [
+      "Supported FTTH, ADSL, VDSL, and PTP services and diagnosed connectivity, IP configuration, routing, and service-layer issues.",
+      "Guided users through troubleshooting and configuration while documenting and tracking incidents through the internal CRM system.",
+      "Escalated unresolved technical issues to network and development teams and coordinated follow-up through resolution."
+    ],
+    "keywords": [
+      "FTTH",
+      "ADSL",
+      "VDSL",
+      "PTP",
+      "TCP/IP",
+      "Troubleshooting",
+      "CRM"
+    ]
+  },
+  {
+    "name": "NADCo Sharif",
+    "url": "",
+    "position": "Robotics Teacher",
+    "startDate": "2024-10",
+    "endDate": "2025-06",
+    "summary": "Delivered part-time programming, electronics, and robotics instruction through project-based learning.",
+    "highlights": [
+  "Taught programming and electronics through structured, project-based lessons.",
+  "Designed practical exercises that strengthened problem-solving, algorithmic thinking, and technical communication."
+],
+    "keywords": [
+      "Teaching",
+      "Robotics",
+      "Electronics",
+      "Problem Solving"
+    ]
+  }
+],
+
+  "education": [
+    {
+      "institution": "Islamic Azad University, South Tehran Branch",
+      "url": "",
+      "area": "Computer Engineering - Computer Networks",
+      "studyType": "M.Sc.",
+      "startDate": "2026",
+      "endDate": "Present"
+    },
+    {
+      "institution": "Islamic Azad University, West Tehran Branch",
+      "url": "",
+      "area": "Computer Engineering",
+      "studyType": "B.Sc.",
+      "startDate": "2021",
+      "endDate": "2025"
+    }
+  ],
+
+  "skills": [
+    {
+      "name": "Backend Development",
+      "keywords": [
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "Django Channels",
+        "ASGI",
+        "Django ORM",
+        "RESTful API Design",
+        "JWT Authentication",
+        "Role-Based Access Control (RBAC)"
+      ]
+    },
+    {
+      "name": "Databases & Caching",
+      "keywords": [
+        "PostgreSQL",
+        "MySQL",
+        "SQL",
+        "Redis",
+        "Relational Data Modeling"
+      ]
+    },
+    {
+      "name": "Testing & API Documentation",
+      "keywords": [
+        "Pytest",
+        "Unit Testing",
+        "Integration Testing",
+        "Swagger / OpenAPI",
+        "drf-spectacular",
+        "Postman"
+      ]
+    },
+    {
+      "name": "DevOps & Infrastructure",
+      "keywords": [
+        "Docker",
+        "Docker Compose",
+        "Git",
+        "GitHub",
+        "GitHub Actions",
+        "CI/CD Fundamentals",
+        "Linux",
+        "Ubuntu Server"
+      ]
+    },
+    {
+      "name": "Networking",
+      "keywords": [
+        "TCP/IP",
+        "OSI Model",
+        "IPv4 Addressing",
+        "Subnetting",
+        "DNS",
+        "DHCP",
+        "NAT",
+        "Routing Fundamentals",
+        "Switching Fundamentals",
+        "VLAN Fundamentals",
+        "VPN"
+      ]
+    },
+    {
+      "name": "Network & Troubleshooting Tools",
+      "keywords": [
+        "Ping",
+        "Tracert / Traceroute",
+        "Ipconfig",
+        "Nslookup",
+        "Netstat",
+        "OpenVPN",
+        "Netplan",
+        "iptables",
+        "PowerShell Fundamentals"
+      ]
+    },
+    {
+      "name": "ISP & IT Support",
+      "keywords": [
+        "FTTH",
+        "ADSL",
+        "VDSL",
+        "PTP Connections",
+        "Service-Layer Troubleshooting",
+        "Windows 10/11",
+        "End-User Support",
+        "CRM / Ticket Handling",
+        "Technical Documentation"
+      ]
+    },
+    {
+      "name": "Software Engineering",
+      "keywords": [
+        "Object-Oriented Programming (OOP)",
+        "Clean Code Fundamentals",
+        "HTTP / HTTPS",
+        "Client-Server Architecture",
+        "Background Tasks",
+        "Caching"
+      ]
+    },
+    {
+      "name": "Frontend Familiarity",
+      "keywords": [
+        "React",
+        "JavaScript",
+        "HTML5",
+        "CSS3"
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "Pediatric Clinic Platform (Medisite)",
+      "description": "Developed backend services for a pediatric clinic platform using Django REST Framework. Implemented user registration, JWT authentication, appointment scheduling, blog and content management, and role-based access control for Doctor, Editor, and Patient roles. Added a business rule limiting each patient to one active appointment. Containerized Django, React, and MySQL using Docker and deployed the application to cloud hosting while collaborating with the frontend team on API integration.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "url": "",
+      "keywords": [
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "React",
+        "MySQL",
+        "JWT",
+        "RBAC",
+        "REST API",
+        "Docker"
+      ]
+    },
+    {
+      "name": "Private Real-Time Chat Platform",
+      "description": "Developed a secure private messaging platform using Django, Django Channels, ASGI, and WebSockets. Implemented authenticated real-time communication, persistent message history, username-based private user search without exposing a public user directory, and timezone-aware timestamps. Containerized the application with Docker and published the image on Docker Hub for simplified deployment.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "url": "",
+      "keywords": [
+        "Python",
+        "Django",
+        "Django Channels",
+        "WebSockets",
+        "ASGI",
+        "Docker"
+      ]
+    },
+    {
+      "name": "E-commerce Backend",
+      "description": "Developed backend APIs for catalog, cart, checkout, and order-management functionality as part of a team project. Implemented JWT authentication and role-based permissions, Redis caching, Celery background tasks, Django signals, and Swagger/OpenAPI documentation. Added unit and integration tests using Pytest, configured GitHub Actions CI, and containerized the application using Docker and PostgreSQL.",
+      "startDate": "2025",
+      "endDate": "2026",
+      "url": "",
+      "keywords": [
+        "Python",
+        "Django REST Framework",
+        "PostgreSQL",
+        "Redis",
+        "Celery",
+        "Pytest",
+        "JWT",
+        "Swagger",
+        "GitHub Actions",
+        "Docker"
+      ]
+    },
+    {
+      "name": "Home VPN Gateway",
+      "description": "Designed and configured a centralized VPN gateway using OpenVPN on Ubuntu Server. Configured Netplan and iptables for routing, traffic forwarding, controlled network access, and network isolation. Implemented encrypted remote connectivity and gained practical experience with Linux networking and infrastructure troubleshooting.",
+      "startDate": "2025",
+      "endDate": "2025",
+      "url": "",
+      "keywords": [
+        "Ubuntu Server",
+        "Linux",
+        "OpenVPN",
+        "Netplan",
+        "iptables",
+        "Routing",
+        "VPN",
+        "Networking"
+      ]
+    },
+    {
+      "name": "Concurrent Client-Server Encryption Application",
+      "description": "Built a TCP client-server application in Python capable of handling multiple concurrent client connections and returning Caesar-encrypted messages. Implemented client identification, configurable encryption behavior, socket communication, connection-error handling, and documented the client-server architecture and communication flow.",
+      "startDate": "2026",
+      "endDate": "2026",
+      "url": "",
+      "keywords": [
+        "Python",
+        "Socket Programming",
+        "TCP/IP",
+        "Client-Server Architecture",
+        "Concurrency",
+        "Caesar Cipher"
+      ]
+    },
+    {
+      "name": "Resume as Code Platform",
+      "description": "Developing a JSON-driven personal resume and portfolio platform using Astro and TypeScript. The project uses a single structured JSON source to generate resume content, grouped technical skills, professional experience, education, projects, and profile information. The application is containerized with Docker and Nginx with plans for automated CI/CD deployment through GitHub Actions.",
+      "startDate": "2026",
+      "endDate": "Present",
+      "url": "",
+      "keywords": [
+        "Astro",
+        "TypeScript",
+        "JSON",
+        "Docker",
+        "Nginx",
+        "GitHub Actions",
+        "CI/CD"
+      ]
+    }
+  ],
+
+  "certificates": [
+    {
+      "name": "Cisco CCNA Training",
+      "issuer": "Training Program",
+      "date": "2026",
+      "status": "Enrolled"
+    }
+  ],
+
+  "languages": [
+    {
+      "language": "Persian",
+      "fluency": "Native"
+    },
+    {
+      "language": "English",
+      "fluency": "Intermediate"
+    },
+    {
+      "language": "German",
+      "fluency": "Elementary"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+---
+import { data } from "../data/resume";
+
+const { basics } = data;
+---
+
+<section
+  id="contact"
+  class="section-shell reveal py-32"
+>
+
+  <div
+    class="
+      motion-card
+      rounded-3xl
+      border
+      border-black/10
+      bg-black/[0.02]
+      p-8
+
+      dark:border-white/10
+      dark:bg-white/[0.025]
+
+      md:p-12
+    "
+  >
+
+    <p class="font-mono text-xs uppercase tracking-widest text-neutral-500">
+      Contact
+    </p>
+
+    <h2
+      class="
+        mt-4
+        max-w-2xl
+        text-3xl
+        font-semibold
+        text-neutral-950
+        dark:text-white
+        md:text-4xl
+      "
+    >
+      Interested in working together?
+    </h2>
+
+    <p
+      class="
+        mt-5
+        max-w-2xl
+        text-neutral-600
+        dark:text-neutral-400
+      "
+    >
+      Feel free to reach out for backend development,
+      networking, or software engineering opportunities.
+    </p>
+
+    <a
+  href={`mailto:${basics.email}`}
+  class="
+    mt-8 inline-flex items-center justify-center
+    rounded-full
+    bg-neutral-950
+    px-5 py-2.5
+    text-sm font-medium
+    !text-white
+    transition
+    hover:bg-neutral-800
+
+    dark:bg-white
+    dark:!text-black
+    dark:hover:bg-neutral-200
+  "
+>
+  {basics.email}
+</a>
+
+  </div>
+
+</section>

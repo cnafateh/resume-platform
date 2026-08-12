@@ -1,0 +1,100 @@
+---
+import { data } from "../data/resume";
+
+const jobs = data.work ?? [];
+---
+
+<section
+  id="experience"
+  class="section-shell reveal py-24"
+>
+
+  <div class="mb-12">
+    <p class="font-mono text-xs uppercase tracking-widest text-neutral-500">
+      Career
+    </p>
+
+    <h2
+      class="
+        mt-3
+        text-3xl
+        font-semibold
+        text-neutral-950
+        dark:text-white
+      "
+    >
+      Experience
+    </h2>
+  </div>
+
+  <div class="space-y-12">
+
+    {
+      jobs.map((job) => (
+
+        <article
+          class="
+            grid gap-4
+            border-t border-black/10
+            pt-6
+            dark:border-white/10
+            md:grid-cols-[220px_1fr]
+          "
+        >
+
+          <div class="text-sm text-neutral-500">
+            {job.startDate} — {job.endDate}
+          </div>
+
+          <div>
+
+            <h3
+              class="
+                text-lg
+                font-medium
+                text-neutral-950
+                dark:text-white
+              "
+            >
+              {job.position}
+            </h3>
+
+            <p class="mt-1 text-neutral-500">
+              {job.name}
+            </p>
+
+            {job.summary && (
+              <p
+                class="
+                  mt-4
+                  max-w-2xl
+                  leading-7
+                  text-neutral-600
+                  dark:text-neutral-400
+                "
+              >
+                {job.summary}
+              </p>
+            )}
+
+            <ul
+              class="
+                mt-5
+                space-y-2
+                text-sm
+                text-neutral-500
+              "
+            >
+              {job.highlights?.map((item) => (
+                <li>— {item}</li>
+              ))}
+            </ul>
+
+          </div>
+
+        </article>
+      ))
+    }
+
+  </div>
+</section>

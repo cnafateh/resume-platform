@@ -1,0 +1,26 @@
+# dependencies
+**/node_modules/
+
+# Astro
+**/.astro/
+**/dist/
+
+# editors
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# environment
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# misc
+coverage/

@@ -1,0 +1,80 @@
+---
+import { data } from "../data/resume";
+
+const education = data.education ?? [];
+---
+
+<section
+  id="education"
+  class="section-shell reveal py-24"
+>
+
+  <div class="mb-12">
+
+    <p class="font-mono text-xs uppercase tracking-widest text-neutral-500">
+      Education
+    </p>
+
+    <h2
+      class="
+        mt-3
+        text-3xl
+        font-semibold
+        text-neutral-950
+        dark:text-white
+      "
+    >
+      Academic background
+    </h2>
+
+  </div>
+
+  <div class="space-y-8">
+
+    {
+      education.map((item) => (
+
+        <article
+          class="
+            grid
+            gap-3
+            border-t
+            border-black/10
+            pt-6
+
+            dark:border-white/10
+
+            md:grid-cols-[220px_1fr]
+          "
+        >
+
+          <div class="font-mono text-xs text-neutral-500">
+            {item.startDate} — {item.endDate}
+          </div>
+
+          <div>
+
+            <h3
+              class="
+                font-medium
+                text-neutral-950
+                dark:text-white
+              "
+            >
+              {item.studyType} {item.area}
+            </h3>
+
+            <p class="mt-1 text-neutral-500">
+              {item.institution}
+            </p>
+
+          </div>
+
+        </article>
+
+      ))
+    }
+
+  </div>
+
+</section>

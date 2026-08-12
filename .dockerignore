@@ -1,0 +1,11 @@
+**/node_modules
+**/.astro
+**/dist
+**/.git
+**/.vscode
+**/.idea
+**/*.log
+
+.git
+.gitignore
+README.md

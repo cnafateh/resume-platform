@@ -1,0 +1,743 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+:root {
+  --background: #f8f8f6;
+  --foreground: #181818;
+
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-hover: rgba(255, 255, 255, 0.95);
+
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.14);
+
+  --muted: #666;
+  --muted-soft: #8b8b8b;
+
+  --dock-bg: rgba(250, 250, 248, 0.78);
+  --dock-active: rgba(0, 0, 0, 0.07);
+
+  --shadow-soft:
+    0 8px 30px rgba(0, 0, 0, 0.05);
+
+  --shadow-card:
+    0 18px 50px rgba(0, 0, 0, 0.08);
+
+  --shadow-dock:
+    0 18px 50px rgba(0, 0, 0, 0.12),
+    0 3px 10px rgba(0, 0, 0, 0.05);
+
+  color-scheme: light;
+}
+
+
+html.dark {
+  --background: #090909;
+  --foreground: #ededed;
+
+  --surface: rgba(20, 20, 20, 0.7);
+  --surface-hover: rgba(28, 28, 28, 0.92);
+
+  --border: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(255, 255, 255, 0.16);
+
+  --muted: #aaa;
+  --muted-soft: #747474;
+
+  --dock-bg: rgba(18, 18, 18, 0.78);
+  --dock-active: rgba(255, 255, 255, 0.1);
+
+  --shadow-soft:
+    0 10px 35px rgba(0, 0, 0, 0.35);
+
+  --shadow-card:
+    0 20px 55px rgba(0, 0, 0, 0.45);
+
+  --shadow-dock:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 3px 12px rgba(0, 0, 0, 0.3);
+
+  color-scheme: dark;
+}
+
+
+/* =========================================================
+   RESET / BASE
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+
+  background: var(--background);
+}
+
+
+body {
+  margin: 0;
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(120, 120, 120, 0.055),
+      transparent 34rem
+    ),
+    var(--background);
+
+  color: var(--foreground);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+
+html.dark body {
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(255, 255, 255, 0.035),
+      transparent 36rem
+    ),
+    var(--background);
+}
+
+
+a {
+  color: inherit;
+}
+
+
+button {
+  font: inherit;
+}
+
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+
+::selection {
+  background: rgba(110, 110, 110, 0.22);
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+main {
+  padding-bottom: 9rem;
+}
+
+
+.section-shell {
+  width: 100%;
+  max-width: 72rem;
+
+  margin-inline: auto;
+
+  padding-inline: 2rem;
+}
+
+
+section[id] {
+  scroll-margin-top: 2rem;
+}
+
+
+/* =========================================================
+   GLASS
+========================================================= */
+
+.glass {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  backdrop-filter:
+    blur(20px)
+    saturate(150%);
+
+  -webkit-backdrop-filter:
+    blur(20px)
+    saturate(150%);
+
+  box-shadow: var(--shadow-soft);
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal {
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  transition:
+    opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.motion-card {
+  position: relative;
+
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 250ms ease,
+    background-color 250ms ease,
+    box-shadow 320ms ease;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+
+  .motion-card:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--border-hover);
+
+    box-shadow: var(--shadow-card);
+  }
+
+}
+
+
+/* =========================================================
+   DESKTOP DOCK
+========================================================= */
+
+.portfolio-dock {
+  position: fixed;
+
+  z-index: 100;
+
+  left: 50%;
+  bottom: 1.35rem;
+
+  transform: translateX(-50%);
+}
+
+
+.dock-shell {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.25rem;
+
+  padding: 0.42rem;
+
+  border-radius: 1.25rem;
+
+  background: var(--dock-bg);
+
+  border: 1px solid var(--border);
+
+  backdrop-filter:
+    blur(24px)
+    saturate(170%);
+
+  -webkit-backdrop-filter:
+    blur(24px)
+    saturate(170%);
+
+  box-shadow: var(--shadow-dock);
+
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+
+.dock-item {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 2.9rem;
+  height: 2.9rem;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 0.85rem;
+
+  background: transparent;
+
+  color: var(--muted);
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  transition:
+    width 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+
+.dock-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.dock-label {
+  position: absolute;
+
+  top: -2.5rem;
+  left: 50%;
+
+  transform:
+    translateX(-50%)
+    translateY(5px);
+
+  padding: 0.35rem 0.55rem;
+
+  border-radius: 0.5rem;
+
+  background: #161616;
+
+  color: white;
+
+  font-size: 0.68rem;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.2);
+
+  transition:
+    opacity 180ms ease,
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.dock-item:hover {
+  background: var(--dock-active);
+
+  color: var(--foreground);
+
+  transform: translateY(-4px);
+}
+
+
+.dock-item:hover .dock-icon {
+  transform: scale(1.08);
+}
+
+
+.dock-item:hover .dock-label {
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+.dock-item.active {
+  background: var(--dock-active);
+
+  color: var(--foreground);
+}
+
+
+.dock-item.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 0.25rem;
+
+  width: 3px;
+  height: 3px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+
+.dock-divider {
+  width: 1px;
+  height: 1.55rem;
+
+  margin-inline: 0.16rem;
+
+  background: var(--border);
+}
+
+
+.theme-item {
+  appearance: none;
+}
+
+
+/* =========================================================
+   LARGE SCREEN
+========================================================= */
+
+@media (min-width: 1280px) {
+
+  .section-shell {
+    padding-inline: 2.5rem;
+  }
+
+}
+
+
+@media (min-width: 1536px) {
+
+  .section-shell {
+    max-width: 76rem;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+  .section-shell {
+    padding-inline: 2.25rem;
+  }
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  html {
+    scroll-padding-top: 1rem;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  main {
+    padding-bottom:
+      calc(
+        6.5rem +
+        env(safe-area-inset-bottom)
+      );
+  }
+
+  .section-shell {
+    padding-inline: 1.5rem;
+  }
+
+  .portfolio-dock {
+    left: 0;
+    right: 0;
+
+    bottom:
+      max(
+        0.75rem,
+        env(safe-area-inset-bottom)
+      );
+
+    width: 100%;
+
+    transform: none;
+
+    padding-inline: 1rem;
+  }
+
+  .dock-shell {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.25rem;
+
+    padding: 0.4rem;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    border-radius: 1.35rem;
+
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+
+    -ms-overflow-style: none;
+
+    overscroll-behavior-x: contain;
+
+    background: var(--dock-bg);
+  }
+
+  .dock-shell::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dock-divider {
+    flex: 0 0 auto;
+
+    width: 1px;
+    height: 1.8rem;
+
+    margin-inline: 0.2rem;
+  }
+
+  .dock-item {
+    flex: 0 0 auto;
+
+    width: auto;
+    min-width: 4rem;
+    height: 3.7rem;
+
+    flex-direction: column;
+
+    gap: 0.28rem;
+
+    padding:
+      0.5rem
+      0.7rem;
+
+    border-radius: 1rem;
+
+    transform: none;
+  }
+
+  .dock-icon {
+    height: 1.25rem;
+  }
+
+  .dock-label {
+    position: static;
+
+    padding: 0;
+
+    transform: none;
+
+    background: transparent;
+
+    box-shadow: none;
+
+    color: inherit;
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    font-size: 0.62rem;
+    font-weight: 500;
+
+    line-height: 1;
+  }
+
+  .dock-item:hover {
+    transform: none;
+  }
+
+  .dock-item:hover .dock-icon {
+    transform: none;
+  }
+
+  .dock-item:hover .dock-label {
+    transform: none;
+  }
+
+  .dock-item:active {
+    transform: scale(0.94);
+  }
+
+  .dock-item.active {
+    background: var(--dock-active);
+
+    color: var(--foreground);
+  }
+
+  .dock-item.active::after {
+    display: none;
+  }
+
+  .theme-item {
+    flex: 0 0 auto;
+
+    min-width: 4rem;
+  }
+}
+@media (max-width: 480px) {
+
+  .section-shell {
+    padding-inline: 1.25rem;
+  }
+
+  .portfolio-dock {
+    padding-inline: 0.65rem;
+  }
+
+  .dock-shell {
+    padding: 0.32rem;
+  }
+
+  .dock-item {
+    min-width: 3.8rem;
+
+    height: 3.5rem;
+
+    padding-inline: 0.55rem;
+  }
+
+  .dock-label {
+    font-size: 0.58rem;
+  }
+
+  .dock-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .section-shell {
+    padding-inline: 1.1rem;
+  }
+
+
+  .portfolio-dock {
+    left: 0.5rem;
+    right: 0.5rem;
+  }
+
+
+  .dock-label {
+    font-size: 0.55rem;
+  }
+
+}
+
+
+/* =========================================================
+   TOUCH
+========================================================= */
+
+@media (hover: none) {
+
+  .motion-card:active {
+    transform: scale(0.99);
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+}

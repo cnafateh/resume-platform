@@ -1,0 +1,36 @@
+---
+import { CV_DATA } from "../data/cv";
+
+const { skills } = CV_DATA;
+---
+
+<section class="flex flex-col gap-4">
+    <h2 class="text-xl font-bold" id="skills-section">
+        Skills
+    </h2>
+
+    <div class="flex flex-col gap-4">
+        {
+            skills.map((group) => (
+                <div class="flex flex-col gap-2">
+                    <h3 class="font-mono text-sm font-semibold">
+                        {group.name}
+                    </h3>
+
+                    <ul
+                        class="flex list-none flex-wrap gap-1 p-0"
+                        aria-label={`${group.name} skills`}
+                    >
+                        {
+                            group.skills.map((skill) => (
+                                <li class="rounded-md bg-foreground px-2 py-1 font-mono text-xs text-background">
+                                    {skill}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            ))
+        }
+    </div>
+</section>

@@ -1,0 +1,27 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: apps/portfolio/Dockerfile
+
+    image: sina-portfolio:latest
+    container_name: sina-portfolio
+
+    ports:
+      - "8081:80"
+
+    restart: unless-stopped
+
+
+  cv:
+    build:
+      context: .
+      dockerfile: apps/cv/Dockerfile
+
+    image: sina-cv:latest
+    container_name: sina-cv
+
+    ports:
+      - "8082:80"
+
+    restart: unless-stopped

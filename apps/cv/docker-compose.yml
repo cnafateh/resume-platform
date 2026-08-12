@@ -1,0 +1,14 @@
+services:
+  resume:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: sinafateh/resume-platform:latest
+
+    container_name: sina-resume
+
+    ports:
+      - "8080:80"
+
+    restart: unless-stopped

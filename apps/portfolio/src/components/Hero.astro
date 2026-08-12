@@ -1,0 +1,107 @@
+---
+import { data } from "../data/resume";
+
+const { basics } = data;
+---
+
+<section
+  id="home"
+  class="
+    section-shell
+    flex
+    min-h-[calc(100svh-1rem)]
+    items-center
+    py-24
+    pb-32
+    md:min-h-screen
+    md:pb-36
+  "
+>  <div class="max-w-3xl">
+
+    <p class="mb-4 font-mono text-sm text-neutral-500">
+      Tehran, Iran
+    </p>
+
+    <h1
+      class="
+        text-5xl
+        font-semibold
+        tracking-tight
+        text-neutral-950
+        dark:text-white
+        md:text-7xl
+      "
+    >
+      {basics.name}
+    </h1>
+
+    <h2
+      class="
+        mt-5
+        text-xl
+        text-neutral-600
+        dark:text-neutral-400
+        md:text-2xl
+      "
+    >
+      {basics.label}
+    </h2>
+
+    <p
+      class="
+        mt-8
+        max-w-2xl
+        text-base
+        leading-8
+        text-neutral-600
+        dark:text-neutral-400
+        md:text-lg
+      "
+    >
+      {basics.about ?? basics.summary}
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+
+      <a
+  href="#projects"
+  class="
+    inline-flex items-center justify-center
+    rounded-full
+    bg-neutral-950
+    px-5 py-2.5
+    text-sm font-medium
+    !text-white
+    transition-all duration-200
+    hover:bg-neutral-800
+    hover:shadow-md
+    hover:-translate-y-0.5
+
+    dark:bg-white
+    dark:!text-black
+    dark:hover:bg-neutral-200
+  "
+>
+  View projects
+</a>
+      <a
+        href="https://cv.sinafateh.ir"
+        class="
+          rounded-full
+          border
+          border-black/10
+          px-5 py-2.5
+          text-sm
+          transition
+          hover:bg-black/5
+
+          dark:border-white/15
+          dark:hover:bg-white/10
+        "
+      >
+        View CV
+      </a>
+
+    </div>
+  </div>
+</section>

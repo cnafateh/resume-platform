@@ -1,0 +1,93 @@
+---
+import {
+  House,
+  BriefcaseBusiness,
+  Code2,
+  Layers3,
+  Award,
+  GraduationCap,
+  Mail,
+  Sun,
+  Moon
+} from "lucide-astro";
+
+const items = [
+  { href: "#home", label: "Home", icon: House },
+  { href: "#experience", label: "Work", icon: BriefcaseBusiness },
+  { href: "#skills", label: "Skills", icon: Layers3 },
+  { href: "#projects", label: "Projects", icon: Code2 },
+  { href: "#certificates", label: "Certs", icon: Award },
+  { href: "#education", label: "Education", icon: GraduationCap },
+  { href: "#contact", label: "Contact", icon: Mail },
+];
+---
+
+<nav
+  class="portfolio-dock"
+  aria-label="Portfolio navigation"
+>
+  <div class="dock-shell">
+
+    {
+      items.map(({ href, label, icon: Icon }) => (
+        <a
+          href={href}
+          data-section-link
+          aria-label={label}
+          class="dock-item"
+        >
+          <span class="dock-icon">
+            <Icon size={20} strokeWidth={1.8} />
+          </span>
+
+          <span class="dock-label">
+            {label}
+          </span>
+        </a>
+      ))
+    }
+
+    <div class="dock-divider"></div>
+
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-label="Toggle color theme"
+      class="dock-item theme-item"
+    >
+      <span class="dock-icon">
+        <Sun
+          size={20}
+          strokeWidth={1.8}
+          class="hidden dark:block"
+        />
+
+        <Moon
+          size={20}
+          strokeWidth={1.8}
+          class="block dark:hidden"
+        />
+      </span>
+
+      <span class="dock-label">
+        Theme
+      </span>
+    </button>
+
+  </div>
+</nav>
+
+<script is:inline>
+  const toggle = document.getElementById("theme-toggle");
+
+  toggle?.addEventListener("click", () => {
+    const root = document.documentElement;
+
+    root.classList.toggle("dark");
+
+    localStorage.setItem(
+      "theme",
+      root.classList.contains("dark") ? "dark" : "light"
+    );
+  });
+</script>
