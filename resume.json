@@ -306,13 +306,31 @@
   ],
 
   "certificates": [
-    {
-      "name": "Cisco CCNA Training",
-      "issuer": "Training Program",
-      "date": "2026",
-      "status": "Enrolled"
-    }
-  ],
+  {
+    "name": "Cisco CCNA Training",
+    "issuer": "Arjang Institute of Higher Education",
+    "date": "2026",
+    "status": "Enrolled"
+  },
+  {
+    "name": "Advanced Python",
+    "issuer": "Arjang Institute of Higher Education",
+    "date": "2023",
+    "status": "Completed"
+  },
+  {
+    "name": "Web Design - Client Side",
+    "issuer": "LAITEC",
+    "date": "2023",
+    "status": "Completed"
+  },
+  {
+    "name": "Python & Django Programming",
+    "issuer": "LAITEC",
+    "date": "2022",
+    "status": "Completed"
+  }
+],
 
   "languages": [
     {
