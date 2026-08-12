@@ -1,0 +1,69 @@
+name: Build and Publish Resume Images
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "resume.json"
+      - "apps/portfolio/**"
+      - "apps/cv/**"
+      - ".github/workflows/build-images.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build-portfolio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push portfolio image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/portfolio/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/resume-portfolio:latest
+            ghcr.io/${{ github.repository_owner }}/resume-portfolio:${{ github.sha }}
+
+  build-cv:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push CV image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/cv/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/resume-cv:latest
+            ghcr.io/${{ github.repository_owner }}/resume-cv:${{ github.sha }}
