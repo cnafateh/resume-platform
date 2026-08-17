@@ -12,7 +12,7 @@ interface Props {
 const { project } = Astro.props;
 
 const github = project.links?.github;
-const live = project.links?.live;
+const live = project.url || project.links?.live;
 ---
 
 <article
