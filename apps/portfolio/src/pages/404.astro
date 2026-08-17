@@ -1,0 +1,1963 @@
+---
+const pageTitle = "404 — Page Not Found | Sina Fateh";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <meta name="robots" content="noindex, follow" />
+
+    <title>{pageTitle}</title>
+
+    <meta
+      name="description"
+      content="The page you are looking for could not be found."
+    />
+  </head>
+
+  <body>
+    <div class="noise"></div>
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+
+    <main class="page">
+      <nav class="navbar">
+        <a href="/" class="brand">
+          <span class="brand-dot"></span>
+          <span>Sina Fateh</span>
+        </a>
+
+        <a href="/" class="home-link">
+          <span>←</span>
+          Back home
+        </a>
+      </nav>
+
+      <div class="content">
+        <section class="intro">
+          <div class="status">
+            <span class="status-dot"></span>
+            HTTP_STATUS: 404
+          </div>
+
+          <div class="error-code">
+            4<span>0</span>4
+          </div>
+
+          <h1>
+            Looks like this route
+            <span>never deployed.</span>
+          </h1>
+
+          <p>
+            The page you're looking for doesn't exist, moved somewhere else,
+            or got lost between development and production.
+          </p>
+
+          <div class="terminal">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div>terminal</div>
+            </div>
+
+            <div class="terminal-body">
+              <div>
+                <span class="prompt">$</span>
+                curl sinafateh.ir/this-page
+              </div>
+
+              <div class="terminal-error">
+                Error: route not found
+              </div>
+
+              <div>
+                <span class="prompt">$</span>
+                cd /
+                <span class="cursor"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a href="/" class="primary-btn">
+              Back to portfolio
+              <span>↗</span>
+            </a>
+
+            <button id="playButton" class="secondary-btn">
+              Play while you're here
+            </button>
+          </div>
+        </section>
+
+        <section class="game-card">
+          <div class="game-header">
+            <div>
+              <div class="game-label">
+                MINI_GAME
+              </div>
+
+              <h2>Deploy Defender</h2>
+            </div>
+
+            <div class="game-stats">
+              <div>
+                <span>score</span>
+                <strong id="score">0</strong>
+              </div>
+
+              <div>
+                <span>best</span>
+                <strong id="bestScore">0</strong>
+              </div>
+
+              <div>
+                <span>health</span>
+                <strong id="health">3</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+
+            <div id="gameOverlay" class="game-overlay">
+              <div class="overlay-icon">
+                &lt;/&gt;
+              </div>
+
+              <h3>Protect the deployment</h3>
+
+              <p>
+                Catch valid packets.
+                Avoid production errors.
+              </p>
+
+              <div class="legend">
+                <span>
+                  <i class="valid"></i>
+                  valid packet
+                </span>
+
+                <span>
+                  <i class="error"></i>
+                  error
+                </span>
+              </div>
+
+              <button id="startGame">
+                Start deployment
+              </button>
+            </div>
+
+            <div class="controls">
+              mouse · touch · ← →
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <span>
+          sinafateh.ir
+        </span>
+
+        <span class="footer-separator">•</span>
+
+        <span>
+          Lost routes happen.
+        </span>
+      </footer>
+    </main>
+
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const overlay = document.getElementById("gameOverlay");
+        const startButton = document.getElementById("startGame");
+        const playButton = document.getElementById("playButton");
+
+        const scoreElement = document.getElementById("score");
+        const bestElement = document.getElementById("bestScore");
+        const healthElement = document.getElementById("health");
+
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+
+        let running = false;
+        let score = 0;
+        let health = 3;
+
+        let lastTime = 0;
+        let spawnTimer = 0;
+        let difficulty = 1;
+
+        let objects = [];
+        let particles = [];
+        let stars = [];
+
+        let animationFrame = null;
+
+        let best =
+          Number(localStorage.getItem("sina404-best")) || 0;
+
+        bestElement.textContent = best;
+
+        const player = {
+          x: 0,
+          targetX: 0,
+          y: 0,
+          width: 76,
+          height: 12
+        };
+
+        function resize() {
+          const rect = canvas.getBoundingClientRect();
+
+          dpr = Math.min(
+            window.devicePixelRatio || 1,
+            2
+          );
+
+          width = rect.width;
+          height = rect.height;
+
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+
+          ctx.setTransform(
+            dpr,
+            0,
+            0,
+            dpr,
+            0,
+            0
+          );
+
+          player.y = height - 45;
+
+          if (!player.x) {
+            player.x = width / 2;
+            player.targetX = width / 2;
+          }
+
+          createStars();
+
+          if (!running) {
+            render();
+          }
+        }
+
+        function createStars() {
+          stars = [];
+
+          const count = Math.floor(
+            (width * height) / 9000
+          );
+
+          for (let i = 0; i < count; i++) {
+            stars.push({
+              x: Math.random() * width,
+              y: Math.random() * height,
+              size: Math.random() * 1.4 + 0.2,
+              alpha: Math.random() * 0.4 + 0.08
+            });
+          }
+        }
+
+        function resetGame() {
+          score = 0;
+          health = 3;
+          difficulty = 1;
+
+          spawnTimer = 0;
+
+          objects = [];
+          particles = [];
+
+          scoreElement.textContent = "0";
+          healthElement.textContent = "3";
+
+          player.x = width / 2;
+          player.targetX = width / 2;
+        }
+
+        function startGame() {
+          if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+          }
+
+          resetGame();
+
+          overlay.classList.add("hidden");
+
+          running = true;
+          lastTime = performance.now();
+
+          animationFrame =
+            requestAnimationFrame(gameLoop);
+        }
+
+        function gameOver() {
+          running = false;
+
+          if (score > best) {
+            best = score;
+
+            localStorage.setItem(
+              "sina404-best",
+              best
+            );
+
+            bestElement.textContent = best;
+          }
+
+          overlay.classList.remove("hidden");
+
+          overlay.querySelector("h3").textContent =
+            "Deployment failed";
+
+          overlay.querySelector("p").textContent =
+            `You protected ${score} valid packets before production went down.`;
+
+          startButton.textContent =
+            "Redeploy";
+        }
+
+        function spawnObject() {
+          const isError =
+            Math.random() < 0.28;
+
+          const radius =
+            isError
+              ? Math.random() * 5 + 11
+              : Math.random() * 4 + 9;
+
+          objects.push({
+            x:
+              30 +
+              Math.random() *
+                Math.max(1, width - 60),
+
+            y: -30,
+
+            radius,
+
+            isError,
+
+            speed:
+              1.7 +
+              Math.random() * 1.4 +
+              difficulty * 0.35,
+
+            rotation:
+              Math.random() * Math.PI,
+
+            spin:
+              (Math.random() - 0.5) * 0.05
+          });
+        }
+
+        function createParticles(
+          x,
+          y,
+          color
+        ) {
+          for (let i = 0; i < 15; i++) {
+            particles.push({
+              x,
+              y,
+
+              vx:
+                (Math.random() - 0.5) * 5,
+
+              vy:
+                (Math.random() - 0.5) * 5,
+
+              size:
+                Math.random() * 2.5 + 1,
+
+              life: 1,
+
+              color
+            });
+          }
+        }
+
+        function collides(obj) {
+          const left =
+            player.x -
+            player.width / 2;
+
+          const right =
+            player.x +
+            player.width / 2;
+
+          const top =
+            player.y -
+            player.height;
+
+          const bottom =
+            player.y +
+            player.height;
+
+          return (
+            obj.x + obj.radius > left &&
+            obj.x - obj.radius < right &&
+            obj.y + obj.radius > top &&
+            obj.y - obj.radius < bottom
+          );
+        }
+
+        function update(delta) {
+          player.x +=
+            (player.targetX - player.x) *
+            0.17;
+
+          const half =
+            player.width / 2;
+
+          player.x = Math.max(
+            half,
+            Math.min(
+              width - half,
+              player.x
+            )
+          );
+
+          spawnTimer += delta;
+
+          difficulty =
+            1 + score / 22;
+
+          const spawnRate =
+            Math.max(
+              280,
+              720 -
+                difficulty * 35
+            );
+
+          if (spawnTimer > spawnRate) {
+            spawnTimer = 0;
+
+            spawnObject();
+          }
+
+          for (
+            let i = objects.length - 1;
+            i >= 0;
+            i--
+          ) {
+            const obj = objects[i];
+
+            obj.y += obj.speed;
+            obj.rotation += obj.spin;
+
+            if (collides(obj)) {
+              if (obj.isError) {
+                health--;
+
+                healthElement.textContent =
+                  health;
+
+                createParticles(
+                  obj.x,
+                  obj.y,
+                  "#ff5470"
+                );
+
+                objects.splice(i, 1);
+
+                if (health <= 0) {
+                  gameOver();
+                  return;
+                }
+              } else {
+                score++;
+
+                scoreElement.textContent =
+                  score;
+
+                createParticles(
+                  obj.x,
+                  obj.y,
+                  "#71e3ff"
+                );
+
+                objects.splice(i, 1);
+              }
+
+              continue;
+            }
+
+            if (obj.y > height + 30) {
+              objects.splice(i, 1);
+            }
+          }
+
+          for (
+            let i = particles.length - 1;
+            i >= 0;
+            i--
+          ) {
+            const p = particles[i];
+
+            p.x += p.vx;
+            p.y += p.vy;
+
+            p.vx *= 0.97;
+            p.vy *= 0.97;
+
+            p.life -= 0.035;
+
+            if (p.life <= 0) {
+              particles.splice(i, 1);
+            }
+          }
+        }
+
+        function drawBackground() {
+          ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+          );
+
+          const background =
+            ctx.createLinearGradient(
+              0,
+              0,
+              0,
+              height
+            );
+
+          background.addColorStop(
+            0,
+            "#0b1020"
+          );
+
+          background.addColorStop(
+            1,
+            "#060913"
+          );
+
+          ctx.fillStyle = background;
+
+          ctx.fillRect(
+            0,
+            0,
+            width,
+            height
+          );
+
+          stars.forEach((star) => {
+            ctx.beginPath();
+
+            ctx.arc(
+              star.x,
+              star.y,
+              star.size,
+              0,
+              Math.PI * 2
+            );
+
+            ctx.fillStyle =
+              `rgba(160, 185, 255, ${star.alpha})`;
+
+            ctx.fill();
+          });
+
+          ctx.strokeStyle =
+            "rgba(255,255,255,0.025)";
+
+          ctx.lineWidth = 1;
+
+          for (
+            let x = 0;
+            x < width;
+            x += 40
+          ) {
+            ctx.beginPath();
+
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, height);
+
+            ctx.stroke();
+          }
+
+          for (
+            let y = 0;
+            y < height;
+            y += 40
+          ) {
+            ctx.beginPath();
+
+            ctx.moveTo(0, y);
+            ctx.lineTo(width, y);
+
+            ctx.stroke();
+          }
+        }
+
+        function drawPlayer() {
+          ctx.save();
+
+          const gradient =
+            ctx.createLinearGradient(
+              player.x -
+                player.width / 2,
+              0,
+              player.x +
+                player.width / 2,
+              0
+            );
+
+          gradient.addColorStop(
+            0,
+            "#755cff"
+          );
+
+          gradient.addColorStop(
+            0.5,
+            "#ffffff"
+          );
+
+          gradient.addColorStop(
+            1,
+            "#61d9ff"
+          );
+
+          ctx.shadowBlur = 24;
+          ctx.shadowColor =
+            "#6c8cff";
+
+          ctx.fillStyle =
+            gradient;
+
+          ctx.beginPath();
+
+          ctx.roundRect(
+            player.x -
+              player.width / 2,
+
+            player.y,
+
+            player.width,
+
+            player.height,
+
+            10
+          );
+
+          ctx.fill();
+
+          ctx.restore();
+        }
+
+        function drawObjects() {
+          objects.forEach((obj) => {
+            ctx.save();
+
+            ctx.translate(
+              obj.x,
+              obj.y
+            );
+
+            ctx.rotate(
+              obj.rotation
+            );
+
+            const color =
+              obj.isError
+                ? "#ff5470"
+                : "#6adfff";
+
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = color;
+
+            ctx.fillStyle = color;
+
+            if (obj.isError) {
+              ctx.fillRect(
+                -obj.radius,
+                -obj.radius,
+                obj.radius * 2,
+                obj.radius * 2
+              );
+
+              ctx.strokeStyle =
+                "rgba(255,255,255,.85)";
+
+              ctx.lineWidth = 2;
+
+              ctx.beginPath();
+
+              ctx.moveTo(
+                -obj.radius / 2,
+                -obj.radius / 2
+              );
+
+              ctx.lineTo(
+                obj.radius / 2,
+                obj.radius / 2
+              );
+
+              ctx.moveTo(
+                obj.radius / 2,
+                -obj.radius / 2
+              );
+
+              ctx.lineTo(
+                -obj.radius / 2,
+                obj.radius / 2
+              );
+
+              ctx.stroke();
+            } else {
+              ctx.beginPath();
+
+              ctx.arc(
+                0,
+                0,
+                obj.radius,
+                0,
+                Math.PI * 2
+              );
+
+              ctx.fill();
+
+              ctx.strokeStyle =
+                "rgba(255,255,255,.9)";
+
+              ctx.lineWidth = 1.4;
+
+              ctx.beginPath();
+
+              ctx.arc(
+                0,
+                0,
+                obj.radius * 0.45,
+                0,
+                Math.PI * 2
+              );
+
+              ctx.stroke();
+            }
+
+            ctx.restore();
+          });
+        }
+
+        function drawParticles() {
+          particles.forEach((p) => {
+            ctx.save();
+
+            ctx.globalAlpha =
+              p.life;
+
+            ctx.fillStyle =
+              p.color;
+
+            ctx.shadowBlur = 10;
+
+            ctx.shadowColor =
+              p.color;
+
+            ctx.beginPath();
+
+            ctx.arc(
+              p.x,
+              p.y,
+              p.size,
+              0,
+              Math.PI * 2
+            );
+
+            ctx.fill();
+
+            ctx.restore();
+          });
+        }
+
+        function render() {
+          drawBackground();
+          drawObjects();
+          drawPlayer();
+          drawParticles();
+        }
+
+        function gameLoop(time) {
+          if (!running) return;
+
+          const delta =
+            Math.min(
+              time - lastTime,
+              40
+            );
+
+          lastTime = time;
+
+          update(delta);
+          render();
+
+          if (running) {
+            animationFrame =
+              requestAnimationFrame(
+                gameLoop
+              );
+          }
+        }
+
+        function updateTarget(clientX) {
+          const rect =
+            canvas.getBoundingClientRect();
+
+          player.targetX =
+            clientX -
+            rect.left;
+        }
+
+        canvas.addEventListener(
+          "mousemove",
+          (event) => {
+            updateTarget(
+              event.clientX
+            );
+          }
+        );
+
+        canvas.addEventListener(
+          "pointermove",
+          (event) => {
+            if (
+              event.pointerType ===
+              "touch"
+            ) {
+              updateTarget(
+                event.clientX
+              );
+            }
+          }
+        );
+
+        window.addEventListener(
+          "keydown",
+          (event) => {
+            if (
+              event.key ===
+              "ArrowLeft"
+            ) {
+              player.targetX -= 60;
+            }
+
+            if (
+              event.key ===
+              "ArrowRight"
+            ) {
+              player.targetX += 60;
+            }
+          }
+        );
+
+        startButton.addEventListener(
+          "click",
+          startGame
+        );
+
+        playButton.addEventListener(
+          "click",
+          () => {
+            document
+              .querySelector(".game-card")
+              .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+              });
+
+            startGame();
+          }
+        );
+
+        window.addEventListener(
+          "resize",
+          resize
+        );
+
+        resize();
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #080a12;
+    --surface: rgba(255, 255, 255, 0.045);
+    --surface-hover: rgba(255, 255, 255, 0.075);
+    --border: rgba(255, 255, 255, 0.09);
+
+    --text: #f4f5fa;
+    --text-soft: #a4a8b8;
+    --text-muted: #737789;
+
+    --purple: #7c5cff;
+    --purple-soft: #a28cff;
+    --blue: #5c8dff;
+    --cyan: #65dcff;
+
+    --danger: #ff5470;
+
+    --radius: 24px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    color: var(--text);
+
+    background:
+      radial-gradient(
+        circle at 13% 10%,
+        rgba(124, 92, 255, 0.14),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 85% 20%,
+        rgba(65, 155, 255, 0.1),
+        transparent 31%
+      ),
+      #080a12;
+
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+  body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+      linear-gradient(
+        rgba(255, 255, 255, 0.02)
+          1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.02)
+          1px,
+        transparent 1px
+      );
+
+    background-size:
+      60px 60px;
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 88%
+      );
+
+    z-index: -2;
+  }
+
+  .noise {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    opacity: 0.025;
+
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.5'/%3E%3C/svg%3E");
+  }
+
+  .orb {
+    position: fixed;
+
+    z-index: -3;
+
+    border-radius: 999px;
+
+    filter: blur(30px);
+
+    pointer-events: none;
+  }
+
+  .orb-one {
+    width: 500px;
+    height: 500px;
+
+    top: -250px;
+    right: -130px;
+
+    background:
+      rgba(117, 83, 255, 0.09);
+  }
+
+  .orb-two {
+    width: 460px;
+    height: 460px;
+
+    bottom: -240px;
+    left: -180px;
+
+    background:
+      rgba(61, 166, 255, 0.07);
+  }
+
+  .page {
+    width:
+      min(1220px, calc(100% - 40px));
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+  }
+
+  .navbar {
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+  }
+
+  .brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--text);
+
+    font-size: 0.94rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+  }
+
+  .brand-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background:
+      linear-gradient(
+        135deg,
+        var(--purple),
+        var(--cyan)
+      );
+
+    box-shadow:
+      0 0 20px
+      rgba(102, 129, 255, 0.6);
+  }
+
+  .home-link {
+    padding:
+      9px 14px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border:
+      1px solid var(--border);
+
+    border-radius: 12px;
+
+    color: var(--text-soft);
+
+    background:
+      rgba(255,255,255,.025);
+
+    text-decoration: none;
+
+    font-size: 0.85rem;
+
+    transition: 0.2s ease;
+  }
+
+  .home-link:hover {
+    color: var(--text);
+
+    background:
+      var(--surface-hover);
+
+    transform:
+      translateY(-1px);
+  }
+
+  .content {
+    flex: 1;
+
+    padding:
+      60px 0 80px;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(280px, 0.8fr)
+      minmax(480px, 1.2fr);
+
+    gap: 56px;
+
+    align-items: center;
+  }
+
+  .intro {
+    max-width: 520px;
+  }
+
+  .status {
+    width: fit-content;
+
+    margin-bottom: 24px;
+
+    padding:
+      7px 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border:
+      1px solid
+      rgba(255, 84, 112, .15);
+
+    border-radius: 9px;
+
+    background:
+      rgba(255, 84, 112, .04);
+
+    color: #ff8b9f;
+
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace;
+
+    font-size: 0.74rem;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+      var(--danger);
+
+    box-shadow:
+      0 0 12px
+      rgba(255, 84, 112, .8);
+  }
+
+  .error-code {
+    margin-bottom: 18px;
+
+    font-size:
+      clamp(5.2rem, 13vw, 8.2rem);
+
+    font-weight: 900;
+
+    line-height: .85;
+
+    letter-spacing: -0.08em;
+
+    color: #fff;
+  }
+
+  .error-code span {
+    color: transparent;
+
+    -webkit-text-stroke:
+      1px
+      rgba(151, 129, 255, .9);
+
+    text-shadow:
+      0 0 50px
+      rgba(124, 92, 255, .14);
+  }
+
+  h1 {
+    margin:
+      0 0 18px;
+
+    font-size:
+      clamp(2rem, 4vw, 3.25rem);
+
+    line-height: 1.12;
+
+    letter-spacing: -0.05em;
+  }
+
+  h1 span {
+    display: block;
+
+    color:
+      var(--purple-soft);
+  }
+
+  .intro > p {
+    max-width: 500px;
+
+    margin:
+      0 0 26px;
+
+    color:
+      var(--text-soft);
+
+    font-size: 0.97rem;
+
+    line-height: 1.8;
+  }
+
+  .terminal {
+    margin-bottom: 26px;
+
+    overflow: hidden;
+
+    border:
+      1px solid var(--border);
+
+    border-radius: 14px;
+
+    background:
+      rgba(4, 6, 12, .65);
+
+    box-shadow:
+      0 20px 60px
+      rgba(0,0,0,.25);
+  }
+
+  .terminal-header {
+    padding:
+      10px 12px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom:
+      1px solid
+      rgba(255,255,255,.055);
+
+    color:
+      var(--text-muted);
+
+    font-family:
+      ui-monospace,
+      monospace;
+
+    font-size: 0.69rem;
+  }
+
+  .terminal-dots {
+    display: flex;
+
+    gap: 5px;
+  }
+
+  .terminal-dots span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(255,255,255,.16);
+  }
+
+  .terminal-dots span:first-child {
+    background: #ff5f57;
+  }
+
+  .terminal-dots span:nth-child(2) {
+    background: #febc2e;
+  }
+
+  .terminal-dots span:last-child {
+    background: #28c840;
+  }
+
+  .terminal-body {
+    padding:
+      16px;
+
+    color:
+      #c1c6d5;
+
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace;
+
+    font-size: .76rem;
+
+    line-height: 1.8;
+  }
+
+  .terminal-error {
+    color:
+      #ff748c;
+  }
+
+  .prompt {
+    margin-right: 7px;
+
+    color:
+      var(--cyan);
+  }
+
+  .cursor {
+    display:
+      inline-block;
+
+    width: 7px;
+    height: 13px;
+
+    margin-left: 4px;
+
+    vertical-align: middle;
+
+    background:
+      var(--purple-soft);
+
+    animation:
+      blink 1s infinite;
+  }
+
+  .actions {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    min-height: 46px;
+
+    padding:
+      0 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: .85rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+      .2s ease;
+  }
+
+  .primary-btn {
+    border:
+      1px solid
+      rgba(151, 129, 255, .25);
+
+    color: #fff;
+
+    background:
+      linear-gradient(
+        135deg,
+        #7258ef,
+        #597cf6
+      );
+
+    text-decoration: none;
+
+    box-shadow:
+      0 12px 30px
+      rgba(101, 89, 255, .18);
+  }
+
+  .secondary-btn {
+    border:
+      1px solid
+      var(--border);
+
+    color:
+      var(--text-soft);
+
+    background:
+      var(--surface);
+  }
+
+  .primary-btn:hover,
+  .secondary-btn:hover {
+    transform:
+      translateY(-2px);
+  }
+
+  .secondary-btn:hover {
+    color: white;
+
+    background:
+      var(--surface-hover);
+  }
+
+  .game-card {
+    min-width: 0;
+
+    overflow: hidden;
+
+    border:
+      1px solid
+      rgba(255,255,255,.09);
+
+    border-radius: 24px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255,255,255,.055),
+        rgba(255,255,255,.018)
+      );
+
+    box-shadow:
+      0 35px 100px
+      rgba(0,0,0,.34);
+
+    backdrop-filter:
+      blur(18px);
+  }
+
+  .game-header {
+    padding:
+      18px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom:
+      1px solid
+      rgba(255,255,255,.055);
+  }
+
+  .game-label {
+    margin-bottom: 2px;
+
+    color:
+      var(--purple-soft);
+
+    font-family:
+      ui-monospace,
+      monospace;
+
+    font-size: .65rem;
+
+    letter-spacing: .09em;
+  }
+
+  .game-header h2 {
+    margin: 0;
+
+    font-size: .98rem;
+
+    letter-spacing: -0.02em;
+  }
+
+  .game-stats {
+    display: flex;
+
+    gap: 6px;
+  }
+
+  .game-stats > div {
+    min-width: 55px;
+
+    padding:
+      6px 9px;
+
+    border:
+      1px solid
+      rgba(255,255,255,.065);
+
+    border-radius: 9px;
+
+    background:
+      rgba(255,255,255,.025);
+
+    text-align: center;
+  }
+
+  .game-stats span {
+    display: block;
+
+    margin-bottom: 1px;
+
+    color:
+      var(--text-muted);
+
+    font-family:
+      ui-monospace,
+      monospace;
+
+    font-size: .57rem;
+  }
+
+  .game-stats strong {
+    color: #fff;
+
+    font-family:
+      ui-monospace,
+      monospace;
+
+    font-size: .8rem;
+  }
+
+  .game-area {
+    position: relative;
+
+    overflow: hidden;
+  }
+
+  canvas {
+    width: 100%;
+
+    aspect-ratio:
+      1.45 / 1;
+
+    display: block;
+
+    touch-action: none;
+
+    cursor: crosshair;
+  }
+
+  .game-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background:
+      rgba(5, 7, 15, .65);
+
+    backdrop-filter:
+      blur(8px);
+
+    transition:
+      opacity .3s ease,
+      visibility .3s ease;
+  }
+
+  .game-overlay.hidden {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+  }
+
+  .overlay-icon {
+    width: 55px;
+    height: 55px;
+
+    margin-bottom: 16px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+      1px solid
+      rgba(140, 117, 255, .2);
+
+    border-radius: 16px;
+
+    color:
+      #cabfff;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(124,92,255,.13),
+        rgba(76,165,255,.04)
+      );
+
+    font-family:
+      ui-monospace,
+      monospace;
+
+    font-weight: 800;
+
+    box-shadow:
+      0 20px 40px
+      rgba(90,73,255,.08);
+  }
+
+  .game-overlay h3 {
+    margin:
+      0 0 7px;
+
+    font-size: 1.15rem;
+  }
+
+  .game-overlay p {
+    margin:
+      0 0 15px;
+
+    color:
+      var(--text-soft);
+
+    font-size: .79rem;
+  }
+
+  .legend {
+    margin-bottom: 18px;
+
+    display: flex;
+
+    gap: 14px;
+
+    color:
+      var(--text-muted);
+
+    font-size: .69rem;
+  }
+
+  .legend span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+  }
+
+  .legend i {
+    width: 7px;
+    height: 7px;
+
+    display: block;
+
+    border-radius: 50%;
+  }
+
+  .legend .valid {
+    background: var(--cyan);
+
+    box-shadow:
+      0 0 10px
+      var(--cyan);
+  }
+
+  .legend .error {
+    background:
+      var(--danger);
+
+    box-shadow:
+      0 0 10px
+      var(--danger);
+  }
+
+  #startGame {
+    min-height: 40px;
+
+    padding:
+      0 17px;
+
+    border:
+      1px solid
+      rgba(132,112,255,.2);
+
+    border-radius: 10px;
+
+    color: white;
+
+    background:
+      linear-gradient(
+        135deg,
+        #7459ed,
+        #567ef5
+      );
+
+    font-family: inherit;
+
+    font-size: .76rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+  }
+
+  .controls {
+    position: absolute;
+
+    bottom: 9px;
+    left: 50%;
+
+    transform:
+      translateX(-50%);
+
+    color:
+      rgba(255,255,255,.28);
+
+    font-family:
+      ui-monospace,
+      monospace;
+
+    font-size: .57rem;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+  }
+
+  footer {
+    min-height: 60px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-top:
+      1px solid
+      rgba(255,255,255,.04);
+
+    color:
+      var(--text-muted);
+
+    font-size: .72rem;
+  }
+
+  .footer-separator {
+    opacity: .45;
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (
+    max-width: 900px
+  ) {
+    .content {
+      padding-top: 40px;
+
+      grid-template-columns: 1fr;
+
+      gap: 50px;
+    }
+
+    .intro {
+      max-width: 640px;
+
+      margin: 0 auto;
+
+      text-align: center;
+    }
+
+    .status {
+      margin-inline: auto;
+    }
+
+    .terminal {
+      text-align: left;
+    }
+
+    .actions {
+      justify-content:
+        center;
+    }
+
+    .game-card {
+      width: 100%;
+
+      max-width: 720px;
+
+      margin: 0 auto;
+    }
+  }
+
+  @media (
+    max-width: 550px
+  ) {
+    .page {
+      width:
+        min(
+          100% - 24px,
+          1220px
+        );
+    }
+
+    .navbar {
+      min-height: 68px;
+    }
+
+    .content {
+      padding:
+        42px 0 60px;
+    }
+
+    .error-code {
+      font-size: 5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .game-header {
+      padding: 13px;
+
+      align-items:
+        flex-start;
+
+      flex-direction:
+        column;
+    }
+
+    .game-stats {
+      width: 100%;
+    }
+
+    .game-stats > div {
+      flex: 1;
+    }
+
+    canvas {
+      aspect-ratio:
+        .95 / 1;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      width: 100%;
+    }
+
+    .home-link {
+      font-size: .76rem;
+    }
+  }
+
+  @media (
+    prefers-reduced-motion:
+    reduce
+  ) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+
+      animation-duration:
+        .01ms !important;
+
+      animation-iteration-count:
+        1 !important;
+
+      transition-duration:
+        .01ms !important;
+    }
+  }
+</style>
