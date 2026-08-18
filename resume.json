@@ -235,7 +235,7 @@
     },
     {
       "name": "Private Real-Time Chat Platform",
-      "description": "Developed a private real-time messaging platform using Django, Django Channels, ASGI, and WebSockets. Implemented authenticated communication, persistent message history, username-based private user search, and timezone-aware timestamps. Containerized the application with Docker, maintained the source code on GitHub, and deployed the service on my own Linux server behind a reverse proxy.",
+      "description": "Developed and deployed a private real-time messaging platform using Django, Django Channels, ASGI, WebSockets, and PostgreSQL. Implemented authenticated one-to-one messaging, persistent conversation history, username-based private user discovery without exposing a public user directory, and timezone-aware message timestamps. Containerized the application with Docker and deployed it on my own Linux server, using Nginx and reverse proxy configuration to handle production traffic, WebSocket connections, DNS, and HTTPS. The project provided hands-on experience across backend development, real-time communication, database persistence, containerization, and production deployment.",
       "startDate": "2026",
       "endDate": "2026",
       "url": "https://chat.sinafateh.ir",
@@ -243,13 +243,17 @@
         "Python",
         "Django",
         "Django Channels",
+        "PostgreSQL",
         "WebSockets",
         "ASGI",
+        "Authentication",
+        "Real-Time Communication",
         "Docker",
         "Linux",
         "Nginx",
         "Reverse Proxy",
-        "GitHub"
+        "DNS",
+        "HTTPS"
       ]
     },
     {
@@ -271,23 +275,7 @@
         "Docker"
       ]
     },
-    {
-      "name": "Home VPN Gateway",
-      "description": "Designed and configured a centralized VPN gateway using OpenVPN on Ubuntu Server. Configured Netplan and iptables for routing, traffic forwarding, controlled network access, and network isolation. Implemented encrypted remote connectivity and gained practical experience with Linux networking and infrastructure troubleshooting.",
-      "startDate": "2025",
-      "endDate": "2025",
-      "url": "",
-      "keywords": [
-        "Ubuntu Server",
-        "Linux",
-        "OpenVPN",
-        "Netplan",
-        "iptables",
-        "Routing",
-        "VPN",
-        "Networking"
-      ]
-    },
+    
     {
       "name": "Resume as Code Platform",
       "description": "Developing a JSON-driven personal resume and portfolio platform using Astro and TypeScript. The project uses a single structured JSON source to generate resume content, grouped technical skills, professional experience, education, projects, and profile information. The application is containerized with Docker and Nginx with plans for automated CI/CD deployment through GitHub Actions.",
@@ -324,7 +312,44 @@
         "Arcane",
         "Self-Hosting"
       ]
-    }
+    },
+        {
+  "name": "Arista Exchange Website",
+  "description": "Developed a modern and responsive website for Arista Exchange, focused on presenting the company, its services, and key information through a clean and user-friendly interface. Built the frontend using HTML, CSS, and JavaScript with attention to responsive design, visual consistency, and usability across different screen sizes. Containerized the website with Docker and Nginx, configured automated image builds with GitHub Actions and GHCR, and deployed it on my Linux server through Arcane and the existing reverse proxy infrastructure.",
+  "startDate": "2026",
+  "endDate": "2026",
+  "url": "https://arista-exchange.ir/",
+  "keywords": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Responsive Design",
+    "UI Development",
+    "Docker",
+    "Nginx",
+    "GitHub Actions",
+    "GHCR",
+    "Arcane",
+    "Reverse Proxy"
+  ]
+},
+    {
+          "name": "Home VPN Gateway",
+          "description": "Designed and configured a centralized VPN gateway using OpenVPN on Ubuntu Server. Configured Netplan and iptables for routing, traffic forwarding, controlled network access, and network isolation. Implemented encrypted remote connectivity and gained practical experience with Linux networking and infrastructure troubleshooting.",
+          "startDate": "2025",
+          "endDate": "2025",
+          "url": "",
+          "keywords": [
+            "Ubuntu Server",
+            "Linux",
+            "OpenVPN",
+            "Netplan",
+            "iptables",
+            "Routing",
+            "VPN",
+            "Networking"
+          ]
+        }
   ],
   "certificates": [
     {
