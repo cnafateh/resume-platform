@@ -1,14 +1,17 @@
 ---
 import "../styles/global.css";
 
+import { data } from "../data/resume";
+const basics = data.basics ?? [];
+
 interface Props {
   title?: string;
   description?: string;
 }
 
 const {
-  title = "Sina Fateh | Python Backend Developer",
-  description = "Portfolio of Sina Fateh, Python Backend Developer."
+  title = `${basics.name} - ${basics.label}`,
+  description = resume.basics.about
 } = Astro.props;
 ---
 
