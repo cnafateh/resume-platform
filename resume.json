@@ -5,7 +5,7 @@
     "email": "sinafateh1382@gmail.com",
     "phone": "+989122638978",
     "url": "https://sinafateh.ir/",
-    "about": "Software Engineer focused on backend development, API design, software architecture, and reliable server-side systems using Python/Django, while expanding into C# and ASP.NET Core.",
+    "about": "I'm Sina Fateh, a Backend Developer focused on building practical and maintainable web applications. I work primarily with Python, Django, Django REST Framework, PostgreSQL and Docker, with experience in REST APIs, Redis, WebSockets, Linux and application deployment. I'm also expanding my backend development skills with C# and ASP.NET Core.",
     "summary": "Software Engineer with hands-on experience building backend applications, RESTful APIs, authentication and authorization flows, real-time features, caching, testing, and containerized deployments. My main production-style experience is with Python, Django, and Django REST Framework, supported by practical knowledge of PostgreSQL, Redis, Linux, Docker, Nginx, CI/CD, networking, and self-hosted infrastructure. I am currently expanding my backend stack with C# and ASP.NET Core, focusing on Entity Framework Core, dependency injection, SOLID principles, Clean Architecture, Domain-Driven Design, design patterns, testing, and maintainable software architecture. I enjoy understanding how systems are designed, deployed, secured, and operated rather than treating backend development as only writing API endpoints.",
     "location": {
       "city": "Tehran",
