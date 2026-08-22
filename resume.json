@@ -256,6 +256,29 @@
         "HTTPS"
       ]
     },
+        {
+      "name": "Telegram Archive Viewer",
+      "description": "Developed a self-hosted Telegram archive viewer that parses Telegram Desktop HTML exports, stores normalized message data in SQLite, and provides fast full-text search using FTS5. Implemented authenticated media serving, reply navigation, filtering, and a responsive chat-style UI. Containerized the application with Docker and added automated tests, CI, Dependabot, semantic versioned releases, and GHCR publishing through GitHub Actions, while keeping personal exports and local database files outside the public repository.",
+      "startDate": "2026",
+      "endDate": "Present",
+      "url": "https://github.com/cnafateh/telegram-archive-viewer",
+      "keywords": [
+        "Python",
+        "FastAPI",
+        "SQLite",
+        "FTS5",
+        "BeautifulSoup",
+        "Docker",
+        "Docker Compose",
+        "GitHub Actions",
+        "Dependabot",
+        "GHCR",
+        "HTML Parsing",
+        "Full-Text Search",
+        "Self-Hosting"
+      ]
+    },
+
     {
       "name": "E-commerce Backend",
       "description": "Developed backend APIs for catalog, cart, checkout, and order-management functionality as part of a team project. Implemented JWT authentication and role-based permissions, Redis caching, Celery background tasks, Django signals, and Swagger/OpenAPI documentation. Added unit and integration tests using Pytest, configured GitHub Actions CI, and containerized the application using Docker and PostgreSQL.",
@@ -316,8 +339,8 @@
         {
   "name": "Arista Exchange Website",
   "description": "Developed a modern and responsive website for Arista Exchange, focused on presenting the company, its services, and key information through a clean and user-friendly interface. Built the frontend using HTML, CSS, and JavaScript with attention to responsive design, visual consistency, and usability across different screen sizes. Containerized the website with Docker and Nginx, configured automated image builds with GitHub Actions and GHCR, and deployed it on my Linux server through Arcane and the existing reverse proxy infrastructure.",
-  "startDate": "2026",
-  "endDate": "2026",
+  "startDate": "2025",
+  "endDate": "2025",
   "url": "https://arista-exchange.ir/",
   "keywords": [
     "HTML",
