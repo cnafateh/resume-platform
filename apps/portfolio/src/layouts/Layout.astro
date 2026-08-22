@@ -13,6 +13,36 @@ const {
   title = `${basics.name} - ${basics.label}`,
   description = basics.about
 } = Astro.props;
+
+        const personSchema = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Sina Fateh",
+      alternateName: [
+        "سینا فاتح",
+        "cnafateh"
+      ],
+      url: "https://sinafateh.ir",
+      jobTitle: "Backend Developer",
+      sameAs: [
+        "https://github.com/cnafateh",
+        "https://www.linkedin.com/in/cnafateh/"
+      ],
+      knowsAbout: [
+        "Backend Development",
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "PostgreSQL",
+        "Docker",
+        "REST APIs",
+        "Redis",
+        "WebSockets",
+        "C#",
+        "ASP.NET Core"
+      ]
+    };
+
 ---
 
 <!doctype html>
@@ -27,8 +57,19 @@ const {
     />
 
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:site_name" content="Sina Fateh" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
 
     <title>{title}</title>
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
     <script is:inline>
       const storedTheme = localStorage.getItem("theme");
@@ -46,6 +87,10 @@ const {
         document.documentElement.classList.remove("dark");
       }
     </script>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(personSchema)}
+    />
   </head>
 
   <body>
