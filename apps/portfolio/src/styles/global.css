@@ -492,6 +492,11 @@ section[id] {
   body {
     overflow-x: hidden;
   }
+     .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
 
   main {
     padding-bottom:
