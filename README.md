@@ -122,7 +122,7 @@ As a result, updating a certificate, skill, project, or work experience only req
 resume-platform/
 │
 ├── resume.json
-├── compose.yaml
+├── docker-compose.yml
 ├── .dockerignore
 ├── .gitignore
 ├── README.md
