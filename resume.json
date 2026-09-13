@@ -1,12 +1,12 @@
 {
   "basics": {
     "name": "Sina Fateh",
-    "label": "Backend Developer | Software Engineer",
+    "label": "Software Developer | Software Engineer",
     "email": "sinafateh1382@gmail.com",
     "phone": "+989122638978",
     "url": "https://sinafateh.ir/",
-    "about": "I'm Sina Fateh, a Backend Developer focused on building practical and maintainable web applications. I work primarily with Python, Django, Django REST Framework, PostgreSQL and Docker, with experience in REST APIs, Redis, WebSockets, Linux and application deployment. I'm also expanding my backend development skills with C# and ASP.NET Core.",
-    "summary": "Software Engineer with hands-on experience building backend applications, RESTful APIs, authentication and authorization flows, real-time features, caching, testing, and containerized deployments. My main production-style experience is with Python, Django, and Django REST Framework, supported by practical knowledge of PostgreSQL, Redis, Linux, Docker, Nginx, CI/CD, networking, and self-hosted infrastructure. I am currently expanding my backend stack with C# and ASP.NET Core, focusing on Entity Framework Core, dependency injection, SOLID principles, Clean Architecture, Domain-Driven Design, design patterns, testing, and maintainable software architecture. I enjoy understanding how systems are designed, deployed, secured, and operated rather than treating backend development as only writing API endpoints.",
+    "about": "I'm Sina Fateh, a Software Developer focused on building practical and maintainable web applications. I currently work with C#, .NET, and ASP.NET Core across web development, while also contributing to product collaboration, stakeholder communication, and technical content. My background includes Python, Django, Django REST Framework, PostgreSQL, Docker, Linux, real-time systems, and application deployment.",
+    "summary": "Software Developer with hands-on experience building, deploying, and maintaining web applications and APIs. My current work includes C#, .NET, ASP.NET Core, and web development, alongside product collaboration, stakeholder communication, product-flow testing, and technical content. I also have practical experience with Python, Django, Django REST Framework, PostgreSQL, Redis, WebSockets, Docker, Linux, Nginx, CI/CD, networking, and self-hosted infrastructure. I focus on maintainable software design, clean architecture, testing, and understanding how applications are built, deployed, secured, and operated end to end.",
     "location": {
       "city": "Tehran",
       "countryCode": "IR"
@@ -25,6 +25,29 @@
     ]
   },
   "work": [
+    {
+      "name": "Asr Energy Pak",
+      "url": "",
+      "position": "Software Developer",
+      "startDate": "2026-08",
+      "endDate": "Present",
+      "summary": "Contributing to .NET-based web development and product delivery, with involvement in stakeholder collaboration and technical content.",
+      "highlights": [
+        "Contribute to web application development using C#, .NET, ASP.NET Core, and related web technologies across frontend and backend tasks.",
+        "Collaborate with internal teams and stakeholders to review requirements, test product flows, communicate feedback, and support feature delivery.",
+        "Contribute to technical and product-focused content by translating product capabilities and technical services into clear user-facing material."
+      ],
+      "keywords": [
+        "C#",
+        ".NET",
+        "ASP.NET Core",
+        "Web Development",
+        "Git",
+        "Product Collaboration",
+        "Stakeholder Communication",
+        "Technical Content"
+      ]
+    },
     {
       "name": "Shatel",
       "url": "https://www.shatel.ir/",
@@ -86,7 +109,7 @@
   ],
   "skills": [
     {
-      "name": "Backend Development & Software Architecture",
+      "name": "Software Development & Architecture",
       "keywords": [
         "C#",
         ".NET",
@@ -256,7 +279,7 @@
         "HTTPS"
       ]
     },
-        {
+    {
       "name": "Telegram Archive Viewer",
       "description": "Developed a self-hosted Telegram archive viewer that parses Telegram Desktop HTML exports, stores normalized message data in SQLite, and provides fast full-text search using FTS5. Implemented authenticated media serving, reply navigation, filtering, and a responsive chat-style UI. Containerized the application with Docker and added automated tests, CI, Dependabot, semantic versioned releases, and GHCR publishing through GitHub Actions, while keeping personal exports and local database files outside the public repository.",
       "startDate": "2026",
@@ -280,6 +303,30 @@
     },
 
     {
+  "name": "TaskFlow",
+  "description": "Developing a task and project management web application using ASP.NET Core MVC and Entity Framework Core. Implemented full CRUD operations for tasks and projects, form validation, service-layer architecture, dependency injection, and a one-to-many relationship between projects and tasks with cascade deletion. The application uses SQLite for persistence and follows a structured MVC approach with ViewModels and separation of application logic from controllers.",
+  "startDate": "2026",
+  "endDate": "Present",
+  "url": "",
+  "keywords": [
+    "C#",
+    ".NET",
+    "ASP.NET Core",
+    "ASP.NET Core MVC",
+    "Entity Framework Core",
+    "SQLite",
+    "MVC",
+    "Dependency Injection",
+    "Service Layer",
+    "ViewModels",
+    "Data Validation",
+    "CRUD",
+    "LINQ",
+    "Git"
+  ]
+  },
+
+    {
       "name": "E-commerce Backend",
       "description": "Developed backend APIs for catalog, cart, checkout, and order-management functionality as part of a team project. Implemented JWT authentication and role-based permissions, Redis caching, Celery background tasks, Django signals, and Swagger/OpenAPI documentation. Added unit and integration tests using Pytest, configured GitHub Actions CI, and containerized the application using Docker and PostgreSQL.",
       "startDate": "2025",
@@ -298,7 +345,6 @@
         "Docker"
       ]
     },
-    
     {
       "name": "Resume as Code Platform",
       "description": "Developing a JSON-driven personal resume and portfolio platform using Astro and TypeScript. The project uses a single structured JSON source to generate resume content, grouped technical skills, professional experience, education, projects, and profile information. The application is containerized with Docker and Nginx with plans for automated CI/CD deployment through GitHub Actions.",
@@ -336,43 +382,43 @@
         "Self-Hosting"
       ]
     },
-        {
-  "name": "Arista Exchange Website",
-  "description": "Developed a modern and responsive website for Arista Exchange, focused on presenting the company, its services, and key information through a clean and user-friendly interface. Built the frontend using HTML, CSS, and JavaScript with attention to responsive design, visual consistency, and usability across different screen sizes. Containerized the website with Docker and Nginx, configured automated image builds with GitHub Actions and GHCR, and deployed it on my Linux server through Arcane and the existing reverse proxy infrastructure.",
-  "startDate": "2025",
-  "endDate": "2025",
-  "url": "https://arista-exchange.ir/",
-  "keywords": [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Responsive Design",
-    "UI Development",
-    "Docker",
-    "Nginx",
-    "GitHub Actions",
-    "GHCR",
-    "Arcane",
-    "Reverse Proxy"
-  ]
-},
     {
-          "name": "Home VPN Gateway",
-          "description": "Designed and configured a centralized VPN gateway using OpenVPN on Ubuntu Server. Configured Netplan and iptables for routing, traffic forwarding, controlled network access, and network isolation. Implemented encrypted remote connectivity and gained practical experience with Linux networking and infrastructure troubleshooting.",
-          "startDate": "2025",
-          "endDate": "2025",
-          "url": "",
-          "keywords": [
-            "Ubuntu Server",
-            "Linux",
-            "OpenVPN",
-            "Netplan",
-            "iptables",
-            "Routing",
-            "VPN",
-            "Networking"
-          ]
-        }
+      "name": "Arista Exchange Website",
+      "description": "Developed a modern and responsive website for Arista Exchange, focused on presenting the company, its services, and key information through a clean and user-friendly interface. Built the frontend using HTML, CSS, and JavaScript with attention to responsive design, visual consistency, and usability across different screen sizes. Containerized the website with Docker and Nginx, configured automated image builds with GitHub Actions and GHCR, and deployed it on my Linux server through Arcane and the existing reverse proxy infrastructure.",
+      "startDate": "2025",
+      "endDate": "2025",
+      "url": "https://arista-exchange.ir/",
+      "keywords": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Responsive Design",
+        "UI Development",
+        "Docker",
+        "Nginx",
+        "GitHub Actions",
+        "GHCR",
+        "Arcane",
+        "Reverse Proxy"
+      ]
+    },
+    {
+      "name": "Home VPN Gateway",
+      "description": "Designed and configured a centralized VPN gateway using OpenVPN on Ubuntu Server. Configured Netplan and iptables for routing, traffic forwarding, controlled network access, and network isolation. Implemented encrypted remote connectivity and gained practical experience with Linux networking and infrastructure troubleshooting.",
+      "startDate": "2025",
+      "endDate": "2025",
+      "url": "",
+      "keywords": [
+        "Ubuntu Server",
+        "Linux",
+        "OpenVPN",
+        "Netplan",
+        "iptables",
+        "Routing",
+        "VPN",
+        "Networking"
+      ]
+    }
   ],
   "certificates": [
     {
