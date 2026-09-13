@@ -11,8 +11,8 @@ interface Props {
 
 const { project } = Astro.props;
 
+const live = project.links?.live;
 const github = project.links?.github;
-const live = project.url || project.links?.live;
 ---
 
 <article
@@ -135,7 +135,7 @@ const live = project.url || project.links?.live;
             dark:text-white
           "
         >
-          View project
+          Live Demo
           <ExternalLink size={14} />
         </a>
       )
@@ -158,7 +158,7 @@ const live = project.url || project.links?.live;
           "
         >
           <Github size={14} />
-          Source
+          Project Source
         </a>
       )
     }

@@ -240,7 +240,6 @@
       "description": "Developed backend services for a pediatric clinic platform using Django REST Framework. Implemented user registration, JWT authentication, appointment scheduling, blog and content management, and role-based access control for Doctor, Editor, and Patient roles. Added a business rule limiting each patient to one active appointment. Migrated the project database to PostgreSQL, containerized the application with Docker, and deployed it on my own Linux server. Configured Nginx as a reverse proxy, including selective proxy-bypass rules for routes that required direct upstream handling, and managed production DNS and HTTPS access.",
       "startDate": "2026",
       "endDate": "2026",
-      "url": "https://dr-noohi.ir",
       "keywords": [
         "Python",
         "Django",
@@ -254,14 +253,16 @@
         "Nginx",
         "Reverse Proxy",
         "DNS"
-      ]
+      ],
+      "links": {
+        "live": "https://dr-noohi.ir"
+      }
     },
     {
       "name": "Private Real-Time Chat Platform",
       "description": "Developed and deployed a private real-time messaging platform using Django, Django Channels, ASGI, WebSockets, and PostgreSQL. Implemented authenticated one-to-one messaging, persistent conversation history, username-based private user discovery without exposing a public user directory, and timezone-aware message timestamps. Containerized the application with Docker and deployed it on my own Linux server, using Nginx and reverse proxy configuration to handle production traffic, WebSocket connections, DNS, and HTTPS. The project provided hands-on experience across backend development, real-time communication, database persistence, containerization, and production deployment.",
       "startDate": "2026",
       "endDate": "2026",
-      "url": "https://chat.sinafateh.ir",
       "keywords": [
         "Python",
         "Django",
@@ -277,14 +278,17 @@
         "Reverse Proxy",
         "DNS",
         "HTTPS"
-      ]
+      ],
+      "links": {
+        "live": "https://chat.sinafateh.ir",
+        "github": "https://github.com/cnafateh/PrivateReal-timeChatPlatform"
+      }
     },
     {
       "name": "Telegram Archive Viewer",
       "description": "Developed a self-hosted Telegram archive viewer that parses Telegram Desktop HTML exports, stores normalized message data in SQLite, and provides fast full-text search using FTS5. Implemented authenticated media serving, reply navigation, filtering, and a responsive chat-style UI. Containerized the application with Docker and added automated tests, CI, Dependabot, semantic versioned releases, and GHCR publishing through GitHub Actions, while keeping personal exports and local database files outside the public repository.",
       "startDate": "2026",
       "endDate": "Present",
-      "url": "https://github.com/cnafateh/telegram-archive-viewer",
       "keywords": [
         "Python",
         "FastAPI",
@@ -299,39 +303,42 @@
         "HTML Parsing",
         "Full-Text Search",
         "Self-Hosting"
-      ]
+      ],
+      "links": {
+        "github": "https://github.com/cnafateh/telegram-archive-viewer"
+      }
     },
-
     {
-  "name": "TaskFlow",
-  "description": "Developing a task and project management web application using ASP.NET Core MVC and Entity Framework Core. Implemented full CRUD operations for tasks and projects, form validation, service-layer architecture, dependency injection, and a one-to-many relationship between projects and tasks with cascade deletion. The application uses SQLite for persistence and follows a structured MVC approach with ViewModels and separation of application logic from controllers.",
-  "startDate": "2026",
-  "endDate": "Present",
-  "url": "",
-  "keywords": [
-    "C#",
-    ".NET",
-    "ASP.NET Core",
-    "ASP.NET Core MVC",
-    "Entity Framework Core",
-    "SQLite",
-    "MVC",
-    "Dependency Injection",
-    "Service Layer",
-    "ViewModels",
-    "Data Validation",
-    "CRUD",
-    "LINQ",
-    "Git"
-  ]
-  },
-
+      "name": "TaskFlow",
+      "description": "Developing a task and project management web application using ASP.NET Core MVC and Entity Framework Core. Implemented full CRUD operations for tasks and projects, form validation, service-layer architecture, dependency injection, and a one-to-many relationship between projects and tasks with cascade deletion. The application uses SQLite for persistence and follows a structured MVC approach with ViewModels and separation of application logic from controllers.",
+      "startDate": "2026",
+      "endDate": "Present",
+      "keywords": [
+        "C#",
+        ".NET",
+        "ASP.NET Core",
+        "ASP.NET Core MVC",
+        "Entity Framework Core",
+        "SQLite",
+        "MVC",
+        "Dependency Injection",
+        "Service Layer",
+        "ViewModels",
+        "Data Validation",
+        "CRUD",
+        "LINQ",
+        "Git"
+      ],
+      "links": {
+        "live": "https://todo.sinafateh.ir",
+        "github": "https://github.com/cnafateh/TaskFlow"
+      }
+    },
     {
       "name": "E-commerce Backend",
       "description": "Developed backend APIs for catalog, cart, checkout, and order-management functionality as part of a team project. Implemented JWT authentication and role-based permissions, Redis caching, Celery background tasks, Django signals, and Swagger/OpenAPI documentation. Added unit and integration tests using Pytest, configured GitHub Actions CI, and containerized the application using Docker and PostgreSQL.",
       "startDate": "2025",
       "endDate": "2026",
-      "url": "https://github.com/cnafateh/CommerceFlow-API",
       "keywords": [
         "Python",
         "Django REST Framework",
@@ -343,14 +350,16 @@
         "Swagger",
         "GitHub Actions",
         "Docker"
-      ]
+      ],
+      "links": {
+        "github": "https://github.com/cnafateh/CommerceFlow-API"
+      }
     },
     {
       "name": "Resume as Code Platform",
       "description": "Developing a JSON-driven personal resume and portfolio platform using Astro and TypeScript. The project uses a single structured JSON source to generate resume content, grouped technical skills, professional experience, education, projects, and profile information. The application is containerized with Docker and Nginx with plans for automated CI/CD deployment through GitHub Actions.",
       "startDate": "2026",
       "endDate": "Present",
-      "url": "https://github.com/cnafateh/resume-platform",
       "keywords": [
         "Astro",
         "TypeScript",
@@ -359,14 +368,16 @@
         "Nginx",
         "GitHub Actions",
         "CI/CD"
-      ]
+      ],
+      "links": {
+        "github": "https://github.com/cnafateh/resume-platform"
+      }
     },
     {
       "name": "Self-Hosted Server & Deployment Infrastructure",
       "description": "Built and managed a self-hosted deployment environment for multiple personal web applications on a Linux server. Configured Docker-based services, reverse proxies, DNS records, CDN integration, HTTPS routing, firewall rules, and service isolation. Worked with Nginx, Nginx Proxy Manager, and Arcane to operate and troubleshoot containerized applications, route multiple domains and subdomains, and handle practical deployment issues across the application, network, and infrastructure layers.",
       "startDate": "2026",
       "endDate": "Present",
-      "url": "https://sinafateh.ir/",
       "keywords": [
         "Linux",
         "Docker",
@@ -380,14 +391,16 @@
         "Firewall",
         "Arcane",
         "Self-Hosting"
-      ]
+      ],
+      "links": {
+        "live": "https://sinafateh.ir/"
+      }
     },
     {
       "name": "Arista Exchange Website",
       "description": "Developed a modern and responsive website for Arista Exchange, focused on presenting the company, its services, and key information through a clean and user-friendly interface. Built the frontend using HTML, CSS, and JavaScript with attention to responsive design, visual consistency, and usability across different screen sizes. Containerized the website with Docker and Nginx, configured automated image builds with GitHub Actions and GHCR, and deployed it on my Linux server through Arcane and the existing reverse proxy infrastructure.",
       "startDate": "2025",
       "endDate": "2025",
-      "url": "https://arista-exchange.ir/",
       "keywords": [
         "HTML",
         "CSS",
@@ -400,14 +413,16 @@
         "GHCR",
         "Arcane",
         "Reverse Proxy"
-      ]
+      ],
+      "links": {
+        "live": "https://arista-exchange.ir/"
+      }
     },
     {
       "name": "Home VPN Gateway",
       "description": "Designed and configured a centralized VPN gateway using OpenVPN on Ubuntu Server. Configured Netplan and iptables for routing, traffic forwarding, controlled network access, and network isolation. Implemented encrypted remote connectivity and gained practical experience with Linux networking and infrastructure troubleshooting.",
       "startDate": "2025",
       "endDate": "2025",
-      "url": "",
       "keywords": [
         "Ubuntu Server",
         "Linux",
