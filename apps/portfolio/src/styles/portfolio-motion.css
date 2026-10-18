@@ -65,9 +65,49 @@ body.portfolio-v2 .scene { transform: translateY(var(--scroll-rise, 0px)) rotate
 .portfolio-v2 .project-visual { transform-style: preserve-3d; transition: transform .55s cubic-bezier(.2,.8,.2,1), border-color .35s, box-shadow .4s; }
 .portfolio-v2 .project-feature:hover .project-visual { transform: translateY(-7px) rotateX(2deg); box-shadow: 0 25px 55px rgba(0, 0, 0, .24); }
 .portfolio-v2 .project-content h3 a { transition: color .25s; }
-.portfolio-v2 .note-item { transition: background .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
-.portfolio-v2 .note-item:hover { transform: translateY(-7px); }
-body.portfolio-v2 .notes-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.portfolio-v2 .note-item {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 270px;
+  border: 1px solid rgba(199, 241, 127, .11);
+  background: radial-gradient(circle at 85% 120%, rgba(65, 111, 99, .12), transparent 45%), #0c1920;
+  transition: background .35s, border-color .35s, box-shadow .45s, transform .55s cubic-bezier(.2,.8,.2,1);
+}
+.portfolio-v2 .note-item::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -40%;
+  background: radial-gradient(circle at 50% 50%, rgba(199, 241, 127, .11), transparent 43%);
+  opacity: 0;
+  transform: translateY(28px) scale(.9);
+  transition: opacity .5s, transform .65s cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+}
+.portfolio-v2 .note-item::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  background: var(--acid);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+}
+.portfolio-v2.fa-page .note-item::after { transform-origin: right; }
+.portfolio-v2 .note-item:is(:hover, :focus-visible) { border-color: rgba(199, 241, 127, .5); box-shadow: 0 24px 54px rgba(0, 0, 0, .23); }
+.portfolio-v2 .note-item:is(:hover, :focus-visible)::before { opacity: 1; transform: translateY(0) scale(1); }
+.portfolio-v2 .note-item:is(:hover, :focus-visible)::after { transform: scaleX(1); }
+.portfolio-v2 .note-item h3, .portfolio-v2 .note-arrow { transition: color .35s, transform .5s cubic-bezier(.2,.8,.2,1); }
+.portfolio-v2 .note-item:is(:hover, :focus-visible) h3 { color: var(--acid); }
+.portfolio-v2 .note-item:is(:hover, :focus-visible) .note-arrow { transform: translate(5px, -5px) rotate(6deg); }
+body.portfolio-v2 .notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.5vw, 20px); background: transparent; border: 0; }
+@media (hover: hover) and (pointer: fine) {
+  html.portfolio-enhanced .portfolio-v2 .note-item.reveal.is-visible:is(:hover, :focus-visible) { transform: translateY(-8px) rotateX(2deg); }
+}
 .portfolio-v2 .capability summary { transition: padding-inline .3s, color .3s; }
 .portfolio-v2 .capability summary:hover { padding-inline: 7px; color: var(--acid); }
 body.portfolio-v2 .contact-section { min-height: 100svh; min-height: 100dvh; display: grid; align-items: center; }
@@ -248,7 +288,7 @@ body.portfolio-v2 .contact-section h2 { line-height: 1.08; }
   body.portfolio-v2 .site-header .mobile-nav a:nth-child(6) { --nav-order: 6; }
   body.portfolio-v2 .site-header .mobile-nav a:nth-child(7) { --nav-order: 7; }
   body.portfolio-v2 .site-header .mobile-nav a:nth-child(8) { --nav-order: 8; }
-  .portfolio-v2.fa-page .mobile-nav a { font-family: "Vazirmatn Variable", Tahoma, sans-serif; letter-spacing: normal; font-size: clamp(26px, 5vw, 46px); }
+  .portfolio-v2.fa-page .mobile-nav a { font-family: "Estedad Variable", Tahoma, sans-serif; letter-spacing: normal; font-size: clamp(26px, 5vw, 46px); }
   .portfolio-v2.fa-page .mobile-nav a.nav-secondary { font-size: 14px; }
 }
 @keyframes menu-arrive { from { opacity: 0; clip-path: circle(0 at 6% 5%); } to { opacity: 1; clip-path: circle(150% at 6% 5%); } }
@@ -269,6 +309,7 @@ body.portfolio-v2 .contact-section h2 { line-height: 1.08; }
 @media (prefers-reduced-motion: reduce) {
   .portfolio-v2 .scene { transform: none; }
   .portfolio-v2 .project-visual, .portfolio-v2 .note-item { transform: none !important; }
+  .portfolio-v2 .note-item::before, .portfolio-v2 .note-item::after, .portfolio-v2 .note-item h3, .portfolio-v2 .note-arrow { transition-duration: .01ms; }
   .orbit-outer, .orbit-inner { animation: none; }
   body.portfolio-v2 .site-header .mobile-nav:not([hidden]),
   body.portfolio-v2 .site-header .mobile-nav a { animation: none; opacity: 1; transform: none; }
