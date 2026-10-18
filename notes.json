@@ -345,5 +345,117 @@
         }
       ]
     }
+  },
+  {
+    "slug": "authorization-boundaries",
+    "related": ["pediatric-clinic-platform-medisite", "arista-exchange-website", "private-real-time-chat-platform"],
+    "en": {
+      "title": "Authentication and authorization boundaries",
+      "description": "Sina Fateh on identity, roles, object-level permissions, and access checks in ASP.NET Core and Django applications.",
+      "intro": "A signed-in user is not automatically allowed to see every record. I design authorization around the resource being requested and the action being performed.",
+      "sections": [
+        { "heading": "What is the difference between authentication and authorization?", "body": "Authentication establishes who is making a request. Authorization determines whether that identity may perform a particular action on a particular resource. Both checks belong on the server." },
+        { "heading": "When are roles useful?", "body": "Roles express broad responsibilities, such as Doctor, Editor, and Patient in the clinic platform. They provide a starting point, but a role alone cannot answer whether a user may read a specific patient's data." },
+        { "heading": "How do you protect an individual record?", "body": "Load the record within the caller's permitted scope or explicitly verify ownership or membership before returning it. In Pulse, conversation membership is checked before private attachments are served." },
+        { "heading": "Why validate every request?", "body": "A hidden button and a private URL are interface choices, not permission checks. Every endpoint that reads or changes sensitive data must enforce the rule again, including file downloads and background actions." },
+        { "heading": "What should tests prove?", "body": "Test allowed access, denied access, and attempts to use another user's resource identifier. A failing authorization test should reveal a real data boundary, not merely a missing UI element." }
+      ]
+    },
+    "fa": {
+      "title": "مرزهای احراز هویت و مجوز دسترسی",
+      "description": "نگاه سینا فاتح به هویت، نقش‌ها، مجوز در سطح رکورد و کنترل دسترسی در برنامه‌های ASP.NET Core و Django.",
+      "intro": "ورود کاربر به معنی دسترسی او به همهٔ رکوردها نیست. مجوز را بر اساس منبع درخواستی و عملی که قرار است انجام شود طراحی می‌کنم.",
+      "sections": [
+        { "heading": "احراز هویت و مجوزدهی چه تفاوتی دارند؟", "body": "احراز هویت مشخص می‌کند درخواست از طرف چه کسی است. مجوزدهی تعیین می‌کند همان شخص اجازهٔ انجام عملی مشخص روی منبعی مشخص را دارد یا نه. هر دو بررسی باید در سرور انجام شوند." },
+        { "heading": "نقش‌ها چه زمانی مفیدند؟", "body": "نقش‌ها مسئولیت‌های کلی را نشان می‌دهند؛ مانند پزشک، ویراستار و بیمار در سامانهٔ کلینیک. اما نقش به‌تنهایی نمی‌گوید کاربر اجازهٔ دیدن اطلاعات یک بیمار مشخص را دارد یا نه." },
+        { "heading": "دسترسی به یک رکورد چگونه کنترل می‌شود؟", "body": "رکورد را فقط از محدودهٔ مجاز کاربر می‌خوانم یا پیش از بازگرداندن آن، مالکیت یا عضویت را بررسی می‌کنم. در پالس، ارائهٔ فایل خصوصی به عضویت در گفت‌وگو وابسته است." },
+        { "heading": "چرا هر درخواست باید جدا بررسی شود؟", "body": "پنهان کردن دکمه یا خصوصی بودن آدرس، کنترل دسترسی نیست. هر مسیر خواندن یا تغییر دادهٔ حساس، از جمله دریافت فایل، باید قاعدهٔ مجوز را در سرور اجرا کند." },
+        { "heading": "آزمون دسترسی چه چیزی را باید ثابت کند؟", "body": "هم دسترسی مجاز و هم درخواست نامجاز را می‌آزمایم؛ به‌خصوص تلاش برای استفاده از شناسهٔ منبع کاربر دیگر. چنین آزمونی مرز واقعی داده را بررسی می‌کند." }
+      ]
+    }
+  },
+  {
+    "slug": "postgresql-data-modeling",
+    "related": ["arista-exchange-website", "private-real-time-chat-platform", "pediatric-clinic-platform-medisite"],
+    "en": {
+      "title": "PostgreSQL data modeling",
+      "description": "Sina Fateh on relational schema design, constraints, indexes, transactions, and safe migrations for web applications.",
+      "intro": "A useful data model captures the rules that must stay true even when several requests arrive together. PostgreSQL gives those rules a durable place close to the data.",
+      "sections": [
+        { "heading": "What belongs in the database schema?", "body": "Use relationships, nullability, uniqueness, and check constraints for invariants the application must never violate. Application validation improves feedback, while database constraints protect the final write." },
+        { "heading": "How do you choose an index?", "body": "Start from real query filters, joins, and ordering. An index can speed reads but costs storage and write work, so measure the query plan before adding one for every column." },
+        { "heading": "When is a transaction necessary?", "body": "Use a transaction when several writes form one business action and must succeed or fail together. Keep it short and avoid waiting on external services while database locks are held." },
+        { "heading": "How should migrations be deployed?", "body": "Review schema changes with the application version that uses them. For disruptive changes, add the new shape first, migrate existing data, switch readers and writers, then remove the old shape in a later release." },
+        { "heading": "What changes for chat history?", "body": "Conversations, participants, messages, and read state have different lifetimes and access rules. A relational model helps preserve message history while membership checks control which records a caller can retrieve." }
+      ]
+    },
+    "fa": {
+      "title": "مدل‌سازی داده با PostgreSQL",
+      "description": "سینا فاتح دربارهٔ طراحی رابطه‌ای، قیدها، ایندکس‌ها، تراکنش‌ها و مهاجرت امن داده در برنامه‌های وب.",
+      "intro": "مدل داده باید قواعدی را نگه دارد که حتی با رسیدن چند درخواست هم‌زمان هم نباید نقض شوند. PostgreSQL جای پایداری برای این قواعد در کنار داده فراهم می‌کند.",
+      "sections": [
+        { "heading": "چه قواعدی باید در شمای پایگاه داده باشند؟", "body": "رابطه‌ها، تهی‌پذیری، یکتایی و قیدهای بررسی برای اصولی مناسب‌اند که برنامه هرگز نباید نقض کند. اعتبارسنجی برنامه پیام بهتری می‌دهد و قید پایگاه داده از ثبت نهایی محافظت می‌کند." },
+        { "heading": "ایندکس را چگونه انتخاب کنیم؟", "body": "از فیلتر، اتصال جدول‌ها و ترتیب واقعی پرس‌وجوها شروع می‌کنم. ایندکس خواندن را سریع‌تر می‌کند اما هزینهٔ ذخیره‌سازی و نوشتن دارد؛ بنابراین قبل از افزودن آن، برنامهٔ اجرای پرس‌وجو را می‌سنجم." },
+        { "heading": "تراکنش چه زمانی لازم است؟", "body": "وقتی چند نوشتن یک عمل واحد را می‌سازند، باید با هم موفق یا ناموفق شوند. تراکنش را کوتاه نگه می‌دارم و هنگام نگه‌داشتن قفل پایگاه داده منتظر سرویس بیرونی نمی‌مانم." },
+        { "heading": "مهاجرت داده چگونه منتشر شود؟", "body": "تغییر شما باید با نسخهٔ برنامه بررسی شود. برای تغییرهای پرریسک، ابتدا ساختار تازه را می‌افزایم، دادهٔ قبلی را منتقل می‌کنم، خواندن و نوشتن را به آن می‌برم و ساختار قدیمی را در انتشار بعدی حذف می‌کنم." },
+        { "heading": "برای تاریخچهٔ گفت‌وگو چه چیزی تغییر می‌کند؟", "body": "گفت‌وگو، اعضا، پیام‌ها و وضعیت خواندن، عمر و قواعد دسترسی متفاوتی دارند. مدل رابطه‌ای تاریخچه را نگه می‌دارد و بررسی عضویت تعیین می‌کند کدام رکورد به درخواست‌کننده برسد." }
+      ]
+    }
+  },
+  {
+    "slug": "container-release-workflow",
+    "related": ["resume-as-code-platform", "self-hosted-server-deployment-infrastructure", "arista-exchange-website"],
+    "en": {
+      "title": "A repeatable container release workflow",
+      "description": "Sina Fateh's checklist for Docker builds, CI, image versions, secrets, health checks, and rollback on a Linux server.",
+      "intro": "A release is more than a successful Docker build. The same artifact should be testable, identifiable, deployable, and recoverable when a service behaves differently in production.",
+      "sections": [
+        { "heading": "What should CI verify?", "body": "Run the project's build and meaningful tests before publishing an image. Keep the source revision and image version linked so the running container can be traced back to a specific change." },
+        { "heading": "Why tag an image by version?", "body": "A version or commit-based tag identifies the exact artifact that passed checks. A mutable latest tag is convenient for browsing, but it is a poor rollback target on its own." },
+        { "heading": "Where should secrets live?", "body": "Runtime secrets belong in deployment configuration or a secret store, not in the image or repository. The application should fail clearly if required configuration is absent." },
+        { "heading": "How do you know deployment succeeded?", "body": "Check more than container startup: inspect health, proxy routing, HTTPS, a representative request, and logs. A running process may still be unable to reach its database or serve the public route." },
+        { "heading": "How do you roll back?", "body": "Keep the previous known-good image and its compatible configuration available. Redeploy that version, verify traffic, and investigate the failed release separately. Database changes need their own rollback plan." }
+      ]
+    },
+    "fa": {
+      "title": "روند تکرارپذیر انتشار کانتینر",
+      "description": "چک‌لیست سینا فاتح برای ساخت Docker، CI، نسخهٔ ایمیج، اسرار، بررسی سلامت و بازگشت نسخه روی سرور لینوکسی.",
+      "intro": "انتشار نرم‌افزار فقط موفق شدن ساخت Docker نیست. خروجی باید آزمودنی، قابل شناسایی، قابل استقرار و هنگام بروز مشکل قابل بازیابی باشد.",
+      "sections": [
+        { "heading": "CI چه چیزهایی را بررسی کند؟", "body": "ساخت پروژه و آزمون‌های معنادار باید پیش از انتشار ایمیج اجرا شوند. ارتباط میان نسخهٔ کد و ایمیج را نگه می‌دارم تا کانتینر در حال اجرا به یک تغییر مشخص قابل ردیابی باشد." },
+        { "heading": "چرا ایمیج به برچسب نسخه نیاز دارد؟", "body": "برچسب نسخه یا شناسهٔ commit دقیقاً مشخص می‌کند کدام خروجی آزمون شده است. برچسب متغیر latest برای مرور راحت است، اما به‌تنهایی مبنای خوبی برای بازگشت نیست." },
+        { "heading": "اطلاعات محرمانه کجا نگهداری شوند؟", "body": "رازهای زمان اجرا باید در پیکربندی استقرار یا مخزن امن قرار گیرند، نه داخل ایمیج یا مخزن کد. نبود پیکربندی ضروری نیز باید خطای روشن ایجاد کند." },
+        { "heading": "از موفقیت استقرار چگونه مطمئن شویم؟", "body": "فقط روشن شدن کانتینر کافی نیست. سلامت سرویس، مسیر پراکسی، HTTPS، یک درخواست واقعی و گزارش‌ها را بررسی می‌کنم؛ ممکن است فرایند روشن باشد اما پایگاه داده یا مسیر عمومی کار نکند." },
+        { "heading": "چگونه به نسخهٔ قبلی برگردیم؟", "body": "ایمیج سالم قبلی و پیکربندی سازگار آن را نگه می‌دارم. همان نسخه دوباره استقرار و ترافیک بررسی می‌شود؛ تغییرهای پایگاه داده نیز برنامهٔ بازگشت جداگانه می‌خواهند." }
+      ]
+    }
+  },
+  {
+    "slug": "private-file-delivery",
+    "related": ["private-real-time-chat-platform", "arista-exchange-website", "telegram-archive-viewer"],
+    "en": {
+      "title": "Private file delivery in web apps",
+      "description": "Sina Fateh on upload validation, private storage, authorization, safe downloads, and media access in web applications.",
+      "intro": "File handling crosses the boundary between user input, storage, and access control. I treat an upload as untrusted data and a download as a fresh authorization decision.",
+      "sections": [
+        { "heading": "What should be checked at upload?", "body": "Limit size, allow only the file types a feature needs, validate content rather than trusting the extension, and generate a server-controlled storage name. Reject failures before further processing." },
+        { "heading": "Why keep private files outside public assets?", "body": "A public asset URL bypasses application permissions. Private media should be served through a route that checks the caller and the parent record, as Pulse does for conversation attachments." },
+        { "heading": "Is an unguessable URL enough?", "body": "No. A long random URL may reduce accidental discovery but can be copied or leaked. The server still needs to decide whether the current caller may receive that file." },
+        { "heading": "How should downloads respond?", "body": "Return the expected content type and a safe content disposition. Avoid reflecting an untrusted filename into headers, and consider whether sensitive responses may be cached by a shared intermediary." },
+        { "heading": "What happens when a parent record is deleted?", "body": "Define whether its files are retained, quarantined, or removed. Database records and object storage can fall out of sync, so cleanup needs an explicit lifecycle rather than an assumption." }
+      ]
+    },
+    "fa": {
+      "title": "ارائهٔ امن فایل خصوصی در وب",
+      "description": "سینا فاتح دربارهٔ بررسی آپلود، ذخیره‌سازی خصوصی، مجوز دسترسی، دانلود امن و فایل‌های رسانه‌ای برنامه‌های وب.",
+      "intro": "کار با فایل از مرز ورودی کاربر، ذخیره‌سازی و کنترل دسترسی عبور می‌کند. آپلود را دادهٔ غیرقابل اعتماد و هر دانلود را تصمیم تازه‌ای دربارهٔ مجوز می‌بینم.",
+      "sections": [
+        { "heading": "هنگام آپلود چه چیزهایی بررسی شوند؟", "body": "حجم را محدود می‌کنم، فقط نوع فایل لازم را می‌پذیرم، محتوا را مستقل از پسوند بررسی می‌کنم و نام ذخیره‌سازی را در سرور می‌سازم. ورودی نامعتبر پیش از پردازش بیشتر رد می‌شود." },
+        { "heading": "چرا فایل خصوصی در مسیر عمومی نباشد؟", "body": "آدرس فایل عمومی از قواعد دسترسی برنامه عبور می‌کند. رسانهٔ خصوصی باید از مسیری ارائه شود که کاربر و رکورد والد را بررسی می‌کند؛ همان کاری که پالس برای پیوست گفت‌وگو انجام می‌دهد." },
+        { "heading": "آدرس غیرقابل حدس کافی است؟", "body": "نه. آدرس تصادفی بلند شاید کشف اتفاقی را کمتر کند، اما می‌تواند کپی یا افشا شود. سرور همچنان باید تعیین کند درخواست‌کننده اجازهٔ دریافت فایل را دارد یا نه." },
+        { "heading": "پاسخ دانلود چگونه ساخته شود؟", "body": "نوع محتوا و سربرگ دانلود باید درست و امن باشند. نام فایل تأییدنشده را مستقیم در سربرگ قرار نمی‌دهم و برای محتوای حساس، رفتار کش میانی را هم در نظر می‌گیرم." },
+        { "heading": "پس از حذف رکورد والد چه می‌شود؟", "body": "باید روشن باشد فایل‌های وابسته می‌مانند، قرنطینه می‌شوند یا حذف می‌شوند. رکورد پایگاه داده و محل ذخیرهٔ فایل ممکن است ناهماهنگ شوند، پس پاک‌سازی به چرخهٔ عمر مشخص نیاز دارد." }
+      ]
+    }
   }
 ]

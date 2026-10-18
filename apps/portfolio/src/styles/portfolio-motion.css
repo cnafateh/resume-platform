@@ -61,7 +61,7 @@ body.portfolio-v2.menu-open { overflow: hidden; }
 body.fa-page .back-top { right: auto; left: clamp(18px, 3vw, 42px); }
 body.fa-page .scroll-progress { transform-origin: right center; }
 
-body.portfolio-v2 .scene { transform: translateY(var(--scroll-rise, 0px)) rotateX(calc(var(--scene-y) + var(--scroll-tilt, 0deg))) rotateY(var(--scene-x)); }
+body.portfolio-v2 .scene { transform: translateY(var(--scroll-rise, 0px)) rotateX(calc(var(--scene-y) + var(--scroll-tilt, 0deg))) rotateY(calc(var(--scene-x) + var(--scroll-spin, 0deg))); }
 .portfolio-v2 .project-visual { transform-style: preserve-3d; transition: transform .55s cubic-bezier(.2,.8,.2,1), border-color .35s, box-shadow .4s; }
 .portfolio-v2 .project-feature:hover .project-visual { transform: translateY(-7px) rotateX(2deg); box-shadow: 0 25px 55px rgba(0, 0, 0, .24); }
 .portfolio-v2 .project-content h3 a { transition: color .25s; }
@@ -140,6 +140,17 @@ body.portfolio-v2 .contact-section h2 { line-height: 1.08; }
 }
 
 @media (max-width: 900px) {
+  @media (hover: none), (pointer: coarse) {
+    .portfolio-v2 .project-visual { transform: perspective(1000px) translateY(var(--mobile-lift, 0px)) rotateX(var(--mobile-tilt, 0deg)); box-shadow: 0 18px 42px rgba(0, 0, 0, .16); }
+    .portfolio-v2 .project-feature:hover .project-visual { transform: perspective(1000px) translateY(var(--mobile-lift, 0px)) rotateX(var(--mobile-tilt, 0deg)); }
+    .portfolio-v2 .project-visual .glyph-frame-a,
+    .portfolio-v2 .project-visual:hover .glyph-frame-a { transform: rotate(calc(45deg + var(--mobile-tilt, 0deg))) rotateX(45deg) translateZ(26px); }
+    .portfolio-v2 .project-visual .glyph-frame-b,
+    .portfolio-v2 .project-visual:hover .glyph-frame-b { transform: rotate(calc(45deg - var(--mobile-tilt, 0deg))) rotateX(45deg) translateZ(80px); }
+    html.portfolio-enhanced .portfolio-v2 .note-item.reveal.is-visible,
+    html.portfolio-enhanced .portfolio-v2 .note-item.reveal.is-visible:hover { transform: perspective(950px) translateY(var(--mobile-lift, 0px)) rotateX(var(--mobile-tilt, 0deg)); }
+    .cursor-observer { pointer-events: auto; touch-action: pan-y; }
+  }
   .portfolio-v2 .site-header { z-index: 95; }
   .portfolio-v2 .brand,
   .portfolio-v2 .header-actions { position: relative; z-index: 98; }
@@ -257,6 +268,7 @@ body.portfolio-v2 .contact-section h2 { line-height: 1.08; }
 }
 @media (prefers-reduced-motion: reduce) {
   .portfolio-v2 .scene { transform: none; }
+  .portfolio-v2 .project-visual, .portfolio-v2 .note-item { transform: none !important; }
   .orbit-outer, .orbit-inner { animation: none; }
   body.portfolio-v2 .site-header .mobile-nav:not([hidden]),
   body.portfolio-v2 .site-header .mobile-nav a { animation: none; opacity: 1; transform: none; }
