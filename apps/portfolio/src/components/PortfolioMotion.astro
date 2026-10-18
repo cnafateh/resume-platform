@@ -1,0 +1,88 @@
+---
+interface Props { lang: "en" | "fa" }
+const { lang } = Astro.props;
+import "../styles/portfolio-motion.css";
+---
+
+<div class="scroll-progress" aria-hidden="true"></div>
+<button class="back-top" type="button" aria-label={lang === "fa" ? "بازگشت به بالای صفحه" : "Back to top"} title={lang === "fa" ? "بازگشت به بالا" : "Back to top"}>
+  <svg viewBox="0 0 56 56" aria-hidden="true"><circle class="back-top-track" cx="28" cy="28" r="23"></circle><circle class="back-top-meter" cx="28" cy="28" r="23"></circle><path d="M28 35V21m0 0-6 6m6-6 6 6"></path></svg>
+</button>
+
+<script>
+  const doc = document.documentElement;
+  const topButton = document.querySelector<HTMLButtonElement>(".back-top");
+  const scene = document.querySelector<HTMLElement>("#architecture-scene");
+  const hero = document.querySelector<HTMLElement>(".hero");
+  const observer = document.querySelector<HTMLElement>(".cursor-observer");
+  const motionReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let scrollFrame = 0;
+  let moveFrame = 0;
+  let smoothFrame = 0;
+
+  const updateScroll = () => {
+    scrollFrame = 0;
+    const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+    const progress = Math.min(1, window.scrollY / max);
+    doc.style.setProperty("--page-progress", String(progress));
+    topButton?.classList.toggle("is-visible", window.scrollY > 520);
+    if (scene && hero && !motionReduced.matches) {
+      const progressInHero = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / Math.max(1, hero.offsetHeight)));
+      scene.style.setProperty("--scroll-tilt", `${progressInHero * 12}deg`);
+      scene.style.setProperty("--scroll-rise", `${progressInHero * -22}px`);
+    }
+  };
+  const queueScroll = () => { if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll); };
+  window.addEventListener("scroll", queueScroll, { passive: true });
+  window.addEventListener("resize", queueScroll, { passive: true });
+  updateScroll();
+
+  const cancelSmooth = () => { if (smoothFrame) cancelAnimationFrame(smoothFrame); smoothFrame = 0; };
+  window.addEventListener("wheel", cancelSmooth, { passive: true });
+  window.addEventListener("touchstart", cancelSmooth, { passive: true });
+  const glideTo = (destination: number, hash?: string) => {
+    cancelSmooth();
+    const target = Math.max(0, Math.min(destination, doc.scrollHeight - window.innerHeight));
+    if (hash) history.pushState(null, "", hash);
+    if (motionReduced.matches) { window.scrollTo(0, target); return; }
+    const from = window.scrollY;
+    const change = target - from;
+    const duration = Math.min(1050, Math.max(500, Math.abs(change) * .42));
+    const started = performance.now();
+    const frame = (now: number) => {
+      const t = Math.min(1, (now - started) / duration);
+      const eased = 1 - Math.pow(1 - t, 4);
+      window.scrollTo(0, from + change * eased);
+      smoothFrame = t < 1 ? requestAnimationFrame(frame) : 0;
+    };
+    smoothFrame = requestAnimationFrame(frame);
+  };
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const hash = link.getAttribute("href");
+      if (!hash || hash === "#") return;
+      const target = document.getElementById(hash.slice(1));
+      if (!target) return;
+      event.preventDefault();
+      glideTo(target.getBoundingClientRect().top + window.scrollY, hash);
+    });
+  });
+  topButton?.addEventListener("click", () => glideTo(0, "#top"));
+
+  if (observer && window.matchMedia("(hover: hover) and (pointer: fine)").matches && !motionReduced.matches) {
+    window.addEventListener("pointermove", (event) => {
+      if (moveFrame) cancelAnimationFrame(moveFrame);
+      moveFrame = requestAnimationFrame(() => {
+        const rect = observer.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const x = event.clientX - (rect.left + rect.width / 2);
+        const y = event.clientY - (rect.top + rect.height / 2);
+        const length = Math.max(1, Math.hypot(x, y));
+        observer.style.setProperty("--look-x", `${x / length * 17}px`);
+        observer.style.setProperty("--look-y", `${y / length * 17}px`);
+        observer.style.setProperty("--iris-x", `${x / length * 7}px`);
+        observer.style.setProperty("--iris-y", `${y / length * 7}px`);
+      });
+    }, { passive: true });
+  }
+</script>

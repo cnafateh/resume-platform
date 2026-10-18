@@ -24,7 +24,7 @@ body.portfolio-v2 ::selection { background: var(--acid); color: #081219; }
 .portfolio-v2 .brand-symbol i { position: absolute; width: 5px; height: 5px; background: var(--acid); right: -3px; top: -3px; }
 .portfolio-v2 .brand-copy { display: grid; gap: 2px; }
 .portfolio-v2 .brand-copy strong { font-size: 13px; letter-spacing: .04em; font-weight: 650; }
-.portfolio-v2 .brand-copy small, .portfolio-v2 .eyebrow, .portfolio-v2 .hero-signals, .portfolio-v2 .scene-coordinate, .portfolio-v2 .scene-note, .portfolio-v2 .signal-label, .portfolio-v2 .section-heading, .portfolio-v2 .section-kicker, .portfolio-v2 .project-visual-top, .portfolio-v2 .project-visual-bottom, .portfolio-v2 .project-overline, .portfolio-v2 .project-tags, .portfolio-v2 .capability-index, .portfolio-v2 .capability-count, .portfolio-v2 .timeline-date, .portfolio-v2 .note-item > span:first-child, .portfolio-v2 .about-meta span { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 10px; letter-spacing: .11em; }
+.portfolio-v2 .brand-copy small, .portfolio-v2 .eyebrow, .portfolio-v2 .hero-signals, .portfolio-v2 .scene-coordinate, .portfolio-v2 .scene-note, .portfolio-v2 .signal-label, .portfolio-v2 .section-heading, .portfolio-v2 .project-visual-top, .portfolio-v2 .project-visual-bottom, .portfolio-v2 .project-overline, .portfolio-v2 .project-tags, .portfolio-v2 .capability-index, .portfolio-v2 .capability-count, .portfolio-v2 .timeline-date, .portfolio-v2 .note-item > span:first-child, .portfolio-v2 .about-meta span { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 10px; letter-spacing: .11em; }
 .portfolio-v2 .brand-copy small { color: var(--quiet); letter-spacing: .12em; font-size: 9px; }
 .portfolio-v2 .desktop-nav { display: flex; align-items: center; gap: clamp(18px, 2.3vw, 38px); }
 .portfolio-v2 .desktop-nav a { color: #b8c4c1; font-size: 12px; transition: color .2s; }
@@ -101,7 +101,6 @@ body.portfolio-v2 ::selection { background: var(--acid); color: #081219; }
 .portfolio-v2 .section-heading { display: flex; align-items: center; gap: 22px; color: var(--acid); font-size: 10px; }
 .portfolio-v2 .section-rule { height: 1px; flex: 1; background: var(--line); }
 .portfolio-v2 .section-aside { color: var(--quiet); }
-.portfolio-v2 .section-kicker { color: var(--acid); margin: 0 0 22px; font-size: 10px; }
 .portfolio-v2 .display-heading { font-size: clamp(48px, 5.2vw, 94px); margin: 0; }
 .portfolio-v2 .about-grid { display: grid; grid-template-columns: 1.08fr .82fr; gap: clamp(60px, 8vw, 150px); align-items: end; padding-top: 82px; }
 .portfolio-v2 .about-copy > p { font-size: clamp(15px,1.15vw,19px); line-height: 1.9; color: #afbfbc; margin: 0; }
@@ -168,7 +167,7 @@ body.portfolio-v2 ::selection { background: var(--acid); color: #081219; }
 
 .portfolio-v2 .contact-section { margin-top: clamp(120px, 12vw, 200px); background: var(--acid); color: #0a1b1a; min-height: 550px; position: relative; overflow: hidden; }
 .portfolio-v2 .contact-inner { max-width: 1600px; margin: auto; padding: clamp(85px,8vw,130px) clamp(24px,5vw,88px); position: relative; z-index: 1; }
-.portfolio-v2 .contact-section .section-kicker { color: #29483a; }.portfolio-v2 .contact-section h2 { font-size: clamp(54px,7vw,115px); margin: 0; }.portfolio-v2 .contact-section h2 em { color: #27503d; }.portfolio-v2 .contact-section p:not(.section-kicker) { max-width: 480px; font-size: 15px; margin: 28px 0 35px; }
+.portfolio-v2 .contact-section h2 { font-size: clamp(54px,7vw,115px); margin: 0; }.portfolio-v2 .contact-section h2 em { color: #27503d; }.portfolio-v2 .contact-section p { max-width: 480px; font-size: 15px; margin: 28px 0 35px; }
 .portfolio-v2 .contact-email { display: inline-flex; align-items: center; gap: 35px; border-bottom: 2px solid #0a1b1a; padding-bottom: 8px; font-size: clamp(17px,2vw,29px); font-weight: 650; letter-spacing: -.03em; }.portfolio-v2 .contact-email:hover { gap: 48px; }
 .portfolio-v2 .contact-links { display: flex; flex-wrap: wrap; gap: 23px; margin-top: 55px; font-size: 12px; font-weight: 650; }.portfolio-v2 .contact-links a { border-bottom: 1px solid currentColor; padding-bottom: 3px; }
 .portfolio-v2 .contact-orbit { position: absolute; width: 700px; aspect-ratio: 1; border: 1px solid rgba(16,55,42,.18); border-radius: 50%; right: -140px; top: -80px; box-shadow: 0 0 0 75px rgba(16,55,42,.045), 0 0 0 150px rgba(16,55,42,.035); }

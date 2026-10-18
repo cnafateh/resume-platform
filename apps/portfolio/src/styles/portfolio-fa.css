@@ -42,7 +42,6 @@ body.portfolio-v2.fa-detail {
 .portfolio-v2.fa-page .hero-signals,
 .portfolio-v2.fa-page .signal-label,
 .portfolio-v2.fa-page .section-heading,
-.portfolio-v2.fa-page .section-kicker,
 .portfolio-v2.fa-page .project-overline,
 .portfolio-v2.fa-page .project-visual-top,
 .portfolio-v2.fa-page .capability-count,
@@ -83,7 +82,7 @@ body.portfolio-v2.fa-detail {
 .portfolio-v2.fa-page .note-arrow { align-self: start; }
 .portfolio-v2.fa-page .contact-orbit { right: auto; left: -140px; }
 .portfolio-v2.fa-page .contact-email bdi { font-family: "Segoe UI", sans-serif; direction: ltr; unicode-bidi: isolate; }
-.portfolio-v2.fa-page .contact-section p:not(.section-kicker) { line-height: 2; }
+.portfolio-v2.fa-page .contact-section p { line-height: 2; }
 
 .portfolio-v2.fa-detail .inner-brand { font-size: 18px; }
 .portfolio-v2.fa-detail .inner-header nav { font-size: 13px; }

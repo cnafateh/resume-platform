@@ -1,115 +1,34 @@
+import copy from "../../../../resume.fa.json";
 import { topics } from "./seo";
 
-export const faName = "سینا فاتح";
+export const faName = copy.name;
+export const faHomepage = copy.homepage;
 export const faProjectPath = (slug: string) => `/fa/projects/${slug}/`;
 export const faTopicPath = (slug: string) => `/fa/topics/${slug}/`;
 
-const projectCopy: Record<string, { title: string; description: string }> = {
-  "pediatric-clinic-platform-medisite": { title: "سامانهٔ کلینیک کودکان مدیسایت", description: "سرویس‌های بک‌اند این پلتفرم را با Django REST Framework توسعه دادم؛ از ثبت‌نام و احراز هویت JWT تا نوبت‌دهی، مدیریت محتوا و دسترسی‌های جداگانه برای پزشک، ویراستار و بیمار. قاعدهٔ داشتن تنها یک نوبت فعال برای هر بیمار را پیاده‌سازی کردم. پایگاه داده را به PostgreSQL منتقل کردم و برنامه را با Docker، Nginx، DNS و HTTPS روی سرور لینوکسی خودم مستقر کردم." },
-  "private-real-time-chat-platform": { title: "سامانهٔ گفت‌وگوی خصوصی بلادرنگ", description: "یک پیام‌رسان خصوصی با Django، Django Channels، ASGI، WebSocket و PostgreSQL توسعه دادم. گفت‌وگوی دونفرهٔ احراز هویت شده، ذخیرهٔ تاریخچه و یافتن کاربر با نام کاربری را بدون نمایش فهرست عمومی کاربران پیاده‌سازی کردم. برنامه با Docker روی سرور لینوکسی و پشت Nginx، DNS و HTTPS مستقر شد." },
-  "telegram-archive-viewer": { title: "مرورگر آرشیو تلگرام", description: "ابزاری خودمیزبان ساختم که خروجی HTML تلگرام دسکتاپ را می‌خواند و پیام‌ها را در SQLite ذخیره می‌کند. جست‌وجوی تمام‌متن با FTS5، نمایش امن رسانه‌ها، رفتن به پیام‌های پاسخ‌داده‌شده و فیلتر کردن در یک رابط واکنش‌گرا پیاده‌سازی شده‌اند. پروژه با Docker اجرا می‌شود و آزمون، CI و انتشار نسخه از طریق GitHub Actions و GHCR دارد." },
-  taskflow: { title: "تسک‌فلو؛ مدیریت پروژه و وظیفه", description: "یک برنامهٔ مدیریت پروژه و وظیفه با ASP.NET Core MVC و Entity Framework Core در دست توسعه دارم. عملیات ایجاد، مشاهده، ویرایش و حذف، اعتبارسنجی فرم، لایهٔ سرویس و تزریق وابستگی در آن پیاده‌سازی شده‌اند. رابطهٔ یک‌به‌چند پروژه و وظیفه با حذف وابسته، SQLite و ViewModelها منطق برنامه را از کنترلرها جدا نگه می‌دارند." },
-  "e-commerce-backend": { title: "بک‌اند فروشگاه اینترنتی", description: "در یک پروژهٔ تیمی، APIهای کاتالوگ، سبد خرید، فرایند خرید و مدیریت سفارش را توسعه دادم. احراز هویت JWT، مجوزهای مبتنی بر نقش، کش Redis، وظایف پس‌زمینه با Celery و مستندات Swagger/OpenAPI بخشی از کار بودند. آزمون‌های واحد و یکپارچه با Pytest، CI با GitHub Actions و اجرای کانتینری با Docker و PostgreSQL به پروژه اضافه شدند." },
-  "resume-as-code-platform": { title: "پلتفرم رزومه به‌مثابه کد", description: "وب‌سایت شخصی و رزومه را با Astro و TypeScript بر پایهٔ یک منبع ساختارمند JSON توسعه می‌دهم. تجربه‌ها، مهارت‌ها، تحصیلات، پروژه‌ها و اطلاعات پروفایل از همان داده تولید می‌شوند. برنامه با Docker و Nginx کانتینرسازی شده و استقرار خودکار با GitHub Actions در برنامهٔ توسعهٔ آن است." },
-  "self-hosted-server-deployment-infrastructure": { title: "زیرساخت سرور و استقرار شخصی", description: "برای چند برنامهٔ وب شخصی، محیط استقرار خودمیزبان روی Linux ساخته‌ام. سرویس‌های Docker، پراکسی معکوس، رکوردهای DNS، CDN، مسیرهای HTTPS، قواعد دیوارهٔ آتش و جداسازی سرویس‌ها را پیکربندی و نگهداری می‌کنم. با Nginx، Nginx Proxy Manager و Arcane، مسائل عملی در لایه‌های برنامه، شبکه و زیرساخت را عیب‌یابی کرده‌ام." },
-  "arista-exchange-website": { title: "وب‌سایت آریستا اکسچنج", description: "یک وب‌سایت واکنش‌گرا برای معرفی شرکت آریستا اکسچنج، خدمات و اطلاعات اصلی آن با HTML، CSS و JavaScript توسعه دادم. در طراحی، خوانایی و یکپارچگی بصری در اندازه‌های مختلف صفحه را در نظر گرفتم. سایت با Docker و Nginx کانتینرسازی شد و ساخت ایمیج با GitHub Actions و GHCR و استقرار آن روی سرور لینوکسی انجام شد." },
-  "home-vpn-gateway": { title: "درگاه VPN خانگی", description: "یک درگاه متمرکز VPN با OpenVPN روی Ubuntu Server طراحی و پیکربندی کردم. Netplan و iptables برای مسیریابی، هدایت ترافیک، کنترل دسترسی و جداسازی شبکه به کار رفتند. این پروژه تجربهٔ عملی من در اتصال رمزگذاری‌شده، شبکهٔ Linux و عیب‌یابی زیرساخت را گسترش داد." },
-};
+const projects = copy.projects as Record<string, { title: string; description: string }>;
+const skills = copy.skills as Record<string, string>;
+const jobs = copy.work as Record<string, { place: string; role: string; summary: string; highlights: string[] }>;
+const education = copy.education as Record<string, { place: string; degree: string }>;
+const certificates = copy.certificates as Record<string, string>;
+const issuers = copy.issuers as Record<string, string>;
 
 export const faProject = (slug: string, englishTitle: string, englishDescription: string) =>
-  projectCopy[slug] ?? { title: englishTitle, description: englishDescription };
+  projects[slug] ?? { title: englishTitle, description: englishDescription };
 
-const topicCopy: Record<string, { title: string; description: string; intro: string; sections: { heading: string; body: string }[] }> = {
-  "asp-net-core": {
-    title: "توسعه با ASP.NET Core",
-    description: "نگاه سینا فاتح به ASP.NET Core MVC، طراحی API، Entity Framework Core، تزریق وابستگی، اعتبارسنجی و نگهداری برنامه‌های C#.",
-    intro: "در توسعهٔ برنامه‌های C# و ASP.NET Core، مسئولیت کنترلر، سرویس، مدل داده و لایهٔ ذخیره‌سازی را روشن نگه می‌دارم. TaskFlow نمونه‌ای عملی از این رویکرد است.",
-    sections: [
-      { heading: "ASP.NET Core MVC چه مسئله‌ای را حل می‌کند؟", body: "الگوی MVC دریافت درخواست، دادهٔ برنامه و نمایش را از هم جدا می‌کند. در TaskFlow کنترلر درخواست را دریافت می‌کند، ViewModel دادهٔ فرم را شکل می‌دهد و قواعد پروژه و وظیفه در لایهٔ سرویس قرار می‌گیرند." },
-      { heading: "چرا تزریق وابستگی مهم است؟", body: "کنترلر به قرارداد یک سرویس وابسته می‌شود، نه به ساخت مستقیم آن. در نتیجه، مسئولیت‌ها واضح‌تر می‌شوند و آزمودن منطق برنامه آسان‌تر است." },
-      { heading: "Entity Framework Core کجا قرار می‌گیرد؟", body: "این ابزار مدل ذخیره‌سازی داده را مدیریت می‌کند. TaskFlow از SQLite و رابطهٔ یک‌به‌چند میان پروژه و وظیفه استفاده می‌کند؛ حذف پروژه نیز وظایف وابسته را حذف می‌کند." },
-      { heading: "اعتبارسنجی باید در کدام لایه انجام شود؟", body: "ورودی نامعتبر باید هنگام ورود درخواست یا ارسال فرم رد شود. قواعد کسب‌وکار در لایهٔ برنامه قرار می‌گیرند تا میان چند مسیر یا رابط قابل استفاده باشند." },
-      { heading: "چه چیزی یک API را قابل نگهداری می‌کند؟", body: "مسیرهای یکدست، قراردادهای روشن، سرویس‌های متمرکز، خطاهای قابل پیش‌بینی و آزمون رفتارهای مهم، تغییر دادن API را در طول زمان آسان‌تر می‌کنند." },
-    ],
-  },
-  "docker-deployment": {
-    title: "داکر و استقرار نرم‌افزار",
-    description: "یادداشت‌های عملی سینا فاتح دربارهٔ Docker، Compose، Nginx، استقرار روی Linux، CI/CD، HTTPS و سرویس‌های خودمیزبان.",
-    intro: "کانتینرسازی، ساخت و اجرای برنامه را تکرارپذیر می‌کند. در چند پروژه از Docker، پراکسی معکوس، HTTPS و استقرار مبتنی بر ایمیج روی سرور لینوکسی استفاده کرده‌ام.",
-    sections: [
-      { heading: "ساخت چندمرحله‌ای Docker چه فایده‌ای دارد؟", body: "مرحلهٔ ساخت ابزارها را نصب و خروجی برنامه را تولید می‌کند. مرحلهٔ اجرا تنها فایل‌های لازم را نگه می‌دارد؛ بنابراین وابستگی‌های ساخت وارد ایمیج نهایی نمی‌شوند." },
-      { heading: "Docker Compose چه چیزهایی را مدیریت می‌کند؟", body: "Compose سرویس‌ها، شبکه‌ها، حجم‌های داده و سیاست راه‌اندازی دوباره را در یک پیکربندی مشخص می‌کند؛ مثلاً برای هماهنگ کردن برنامه، پایگاه داده و پراکسی." },
-      { heading: "Nginx در استقرار چه نقشی دارد؟", body: "Nginx می‌تواند فایل‌های ایستا را ارائه کند یا درخواست‌ها را به برنامه برساند. برای WebSocket باید سربرگ‌های ارتقای اتصال حفظ شوند و درخواست به سرویس درست برسد." },
-      { heading: "HTTPS چگونه تنظیم می‌شود؟", body: "پراکسی عمومی اتصال TLS را خاتمه می‌دهد و درخواست را براساس دامنه هدایت می‌کند. DNS باید به سرور اشاره کند و برنامه URL عمومی HTTPS را در پیوندهای canonical به کار ببرد." },
-      { heading: "روند استقرار مطمئن چیست؟", body: "ایمیج در CI ساخته می‌شود، با نسخهٔ مشخص منتشر می‌شود، همان نسخه استقرار می‌یابد و سلامت سرویس بررسی می‌شود. نگهداری نسخهٔ قبلی مسیر بازگشت را فراهم می‌کند." },
-      { heading: "خطای استقرار را از کجا عیب‌یابی کنیم؟", body: "از DNS و TLS شروع می‌کنم، سپس مسیر پراکسی، سلامت و گزارش کانتینرها، اتصال شبکه و پیکربندی برنامه را بررسی می‌کنم. تفکیک این لایه‌ها علت خطا را روشن‌تر می‌کند." },
-    ],
-  },
-  "backend-engineering": {
-    title: "مهندسی بک‌اند و API",
-    description: "سینا فاتح دربارهٔ REST API، Django REST Framework، PostgreSQL، احراز هویت، Redis، WebSocket و معماری بک‌اند می‌نویسد.",
-    intro: "تجربهٔ بک‌اند من در ASP.NET Core و Django شامل طراحی API، احراز هویت، ذخیرهٔ داده، پیام‌رسانی بلادرنگ و نگهداری برنامه پس از استقرار است.",
-    sections: [
-      { heading: "یک REST API کاربردی را چگونه طراحی کنیم؟", body: "از منابع و کارهایی که کاربر باید انجام دهد شروع می‌کنم. شکل درخواست و پاسخ باید یکدست باشد، ورودی بررسی شود، خطا واضح بیان شود و در صورت نیاز مسیرها با OpenAPI مستند شوند." },
-      { heading: "دسترسی کاربران چگونه مدل می‌شود؟", body: "احراز هویت مشخص می‌کند کاربر کیست؛ مجوزدهی مشخص می‌کند چه کاری می‌تواند انجام دهد. سامانهٔ کلینیک کودکان نقش‌های پزشک، ویراستار و بیمار را با قواعد دسترسی جداگانه دارد." },
-      { heading: "PostgreSQL چه زمانی مناسب است؟", body: "برای داده‌های رابطه‌ای، قیدها، ایندکس‌ها و تغییرات تراکنشی از PostgreSQL استفاده کرده‌ام؛ به‌ویژه جایی که دوام رابطه‌ها و رفتار پرس‌وجو مهم است." },
-      { heading: "Redis چه کمکی می‌کند؟", body: "Redis برای داده‌های موقت و دسترسی سریع کاربرد دارد. برای کش باید زمان انقضا و راهبرد بی‌اعتبارسازی تعریف شود تا اطلاعات کهنه به کاربر نرسد." },
-      { heading: "WebSocket طراحی بک‌اند را چگونه تغییر می‌دهد؟", body: "اتصال پایدار رویدادهای زنده را ممکن می‌کند، اما احراز هویت اتصال، مسیریابی، قطع ارتباط و ذخیرهٔ تاریخچه را نیز لازم دارد. پروژهٔ گفت‌وگوی خصوصی از Django Channels و PostgreSQL استفاده می‌کند." },
-      { heading: "بک‌اند آمادهٔ بهره‌برداری چه نیاز دارد؟", body: "فراتر از عملکرد endpoint، پیکربندی، ثبت رخداد، مهاجرت پایگاه داده، نسخهٔ پشتیبان، HTTPS، بررسی استقرار و عیب‌یابی بدون افشای اطلاعات حساس ضروری است." },
-    ],
-  },
-  "software-engineering": {
-    title: "روش کار در مهندسی نرم‌افزار",
-    description: "رویکرد سینا فاتح به نگهداری کد، آزمون، CI/CD، معماری و اجرای برنامه‌های وب در عمل.",
-    intro: "مهندسی نرم‌افزار را از نیاز کاربر تا سیستمی می‌بینم که بتوان آن را تغییر داد و نگهداری کرد. این یادداشت‌ها ساختار کد را به آزمون و استقرار پیوند می‌دهند.",
-    sections: [
-      { heading: "کد قابل نگهداری چه ویژگی‌ای دارد؟", body: "فردی که بعداً کد را تغییر می‌دهد باید بتواند رفتار مورد نظر را پیدا کند، وابستگی‌هایش را بفهمد، آن را در جای مشخصی عوض کند و نتیجه را بررسی کند. مسئولیت کوچک و نام روشن کمک می‌کند." },
-      { heading: "چه زمانی لایهٔ سرویس اضافه کنیم؟", body: "وقتی قواعد برنامه در کنترلرها یا endpointهای مختلف تکرار می‌شوند، لایهٔ سرویس مفید است. TaskFlow منطق برنامه را از دریافت درخواست در MVC جدا می‌کند." },
-      { heading: "آزمون‌ها باید چه چیزهایی را پوشش دهند؟", body: "آزمون باید رفتار مهم و حالت شکست را بررسی کند: مرزهای دسترسی، قیدهای داده، مسیرهای اصلی کاربر و نقاط اتصال سیستم‌ها. تکرار جزئیات پیاده‌سازی اطمینان کمتری می‌دهد." },
-      { heading: "چرا ساخت خودکار مهم است؟", body: "CI می‌تواند خطای ساخت و آزمون را پیش از انتشار ایمیج پیدا کند. خروجی نسخه‌دار استقرار را تکرارپذیر می‌کند و نقطهٔ بازگشت مشخصی می‌دهد." },
-      { heading: "فناوری را چگونه انتخاب کنیم؟", body: "نیاز محصول، توان تیم برای نگهداری، محدودیت میزبانی و هزینهٔ عملیاتی را کنار هم می‌گذارم. پشتهٔ ساده‌ای که این نیازها را برآورده کند، معمولاً تحویل و نگهداری را آسان‌تر می‌کند." },
-    ],
-  },
+export const faTopic = (slug: string) => {
+  const topic = topics.find((item) => item.slug === slug);
+  return topic?.fa ?? {
+    title: topic?.title ?? slug,
+    description: topic?.description ?? "",
+    intro: topic?.intro ?? "",
+    sections: topic?.sections ?? [],
+  };
 };
 
-export const faTopic = (slug: string) => topicCopy[slug] ?? {
-  title: topics.find((topic) => topic.slug === slug)?.title ?? slug,
-  description: topics.find((topic) => topic.slug === slug)?.description ?? "",
-  intro: topics.find((topic) => topic.slug === slug)?.intro ?? "",
-  sections: [...(topics.find((topic) => topic.slug === slug)?.sections ?? [])],
-};
-
-export const faSkillGroup = (name: string) => ({
-  "Software Development & Architecture": "توسعه و معماری نرم‌افزار",
-  "Databases & Caching": "پایگاه داده و کش",
-  "Testing & API Documentation": "آزمون و مستندسازی API",
-  "DevOps & Infrastructure": "زیرساخت و استقرار",
-  Networking: "شبکه",
-  "Network & Troubleshooting Tools": "ابزارهای شبکه و عیب‌یابی",
-  "Frontend Familiarity": "توسعهٔ فرانت‌اند",
-}[name] ?? name);
-
-export const faJob = (name: string) => ({
-  "Asr Energy Pak": { place: "عصر انرژی پاک", role: "توسعه‌دهندهٔ نرم‌افزار", summary: "مشارکت در توسعهٔ وب با .NET و تحویل محصول، همکاری با ذی‌نفعان و تولید محتوای فنی.", highlights: ["توسعهٔ بخش‌هایی از برنامهٔ وب با C#، .NET و ASP.NET Core در فرانت‌اند و بک‌اند.", "همکاری با تیم‌ها برای بررسی نیازمندی‌ها، آزمون مسیرهای محصول و انتقال بازخورد.", "تبدیل ویژگی‌ها و خدمات فنی محصول به محتوای روشن برای کاربران."] },
-  Shatel: { place: "شاتل", role: "کارشناس پشتیبانی فنی", summary: "پشتیبانی فنی سرویس‌های اینترنت در محیط یک ارائه‌دهندهٔ بزرگ خدمات اینترنتی.", highlights: ["عیب‌یابی سرویس‌های FTTH، ADSL، VDSL و PTP و مشکلات اتصال، IP و مسیریابی.", "راهنمایی کاربران، ثبت و پیگیری رخدادها در سامانهٔ CRM.", "ارجاع مسائل حل‌نشده به تیم‌های شبکه و توسعه و پیگیری تا رفع مشکل."] },
-  "NADCo Sharif": { place: "نادکو شریف", role: "مدرس رباتیک", summary: "آموزش پاره‌وقت برنامه‌نویسی، الکترونیک و رباتیک با تمرین‌های پروژه‌محور.", highlights: ["آموزش برنامه‌نویسی و الکترونیک در درس‌های ساختارمند و عملی.", "طراحی تمرین‌هایی برای تقویت حل مسئله، تفکر الگوریتمی و بیان فنی."] },
-}[name] ?? { place: name, role: "", summary: "", highlights: [] });
-
-export const faEducation = (institution: string) => ({
-  "Islamic Azad University, South Tehran Branch": { place: "دانشگاه آزاد اسلامی، واحد تهران جنوب", degree: "کارشناسی ارشد مهندسی کامپیوتر ـ شبکه‌های کامپیوتری" },
-  "Islamic Azad University, West Tehran Branch": { place: "دانشگاه آزاد اسلامی، واحد تهران غرب", degree: "کارشناسی مهندسی کامپیوتر" },
-}[institution] ?? { place: institution, degree: "" });
-
-export const faCertificate = (name: string) => ({
-  "Cisco CCNA Training": "دورهٔ آموزشی Cisco CCNA",
-  "Advanced Python": "پایتون پیشرفته",
-  "Web Design - Client Side": "طراحی وب ـ سمت کاربر",
-  "Python & Django Programming": "برنامه‌نویسی Python و Django",
-}[name] ?? name);
-
-export const faIssuer = (issuer: string) => ({
-  "Arjang Institute of Higher Education": "مؤسسهٔ آموزش عالی ارژنگ",
-  LAITEC: "لای‌تک",
-}[issuer] ?? issuer);
-
+export const faSkillGroup = (name: string) => skills[name] ?? name;
+export const faJob = (name: string) => jobs[name] ?? { place: name, role: "", summary: "", highlights: [] };
+export const faEducation = (institution: string) => education[institution] ?? { place: institution, degree: "" };
+export const faCertificate = (name: string) => certificates[name] ?? name;
+export const faIssuer = (issuer: string) => issuers[issuer] ?? issuer;
 export const faDate = (date?: string) => date === "Present" ? "اکنون" : date ?? "";
