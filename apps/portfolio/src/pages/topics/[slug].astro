@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { personId, projects, siteUrl, topics } from "../../data/seo";
+import { data } from "../../data/resume";
+import "../../styles/portfolio-experience.css";
 
 export function getStaticPaths() {
   return topics.map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
@@ -19,17 +21,15 @@ const schema = {
 };
 ---
 
-<Layout title={`${topic.title} | Sina Fateh`} description={topic.description} schema={schema}>
-  <main class="section-shell py-16">
-    <nav aria-label="Breadcrumb" class="text-sm text-neutral-500"><a href="/" class="underline">Sina Fateh</a> <span aria-hidden="true">/</span> {topic.title}</nav>
-    <article class="mt-12 max-w-4xl">
-      <p class="font-mono text-xs uppercase tracking-widest text-neutral-500">Engineering notes by Sina Fateh</p>
-      <h1 class="mt-3 text-4xl font-semibold leading-tight md:text-5xl">{topic.title}</h1>
-      <p class="mt-7 text-lg leading-9 text-neutral-600 dark:text-neutral-400">{topic.intro}</p>
-      <div class="mt-12 space-y-10">{topic.sections.map((section) => <section><h2 class="text-2xl font-semibold">{section.heading}</h2><p class="mt-3 leading-8 text-neutral-600 dark:text-neutral-400">{section.body}</p></section>)}</div>
-    </article>
-    <section class="mt-16" aria-labelledby="project-heading"><h2 id="project-heading" class="text-2xl font-semibold">Projects that show this work</h2><ul class="mt-5 grid gap-3 md:grid-cols-2">{related.map((project) => <li><a class="block rounded-2xl border border-black/10 p-5 underline dark:border-white/10" href={project.href}>{project.name}</a></li>)}</ul></section>
-    <section class="mt-16" aria-labelledby="more-heading"><h2 id="more-heading" class="text-2xl font-semibold">More from Sina Fateh</h2><ul class="mt-5 flex flex-wrap gap-5">{topics.filter((item) => item.slug !== topic.slug).map((item) => <li><a class="underline" href={`/topics/${item.slug}/`}>{item.title}</a></li>)}</ul></section>
-    <p class="mt-16 text-sm"><a class="underline" href="/">← Sina Fateh portfolio</a></p>
+<Layout title={`${topic.title} | ${data.basics.name}`} description={topic.description} schema={schema} alternatePath={`/topics/${topic.slug}/`} bodyClass="portfolio-v2 editorial-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="inner-header"><a class="inner-brand" href="/">{data.basics.name}<span aria-hidden="true">✳</span></a><nav aria-label="Page navigation"><a href="/#work">Projects</a><a href={`/fa/topics/${topic.slug}/`} lang="fa" dir="rtl">فارسی</a><a href="https://cv.sinafateh.ir/">CV ↗</a><a href={`mailto:${data.basics.email}`}>Contact ↗</a></nav></header>
+  <main id="main-content" class="inner-main">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span aria-current="page">{topic.title}</span></nav>
+    <article class="note-article"><p class="inner-eyebrow">ENGINEERING NOTE / {String(topics.findIndex((item) => item.slug === topic.slug) + 1).padStart(2, "0")}</p><h1>{topic.title}</h1><p class="inner-lead">{topic.intro}</p><details class="note-outline"><summary>In this note <span>{String(topic.sections.length).padStart(2, "0")} questions</span></summary><nav aria-label="Questions in this note"><ol>{topic.sections.map((section, index) => <li><a href={`#question-${index + 1}`}>{section.heading}</a></li>)}</ol></nav></details><div class="note-questions">{topic.sections.map((section, index) => <section id={`question-${index + 1}`}><span>{String(index + 1).padStart(2, "0")}</span><div><h2>{section.heading}</h2><p>{section.body}</p></div></section>)}</div></article>
+    <section class="inner-section" aria-labelledby="project-heading"><div class="inner-section-head"><span>IN PRACTICE</span><h2 id="project-heading">Related projects</h2></div><ul class="inner-link-list">{related.map((project) => <li><a href={project.href}>{project.name}<span aria-hidden="true">↗</span></a></li>)}</ul></section>
+    <section class="inner-section" aria-labelledby="more-heading"><div class="inner-section-head"><span>CONTINUE READING</span><h2 id="more-heading">More notes</h2></div><ul class="inner-link-list">{topics.filter((item) => item.slug !== topic.slug).map((item) => <li><a href={`/topics/${item.slug}/`}>{item.title}<span aria-hidden="true">↗</span></a></li>)}</ul></section>
+    <a class="inner-back" href="/">← Back to portfolio</a>
   </main>
+  <footer class="inner-footer"><span>{data.basics.name}</span><a href="/">Back to portfolio ↗</a></footer>
 </Layout>

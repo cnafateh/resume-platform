@@ -259,10 +259,11 @@
       }
     },
     {
-      "name": "Private Real-Time Chat Platform",
-      "description": "Developed and deployed a private real-time messaging platform using Django, Django Channels, ASGI, WebSockets, and PostgreSQL. Implemented authenticated one-to-one messaging, persistent conversation history, username-based private user discovery without exposing a public user directory, and timezone-aware message timestamps. Containerized the application with Docker and deployed it on my own Linux server, using Nginx and reverse proxy configuration to handle production traffic, WebSocket connections, DNS, and HTTPS. The project provided hands-on experience across backend development, real-time communication, database persistence, containerization, and production deployment.",
+      "name": "Pulse — Private Messenger",
+      "slug": "private-real-time-chat-platform",
+      "description": "Built Pulse, a self-hosted private messenger with Django, Channels, ASGI, WebSockets, PostgreSQL, Redis, and Docker. The web application supports authenticated one-to-one and admin-managed group conversations, persistent history, read receipts, typing indicators, replies, voice messages, private attachments, profiles, and an operations dashboard. An Android companion app uses the same web experience with native file handling and periodic notification checks. The service is hosted at pulsetalk.ir; Android background alerts are periodic rather than instant push.",
       "startDate": "2026",
-      "endDate": "2026",
+      "endDate": "Present",
       "keywords": [
         "Python",
         "Django",
@@ -270,6 +271,9 @@
         "PostgreSQL",
         "WebSockets",
         "ASGI",
+        "Android",
+        "Group Chat",
+        "Voice Messages",
         "Authentication",
         "Real-Time Communication",
         "Docker",
@@ -280,7 +284,7 @@
         "HTTPS"
       ],
       "links": {
-        "live": "https://chat.sinafateh.ir",
+        "live": "https://pulsetalk.ir/",
         "github": "https://github.com/cnafateh/PrivateReal-timeChatPlatform"
       }
     },
@@ -357,7 +361,7 @@
     },
     {
       "name": "Resume as Code Platform",
-      "description": "Developing a JSON-driven personal resume and portfolio platform using Astro and TypeScript. The project uses a single structured JSON source to generate resume content, grouped technical skills, professional experience, education, projects, and profile information. The application is containerized with Docker and Nginx with plans for automated CI/CD deployment through GitHub Actions.",
+      "description": "Developing a JSON-driven personal resume and portfolio platform using Astro and TypeScript. Structured JSON files generate profile details, experience, skills, bilingual projects, and engineering notes in English and Persian. The application is containerized with Docker and Nginx, with automated deployment planned through GitHub Actions.",
       "startDate": "2026",
       "endDate": "Present",
       "keywords": [
@@ -397,22 +401,25 @@
       }
     },
     {
-      "name": "Arista Exchange Website",
-      "description": "Developed a modern and responsive website for Arista Exchange, focused on presenting the company, its services, and key information through a clean and user-friendly interface. Built the frontend using HTML, CSS, and JavaScript with attention to responsive design, visual consistency, and usability across different screen sizes. Containerized the website with Docker and Nginx, configured automated image builds with GitHub Actions and GHCR, and deployed it on my Linux server through Arcane and the existing reverse proxy infrastructure.",
+      "name": "Arista Exchange Platform",
+      "slug": "arista-exchange-website",
+      "description": "Rebuilding Arista Exchange from a static marketing page into a remittance service platform with ASP.NET Core MVC on .NET 10, PostgreSQL, Entity Framework Core, and Docker. The modular monolith separates Domain, Application, Infrastructure, Web, and background Worker projects. The codebase includes public service and content pages, account and verification flows, customer and admin areas, KYC and transfer workflows, CMS administration, an outbox-based notification worker, automated tests, and technical SEO. The former static website remains archived in the repository.",
       "startDate": "2025",
-      "endDate": "2025",
+      "endDate": "Present",
       "keywords": [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "Responsive Design",
-        "UI Development",
+        "C#",
+        ".NET 10",
+        "ASP.NET Core MVC",
+        "Entity Framework Core",
+        "PostgreSQL",
+        "Clean Architecture",
+        "Modular Monolith",
+        "Identity",
+        "KYC",
+        "CMS",
         "Docker",
-        "Nginx",
-        "GitHub Actions",
-        "GHCR",
-        "Arcane",
-        "Reverse Proxy"
+        "Background Worker",
+        "Automated Tests"
       ],
       "links": {
         "live": "https://arista-exchange.ir/"

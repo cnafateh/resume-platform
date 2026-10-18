@@ -1,0 +1,12 @@
+---
+interface Props { lang: "en" | "fa" }
+const { lang } = Astro.props;
+---
+
+<div class="cursor-observer" aria-label={lang === "fa" ? "چشم تعاملی که حرکت نشانگر را دنبال می‌کند" : "Interactive eye that follows the pointer"} role="img">
+  <span class="observer-orbit orbit-outer"></span>
+  <span class="observer-orbit orbit-inner"></span>
+  <span class="observer-eye"><span class="observer-iris"><span class="observer-pupil"></span></span></span>
+  <span class="observer-point point-a"></span>
+  <span class="observer-point point-b"></span>
+</div>

@@ -1,0 +1,131 @@
+/* Persian typography and RTL refinements for the portfolio and editorial pages. */
+body.portfolio-v2.fa-page,
+body.portfolio-v2.fa-detail {
+  font-family: "Estedad Variable", Tahoma, sans-serif;
+  font-synthesis: none;
+}
+
+.portfolio-v2.fa-page :is(p, li, a, h1, h2, h3, h4, span),
+.portfolio-v2.fa-detail :is(p, li, a, h1, h2, h3, h4, span) {
+  letter-spacing: normal;
+}
+
+.portfolio-v2.fa-page :is(.hero h1, .display-heading, .contact-section h2),
+.portfolio-v2.fa-detail h1 {
+  font-family: "Estedad Variable", Tahoma, sans-serif;
+  font-weight: 700;
+  letter-spacing: -.035em;
+  line-height: 1.33;
+}
+
+.portfolio-v2.fa-page :is(.hero h1 em, .display-heading em, .contact-section h2 em) {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -.035em;
+}
+
+.portfolio-v2.fa-page .hero h1 { font-size: clamp(52px, 5.2vw, 88px); white-space: normal; }
+.portfolio-v2.fa-page .display-heading { font-size: clamp(44px, 4.5vw, 75px); }
+.portfolio-v2.fa-page .contact-section h2 { font-size: clamp(48px, 5.2vw, 86px); }
+.portfolio-v2.fa-page .hero-intro { margin-top: 46px; }
+.portfolio-v2.fa-page .hero-description { font-size: clamp(15px, 1.2vw, 18px); line-height: 2.05; max-width: 630px; }
+.portfolio-v2.fa-page .hero { grid-template-columns: minmax(0, 1.12fr) minmax(350px, .88fr); }
+.portfolio-v2.fa-page .brand-copy strong { font-size: 15px; }
+.portfolio-v2.fa-page .brand-copy small { font-family: ui-monospace, Consolas, monospace; }
+.portfolio-v2.fa-page .desktop-nav { gap: clamp(13px, 1.7vw, 29px); }
+.portfolio-v2.fa-page .desktop-nav a { font-size: 13px; white-space: nowrap; }
+.portfolio-v2.fa-page .language-link { display: inline-grid; place-items: center; width: 34px; height: 34px; font: 700 11px ui-monospace, Consolas, monospace; color: var(--acid); border: 1px solid var(--line); }
+.portfolio-v2.fa-page .language-link:hover { border-color: var(--acid); }
+.portfolio-v2.fa-page .header-cv { font-size: 12px; }
+.portfolio-v2.fa-page .eyebrow,
+.portfolio-v2.fa-page .hero-signals,
+.portfolio-v2.fa-page .signal-label,
+.portfolio-v2.fa-page .section-heading,
+.portfolio-v2.fa-page .project-overline,
+.portfolio-v2.fa-page .project-visual-top,
+.portfolio-v2.fa-page .capability-count,
+.portfolio-v2.fa-page .about-meta span,
+.portfolio-v2.fa-page .scene-note {
+  font-family: "Estedad Variable", Tahoma, sans-serif;
+  letter-spacing: normal;
+  font-size: 12px;
+}
+.portfolio-v2.fa-page .hero-signals { font-size: 11px; }
+.portfolio-v2.fa-page .hero-signals i { flex: 0 0 4px; }
+.portfolio-v2.fa-page .hero-rail { right: auto; left: clamp(24px,5vw,88px); font-family: inherit; letter-spacing: normal; font-size: 10px; }
+.portfolio-v2.fa-page .scene-note { left: 5%; right: 5%; }
+.portfolio-v2.fa-page .scene-note > span:last-child { margin-left: 0; margin-right: auto; }
+.portfolio-v2.fa-page .layer-index { left: auto; right: 23px; font-family: inherit; letter-spacing: normal; }
+.portfolio-v2.fa-page .layer-bottom { right: auto; left: 22px; font-family: inherit; letter-spacing: normal; }
+.portfolio-v2.fa-page .signal-items span:not(:last-child)::after { margin-left: 0; margin-right: 25px; }
+.portfolio-v2.fa-page .section-title-row > p,
+.portfolio-v2.fa-page .expertise-intro > p:last-of-type,
+.portfolio-v2.fa-page .journey-lead,
+.portfolio-v2.fa-page .note-item p { line-height: 2; }
+.portfolio-v2.fa-page .about-copy > p { line-height: 2.15; }
+.portfolio-v2.fa-page .about-meta strong { font-size: 14px; }
+.portfolio-v2.fa-page .project-content h3 { font-size: clamp(27px, 2.5vw, 41px); line-height: 1.5; }
+.portfolio-v2.fa-page .project-content > p { font-size: 14px; line-height: 2; }
+.portfolio-v2.fa-page .project-tags li,
+.portfolio-v2.fa-page .capability li { font-family: ui-monospace, Consolas, monospace; letter-spacing: 0; }
+.portfolio-v2.fa-page .capability h3 { font-size: clamp(16px, 1.4vw, 20px); }
+.portfolio-v2.fa-page .capability ul { padding: 0 0 28px 0; }
+.portfolio-v2.fa-page .timeline-item { grid-template-columns: 1fr 170px; }
+.portfolio-v2.fa-page .timeline-date { grid-column: 2; grid-row: 1; text-align: left; font-family: ui-monospace, Consolas, monospace; font-size: 10px; }
+.portfolio-v2.fa-page .timeline-item > div:nth-child(2) { grid-column: 1; grid-row: 1; }
+.portfolio-v2.fa-page .timeline-highlights { padding-left: 0; padding-right: 18px; font-size: 13px; line-height: 2; }
+.portfolio-v2.fa-page .timeline-summary { font-size: 13px; line-height: 2; }
+.portfolio-v2.fa-page .timeline-item h4,
+.portfolio-v2.fa-page .certificate-item h4 { font-size: 17px; }
+.portfolio-v2.fa-page .note-item h3 { font-size: 21px; line-height: 1.6; }
+.portfolio-v2.fa-page .note-arrow { align-self: start; }
+.portfolio-v2.fa-page .contact-orbit { right: auto; left: -140px; }
+.portfolio-v2.fa-page .contact-email bdi { font-family: "Segoe UI", sans-serif; direction: ltr; unicode-bidi: isolate; }
+.portfolio-v2.fa-page .contact-section p { line-height: 2; }
+
+.portfolio-v2.fa-detail .inner-brand { font-size: 18px; }
+.portfolio-v2.fa-detail .inner-header nav { font-size: 13px; }
+.portfolio-v2.fa-detail .breadcrumbs { font-size: 12px; }
+.portfolio-v2.fa-detail .inner-eyebrow,
+.portfolio-v2.fa-detail .inner-section-head > span { font-family: "Estedad Variable", sans-serif; font-size: 12px; letter-spacing: normal; }
+.portfolio-v2.fa-detail h1 { font-size: clamp(44px, 4.5vw, 78px); }
+.portfolio-v2.fa-detail .inner-lead { line-height: 2.1; }
+.portfolio-v2.fa-detail .inner-section-head h2,
+.portfolio-v2.fa-detail .note-questions h2 { letter-spacing: normal; line-height: 1.6; }
+.portfolio-v2.fa-detail .inner-actions a,
+.portfolio-v2.fa-detail .inner-back { font-size: 13px; }
+.portfolio-v2.fa-detail .inner-link-list a { line-height: 1.65; }
+.portfolio-v2.fa-detail .inner-art-label { left: auto; right: 25px; font-family: inherit; }
+.portfolio-v2.fa-detail .note-questions section { grid-template-columns: 1fr 65px; }
+.portfolio-v2.fa-detail .note-questions section > span { grid-column: 2; grid-row: 1; font-family: ui-monospace, monospace; }
+.portfolio-v2.fa-detail .note-questions section > div { grid-column: 1; grid-row: 1; }
+.portfolio-v2.fa-detail .note-questions p { font-size: 15px; line-height: 2.1; }
+
+@media (max-width: 1150px) {
+  .portfolio-v2.fa-page .hero { grid-template-columns: minmax(0, 1fr) minmax(300px, .8fr); }
+  .portfolio-v2.fa-page .hero h1 { font-size: clamp(48px, 5.8vw, 72px); }
+}
+@media (max-width: 900px) {
+  .portfolio-v2.fa-page .hero { grid-template-columns: 1fr; }
+  .portfolio-v2.fa-page .hero h1 { font-size: clamp(56px, 8vw, 78px); }
+  .portfolio-v2.fa-page .timeline-item { grid-template-columns: 1fr 170px; }
+}
+@media (max-width: 650px) {
+  .portfolio-v2.fa-page .hero h1 { font-size: clamp(43px, 10vw, 62px); line-height: 1.4; }
+  .portfolio-v2.fa-page .display-heading { font-size: clamp(40px, 9.5vw, 62px); }
+  .portfolio-v2.fa-page .contact-section h2 { font-size: clamp(44px, 10vw, 62px); }
+  .portfolio-v2.fa-page .hero-description { font-size: 15px; }
+  .portfolio-v2.fa-page .timeline-item { grid-template-columns: 1fr; }
+  .portfolio-v2.fa-page .timeline-date { grid-column: 1; grid-row: 1; text-align: right; }
+  .portfolio-v2.fa-page .timeline-item > div:nth-child(2) { grid-column: 1; grid-row: 2; }
+  .portfolio-v2.fa-page .contact-orbit { left: -440px; }
+  .portfolio-v2.fa-detail .inner-header nav { gap: 12px; }
+  .portfolio-v2.fa-detail .inner-header nav a:nth-child(2) { display: inline; }
+  .portfolio-v2.fa-detail .note-questions section { grid-template-columns: 1fr 28px; }
+}
+@media (max-width: 390px) {
+  .portfolio-v2.fa-page .hero h1 { font-size: 42px; }
+  .portfolio-v2.fa-page .brand-copy small { display: none; }
+  .portfolio-v2.fa-detail .inner-header nav a:nth-child(3) { display: none; }
+}

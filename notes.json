@@ -1,0 +1,461 @@
+[
+  {
+    "slug": "asp-net-core",
+    "related": [
+      "taskflow",
+      "e-commerce-backend"
+    ],
+    "en": {
+      "title": "ASP.NET Core development",
+      "description": "How Sina Fateh approaches ASP.NET Core MVC, API design, Entity Framework Core, dependency injection, validation, and maintainable C# applications.",
+      "intro": "I use C# and ASP.NET Core to build web applications with clear responsibilities between controllers, services, models, and persistence. TaskFlow is a concrete example in my portfolio.",
+      "sections": [
+        {
+          "heading": "What is ASP.NET Core MVC?",
+          "body": "MVC separates request handling, application data, and presentation. In TaskFlow, controllers receive requests, ViewModels shape form data, and a service layer keeps task and project rules outside the controllers."
+        },
+        {
+          "heading": "Why use dependency injection?",
+          "body": "Dependency injection lets a controller depend on a service contract rather than construct its own dependencies. That makes responsibilities easier to inspect and application logic easier to test."
+        },
+        {
+          "heading": "How does Entity Framework Core fit?",
+          "body": "Entity Framework Core handles the persistence model. TaskFlow uses SQLite and a one-to-many relationship between projects and tasks, including cascade deletion when a project is removed."
+        },
+        {
+          "heading": "Where should validation happen?",
+          "body": "Request and form validation should reject invalid input at the boundary. Business rules belong in the application layer, where they can be reused by more than one endpoint or interface."
+        },
+        {
+          "heading": "What makes an API maintainable?",
+          "body": "Consistent routes, explicit contracts, focused services, predictable errors, and tests for important behavior help an API remain understandable as requirements change."
+        }
+      ]
+    },
+    "fa": {
+      "title": "توسعه با ASP.NET Core",
+      "description": "نگاه سینا فاتح به ASP.NET Core MVC، طراحی API، Entity Framework Core، تزریق وابستگی، اعتبارسنجی و نگهداری برنامه‌های C#.",
+      "intro": "در توسعهٔ برنامه‌های C# و ASP.NET Core، مسئولیت کنترلر، سرویس، مدل داده و لایهٔ ذخیره‌سازی را روشن نگه می‌دارم. TaskFlow نمونه‌ای عملی از این رویکرد است.",
+      "sections": [
+        {
+          "heading": "ASP.NET Core MVC چه مسئله‌ای را حل می‌کند؟",
+          "body": "الگوی MVC دریافت درخواست، دادهٔ برنامه و نمایش را از هم جدا می‌کند. در TaskFlow کنترلر درخواست را دریافت می‌کند، ViewModel دادهٔ فرم را شکل می‌دهد و قواعد پروژه و وظیفه در لایهٔ سرویس قرار می‌گیرند."
+        },
+        {
+          "heading": "چرا تزریق وابستگی مهم است؟",
+          "body": "کنترلر به قرارداد یک سرویس وابسته می‌شود، نه به ساخت مستقیم آن. در نتیجه، مسئولیت‌ها واضح‌تر می‌شوند و آزمودن منطق برنامه آسان‌تر است."
+        },
+        {
+          "heading": "Entity Framework Core کجا قرار می‌گیرد؟",
+          "body": "این ابزار مدل ذخیره‌سازی داده را مدیریت می‌کند. TaskFlow از SQLite و رابطهٔ یک‌به‌چند میان پروژه و وظیفه استفاده می‌کند؛ حذف پروژه نیز وظایف وابسته را حذف می‌کند."
+        },
+        {
+          "heading": "اعتبارسنجی باید در کدام لایه انجام شود؟",
+          "body": "ورودی نامعتبر باید هنگام ورود درخواست یا ارسال فرم رد شود. قواعد کسب‌وکار در لایهٔ برنامه قرار می‌گیرند تا میان چند مسیر یا رابط قابل استفاده باشند."
+        },
+        {
+          "heading": "چه چیزی یک API را قابل نگهداری می‌کند؟",
+          "body": "مسیرهای یکدست، قراردادهای روشن، سرویس‌های متمرکز، خطاهای قابل پیش‌بینی و آزمون رفتارهای مهم، تغییر دادن API را در طول زمان آسان‌تر می‌کنند."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "docker-deployment",
+    "related": [
+      "resume-as-code-platform",
+      "self-hosted-server-deployment-infrastructure",
+      "pediatric-clinic-platform-medisite"
+    ],
+    "en": {
+      "title": "Docker and deployment",
+      "description": "Sina Fateh's practical notes on Docker images, Compose, Nginx, Linux deployment, CI/CD, HTTPS, and self-hosted applications.",
+      "intro": "I containerize applications so builds and runtime dependencies are repeatable. My portfolio and several projects use Docker, a reverse proxy, HTTPS, and image-based deployment on a Linux server.",
+      "sections": [
+        {
+          "heading": "Why use a multi-stage Docker build?",
+          "body": "A build stage installs tools and produces the application artifact. A smaller runtime stage serves only what is needed in production. This separates build dependencies from the deployed image."
+        },
+        {
+          "heading": "What does Docker Compose manage?",
+          "body": "Compose describes related services, networks, volumes, and restart behavior in one configuration. It is useful for coordinating a web application, database, and reverse proxy during deployment."
+        },
+        {
+          "heading": "Where does Nginx fit?",
+          "body": "Nginx can serve static assets or proxy requests to an application. For WebSocket applications, the proxy must preserve connection upgrade headers and route traffic to the correct upstream."
+        },
+        {
+          "heading": "How should HTTPS be handled?",
+          "body": "The public reverse proxy terminates TLS and routes requests by domain. DNS must point to the server and the application must generate canonical URLs for its public HTTPS origin."
+        },
+        {
+          "heading": "What is a safe deployment workflow?",
+          "body": "Build an image in CI, publish an immutable version tag, deploy that version, check the service, and retain an earlier image for rollback. My resume platform uses GitHub Actions and GHCR in this workflow."
+        },
+        {
+          "heading": "How do you troubleshoot a failed deployment?",
+          "body": "Check DNS and TLS first, then proxy routing, container health and logs, network reachability, and application configuration. Separating those layers narrows down the failure."
+        }
+      ]
+    },
+    "fa": {
+      "title": "داکر و استقرار نرم‌افزار",
+      "description": "یادداشت‌های عملی سینا فاتح دربارهٔ Docker، Compose، Nginx، استقرار روی Linux، CI/CD، HTTPS و سرویس‌های خودمیزبان.",
+      "intro": "کانتینرسازی، ساخت و اجرای برنامه را تکرارپذیر می‌کند. در چند پروژه از Docker، پراکسی معکوس، HTTPS و استقرار مبتنی بر ایمیج روی سرور لینوکسی استفاده کرده‌ام.",
+      "sections": [
+        {
+          "heading": "ساخت چندمرحله‌ای Docker چه فایده‌ای دارد؟",
+          "body": "مرحلهٔ ساخت ابزارها را نصب و خروجی برنامه را تولید می‌کند. مرحلهٔ اجرا تنها فایل‌های لازم را نگه می‌دارد؛ بنابراین وابستگی‌های ساخت وارد ایمیج نهایی نمی‌شوند."
+        },
+        {
+          "heading": "Docker Compose چه چیزهایی را مدیریت می‌کند؟",
+          "body": "Compose سرویس‌ها، شبکه‌ها، حجم‌های داده و سیاست راه‌اندازی دوباره را در یک پیکربندی مشخص می‌کند؛ مثلاً برای هماهنگ کردن برنامه، پایگاه داده و پراکسی."
+        },
+        {
+          "heading": "Nginx در استقرار چه نقشی دارد؟",
+          "body": "Nginx می‌تواند فایل‌های ایستا را ارائه کند یا درخواست‌ها را به برنامه برساند. برای WebSocket باید سربرگ‌های ارتقای اتصال حفظ شوند و درخواست به سرویس درست برسد."
+        },
+        {
+          "heading": "HTTPS چگونه تنظیم می‌شود؟",
+          "body": "پراکسی عمومی اتصال TLS را خاتمه می‌دهد و درخواست را براساس دامنه هدایت می‌کند. DNS باید به سرور اشاره کند و برنامه URL عمومی HTTPS را در پیوندهای canonical به کار ببرد."
+        },
+        {
+          "heading": "روند استقرار مطمئن چیست؟",
+          "body": "ایمیج در CI ساخته می‌شود، با نسخهٔ مشخص منتشر می‌شود، همان نسخه استقرار می‌یابد و سلامت سرویس بررسی می‌شود. نگهداری نسخهٔ قبلی مسیر بازگشت را فراهم می‌کند."
+        },
+        {
+          "heading": "خطای استقرار را از کجا عیب‌یابی کنیم؟",
+          "body": "از DNS و TLS شروع می‌کنم، سپس مسیر پراکسی، سلامت و گزارش کانتینرها، اتصال شبکه و پیکربندی برنامه را بررسی می‌کنم. تفکیک این لایه‌ها علت خطا را روشن‌تر می‌کند."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "backend-engineering",
+    "related": [
+      "private-real-time-chat-platform",
+      "pediatric-clinic-platform-medisite",
+      "e-commerce-backend"
+    ],
+    "en": {
+      "title": "Backend engineering and APIs",
+      "description": "Sina Fateh on REST APIs, Django REST Framework, PostgreSQL, authentication, Redis, WebSockets, and backend architecture.",
+      "intro": "My backend work spans ASP.NET Core and Django. The projects below show authentication, persistence, real-time messaging, API design, and operating applications after deployment.",
+      "sections": [
+        {
+          "heading": "How do you design a useful REST API?",
+          "body": "Start with the resources and the operations users need. Use consistent request and response shapes, validate input, communicate errors clearly, and document endpoints with OpenAPI where appropriate."
+        },
+        {
+          "heading": "How should authorization be modeled?",
+          "body": "Authentication identifies a user. Authorization decides what that user may do. The pediatric clinic platform uses distinct Doctor, Editor, and Patient roles with role-based access rules."
+        },
+        {
+          "heading": "When is PostgreSQL useful?",
+          "body": "PostgreSQL supports relational data, constraints, indexing, and transactional updates. I use it in projects where durable relationships and query behavior matter."
+        },
+        {
+          "heading": "Where does Redis help?",
+          "body": "Redis is useful for short-lived cached data and other fast-access workloads. Cache entries need an expiration and invalidation strategy so users do not receive stale results."
+        },
+        {
+          "heading": "How do WebSockets change backend design?",
+          "body": "A persistent connection enables live events but also requires connection authentication, routing, disconnection handling, and durable storage when conversation history matters. My private chat project uses Django Channels and PostgreSQL for those needs."
+        },
+        {
+          "heading": "What makes a backend production-ready?",
+          "body": "Beyond endpoint behavior, it needs configuration, logging, migrations, backups, HTTPS, deployment checks, and a way to diagnose failures without exposing secrets."
+        }
+      ]
+    },
+    "fa": {
+      "title": "مهندسی بک‌اند و API",
+      "description": "سینا فاتح دربارهٔ REST API، Django REST Framework، PostgreSQL، احراز هویت، Redis، WebSocket و معماری بک‌اند می‌نویسد.",
+      "intro": "تجربهٔ بک‌اند من در ASP.NET Core و Django شامل طراحی API، احراز هویت، ذخیرهٔ داده، پیام‌رسانی بلادرنگ و نگهداری برنامه پس از استقرار است.",
+      "sections": [
+        {
+          "heading": "یک REST API کاربردی را چگونه طراحی کنیم؟",
+          "body": "از منابع و کارهایی که کاربر باید انجام دهد شروع می‌کنم. شکل درخواست و پاسخ باید یکدست باشد، ورودی بررسی شود، خطا واضح بیان شود و در صورت نیاز مسیرها با OpenAPI مستند شوند."
+        },
+        {
+          "heading": "دسترسی کاربران چگونه مدل می‌شود؟",
+          "body": "احراز هویت مشخص می‌کند کاربر کیست؛ مجوزدهی مشخص می‌کند چه کاری می‌تواند انجام دهد. سامانهٔ کلینیک کودکان نقش‌های پزشک، ویراستار و بیمار را با قواعد دسترسی جداگانه دارد."
+        },
+        {
+          "heading": "PostgreSQL چه زمانی مناسب است؟",
+          "body": "برای داده‌های رابطه‌ای، قیدها، ایندکس‌ها و تغییرات تراکنشی از PostgreSQL استفاده کرده‌ام؛ به‌ویژه جایی که دوام رابطه‌ها و رفتار پرس‌وجو مهم است."
+        },
+        {
+          "heading": "Redis چه کمکی می‌کند؟",
+          "body": "Redis برای داده‌های موقت و دسترسی سریع کاربرد دارد. برای کش باید زمان انقضا و راهبرد بی‌اعتبارسازی تعریف شود تا اطلاعات کهنه به کاربر نرسد."
+        },
+        {
+          "heading": "WebSocket طراحی بک‌اند را چگونه تغییر می‌دهد؟",
+          "body": "اتصال پایدار رویدادهای زنده را ممکن می‌کند، اما احراز هویت اتصال، مسیریابی، قطع ارتباط و ذخیرهٔ تاریخچه را نیز لازم دارد. پروژهٔ گفت‌وگوی خصوصی از Django Channels و PostgreSQL استفاده می‌کند."
+        },
+        {
+          "heading": "بک‌اند آمادهٔ بهره‌برداری چه نیاز دارد؟",
+          "body": "فراتر از عملکرد endpoint، پیکربندی، ثبت رخداد، مهاجرت پایگاه داده، نسخهٔ پشتیبان، HTTPS، بررسی استقرار و عیب‌یابی بدون افشای اطلاعات حساس ضروری است."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "software-engineering",
+    "related": [
+      "taskflow",
+      "telegram-archive-viewer",
+      "resume-as-code-platform"
+    ],
+    "en": {
+      "title": "Software engineering practice",
+      "description": "Sina Fateh's software engineering approach to maintainability, testing, CI/CD, architecture, and operating real web applications.",
+      "intro": "I treat software engineering as the full path from a user need to a system that can be maintained and operated. These short notes connect code structure with testing and deployment.",
+      "sections": [
+        {
+          "heading": "What does maintainable code mean?",
+          "body": "A maintainer should be able to find a behavior, understand its dependencies, change it in one place, and verify the result. Small responsibilities and clear names help more than extra layers without purpose."
+        },
+        {
+          "heading": "When should you add a service layer?",
+          "body": "A service layer is useful when business rules would otherwise be repeated in controllers, views, or endpoints. TaskFlow uses one to separate application logic from MVC request handling."
+        },
+        {
+          "heading": "What should tests cover?",
+          "body": "Tests should exercise meaningful behavior and failure cases: authorization boundaries, data constraints, critical user flows, and integration points. A test that only repeats an implementation detail gives less confidence."
+        },
+        {
+          "heading": "Why automate builds?",
+          "body": "CI can catch build and test failures before an image is published. Versioned artifacts make deployments reproducible and provide a known rollback target."
+        },
+        {
+          "heading": "How do you choose a technology?",
+          "body": "Start with the product's requirements, the team's ability to maintain it, hosting constraints, and the operational cost. A simpler stack that meets those needs often makes delivery and maintenance easier."
+        }
+      ]
+    },
+    "fa": {
+      "title": "روش کار در مهندسی نرم‌افزار",
+      "description": "رویکرد سینا فاتح به نگهداری کد، آزمون، CI/CD، معماری و اجرای برنامه‌های وب در عمل.",
+      "intro": "مهندسی نرم‌افزار را از نیاز کاربر تا سیستمی می‌بینم که بتوان آن را تغییر داد و نگهداری کرد. این یادداشت‌ها ساختار کد را به آزمون و استقرار پیوند می‌دهند.",
+      "sections": [
+        {
+          "heading": "کد قابل نگهداری چه ویژگی‌ای دارد؟",
+          "body": "فردی که بعداً کد را تغییر می‌دهد باید بتواند رفتار مورد نظر را پیدا کند، وابستگی‌هایش را بفهمد، آن را در جای مشخصی عوض کند و نتیجه را بررسی کند. مسئولیت کوچک و نام روشن کمک می‌کند."
+        },
+        {
+          "heading": "چه زمانی لایهٔ سرویس اضافه کنیم؟",
+          "body": "وقتی قواعد برنامه در کنترلرها یا endpointهای مختلف تکرار می‌شوند، لایهٔ سرویس مفید است. TaskFlow منطق برنامه را از دریافت درخواست در MVC جدا می‌کند."
+        },
+        {
+          "heading": "آزمون‌ها باید چه چیزهایی را پوشش دهند؟",
+          "body": "آزمون باید رفتار مهم و حالت شکست را بررسی کند: مرزهای دسترسی، قیدهای داده، مسیرهای اصلی کاربر و نقاط اتصال سیستم‌ها. تکرار جزئیات پیاده‌سازی اطمینان کمتری می‌دهد."
+        },
+        {
+          "heading": "چرا ساخت خودکار مهم است؟",
+          "body": "CI می‌تواند خطای ساخت و آزمون را پیش از انتشار ایمیج پیدا کند. خروجی نسخه‌دار استقرار را تکرارپذیر می‌کند و نقطهٔ بازگشت مشخصی می‌دهد."
+        },
+        {
+          "heading": "فناوری را چگونه انتخاب کنیم؟",
+          "body": "نیاز محصول، توان تیم برای نگهداری، محدودیت میزبانی و هزینهٔ عملیاتی را کنار هم می‌گذارم. پشتهٔ ساده‌ای که این نیازها را برآورده کند، معمولاً تحویل و نگهداری را آسان‌تر می‌کند."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "realtime-messaging",
+    "related": ["private-real-time-chat-platform"],
+    "en": {
+      "title": "Real-time messaging in Pulse",
+      "description": "Sina Fateh on Django Channels, WebSockets, private media, unread state, and Android notifications in Pulse.",
+      "intro": "Pulse connects persistent chat data to live delivery. The design keeps access control, recovery, and device behavior in view alongside WebSockets.",
+      "sections": [
+        {
+          "heading": "What does a WebSocket add?",
+          "body": "It delivers messages and state changes while a conversation is open. Persistent storage still supplies history, pagination, and recovery after a connection drops."
+        },
+        {
+          "heading": "How are private files protected?",
+          "body": "The server checks conversation membership before serving an attachment. A private upload path is not made public simply because the message UI can display it."
+        },
+        {
+          "heading": "What happens on Android in the background?",
+          "body": "The Android app uses the same web conversation interface and checks periodically for unread messages while closed. That is a scheduled check, not instant push delivery."
+        }
+      ]
+    },
+    "fa": {
+      "title": "پیام‌رسانی بلادرنگ در پالس",
+      "description": "نگاه سینا فاتح به Django Channels، WebSocket، فایل خصوصی، پیام خوانده‌نشده و اعلان‌های اندروید در پالس.",
+      "intro": "در پالس، دادهٔ ماندگار گفت‌وگو به تحویل زندهٔ پیام وصل می‌شود. در کنار WebSocket، کنترل دسترسی، بازیابی اتصال و رفتار دستگاه هم مهم‌اند.",
+      "sections": [
+        {
+          "heading": "WebSocket چه چیزی اضافه می‌کند؟",
+          "body": "وقتی گفت‌وگو باز است، پیام و تغییر وضعیت را بلافاصله می‌رساند. ذخیره‌سازی ماندگار همچنان برای تاریخچه، صفحه‌بندی و بازیابی پس از قطع اتصال لازم است."
+        },
+        {
+          "heading": "فایل خصوصی چگونه محافظت می‌شود؟",
+          "body": "سرور پیش از ارائهٔ هر فایل، عضویت درخواست‌کننده در گفت‌وگو را بررسی می‌کند. نمایش فایل در رابط پیام‌رسان به معنی عمومی شدن مسیر فایل نیست."
+        },
+        {
+          "heading": "در پس‌زمینهٔ اندروید چه اتفاقی می‌افتد؟",
+          "body": "اپ اندروید از همان رابط گفت‌وگوی وب استفاده می‌کند و هنگام بسته بودن، پیام‌های خوانده‌نشده را به‌صورت دوره‌ای بررسی می‌کند. این بررسی زمان‌بندی‌شده است، نه اعلان فوری."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "modular-aspnet-platform",
+    "related": ["arista-exchange-website", "taskflow"],
+    "en": {
+      "title": "A modular ASP.NET Core platform",
+      "description": "How Sina Fateh structures Arista Exchange with ASP.NET Core MVC, clean boundaries, PostgreSQL, and background work.",
+      "intro": "Arista Exchange grew beyond a static page. Its application now separates domain rules, use cases, persistence, web delivery, and background processing.",
+      "sections": [
+        {
+          "heading": "Why a modular monolith?",
+          "body": "Modules can keep their responsibilities clear while sharing one deployable application. It avoids distributing a small team's workflow across services before the product needs that complexity."
+        },
+        {
+          "heading": "Where do domain rules belong?",
+          "body": "Rules for identity, verification, and transfer state should remain separate from controllers and database details. Web requests call application services; infrastructure supplies persistence and external integrations."
+        },
+        {
+          "heading": "Why use a background worker?",
+          "body": "The outbox records work with the business transaction. A worker can then deliver optional notifications with retries without making a user-facing request depend on the notification provider."
+        }
+      ]
+    },
+    "fa": {
+      "title": "پلتفرم ماژولار با ASP.NET Core",
+      "description": "ساختار آریستا اکسچنج با ASP.NET Core MVC، مرزهای روشن، PostgreSQL و پردازش پس‌زمینه از نگاه سینا فاتح.",
+      "intro": "آریستا اکسچنج از یک صفحهٔ استاتیک فراتر رفته است. ساختار فعلی آن قواعد دامنه، کاربردها، ذخیره‌سازی، وب و پردازش پس‌زمینه را جدا می‌کند.",
+      "sections": [
+        {
+          "heading": "چرا مونولیت ماژولار؟",
+          "body": "هر بخش مسئولیت مشخص خود را نگه می‌دارد و برنامه همچنان یک واحد قابل استقرار است. برای تیم کوچک، پیش از نیاز واقعی محصول به چند سرویس مستقل، این ساختار ساده‌تر اداره می‌شود."
+        },
+        {
+          "heading": "قواعد دامنه کجا قرار می‌گیرند؟",
+          "body": "قواعد هویت، احراز و وضعیت انتقال باید از کنترلر و جزئیات پایگاه داده جدا بمانند. درخواست وب سرویس برنامه را صدا می‌زند و لایهٔ زیرساخت ذخیره‌سازی و اتصال‌های بیرونی را فراهم می‌کند."
+        },
+        {
+          "heading": "پردازش پس‌زمینه چه فایده‌ای دارد؟",
+          "body": "الگوی outbox کار لازم را همراه تراکنش اصلی ثبت می‌کند. سپس worker می‌تواند اعلان‌های اختیاری را با امکان تلاش دوباره ارسال کند، بدون اینکه درخواست کاربر به سرویس اعلان وابسته شود."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "authorization-boundaries",
+    "related": ["pediatric-clinic-platform-medisite", "arista-exchange-website", "private-real-time-chat-platform"],
+    "en": {
+      "title": "Authentication and authorization boundaries",
+      "description": "Sina Fateh on identity, roles, object-level permissions, and access checks in ASP.NET Core and Django applications.",
+      "intro": "A signed-in user is not automatically allowed to see every record. I design authorization around the resource being requested and the action being performed.",
+      "sections": [
+        { "heading": "What is the difference between authentication and authorization?", "body": "Authentication establishes who is making a request. Authorization determines whether that identity may perform a particular action on a particular resource. Both checks belong on the server." },
+        { "heading": "When are roles useful?", "body": "Roles express broad responsibilities, such as Doctor, Editor, and Patient in the clinic platform. They provide a starting point, but a role alone cannot answer whether a user may read a specific patient's data." },
+        { "heading": "How do you protect an individual record?", "body": "Load the record within the caller's permitted scope or explicitly verify ownership or membership before returning it. In Pulse, conversation membership is checked before private attachments are served." },
+        { "heading": "Why validate every request?", "body": "A hidden button and a private URL are interface choices, not permission checks. Every endpoint that reads or changes sensitive data must enforce the rule again, including file downloads and background actions." },
+        { "heading": "What should tests prove?", "body": "Test allowed access, denied access, and attempts to use another user's resource identifier. A failing authorization test should reveal a real data boundary, not merely a missing UI element." }
+      ]
+    },
+    "fa": {
+      "title": "مرزهای احراز هویت و مجوز دسترسی",
+      "description": "نگاه سینا فاتح به هویت، نقش‌ها، مجوز در سطح رکورد و کنترل دسترسی در برنامه‌های ASP.NET Core و Django.",
+      "intro": "ورود کاربر به معنی دسترسی او به همهٔ رکوردها نیست. مجوز را بر اساس منبع درخواستی و عملی که قرار است انجام شود طراحی می‌کنم.",
+      "sections": [
+        { "heading": "احراز هویت و مجوزدهی چه تفاوتی دارند؟", "body": "احراز هویت مشخص می‌کند درخواست از طرف چه کسی است. مجوزدهی تعیین می‌کند همان شخص اجازهٔ انجام عملی مشخص روی منبعی مشخص را دارد یا نه. هر دو بررسی باید در سرور انجام شوند." },
+        { "heading": "نقش‌ها چه زمانی مفیدند؟", "body": "نقش‌ها مسئولیت‌های کلی را نشان می‌دهند؛ مانند پزشک، ویراستار و بیمار در سامانهٔ کلینیک. اما نقش به‌تنهایی نمی‌گوید کاربر اجازهٔ دیدن اطلاعات یک بیمار مشخص را دارد یا نه." },
+        { "heading": "دسترسی به یک رکورد چگونه کنترل می‌شود؟", "body": "رکورد را فقط از محدودهٔ مجاز کاربر می‌خوانم یا پیش از بازگرداندن آن، مالکیت یا عضویت را بررسی می‌کنم. در پالس، ارائهٔ فایل خصوصی به عضویت در گفت‌وگو وابسته است." },
+        { "heading": "چرا هر درخواست باید جدا بررسی شود؟", "body": "پنهان کردن دکمه یا خصوصی بودن آدرس، کنترل دسترسی نیست. هر مسیر خواندن یا تغییر دادهٔ حساس، از جمله دریافت فایل، باید قاعدهٔ مجوز را در سرور اجرا کند." },
+        { "heading": "آزمون دسترسی چه چیزی را باید ثابت کند؟", "body": "هم دسترسی مجاز و هم درخواست نامجاز را می‌آزمایم؛ به‌خصوص تلاش برای استفاده از شناسهٔ منبع کاربر دیگر. چنین آزمونی مرز واقعی داده را بررسی می‌کند." }
+      ]
+    }
+  },
+  {
+    "slug": "postgresql-data-modeling",
+    "related": ["arista-exchange-website", "private-real-time-chat-platform", "pediatric-clinic-platform-medisite"],
+    "en": {
+      "title": "PostgreSQL data modeling",
+      "description": "Sina Fateh on relational schema design, constraints, indexes, transactions, and safe migrations for web applications.",
+      "intro": "A useful data model captures the rules that must stay true even when several requests arrive together. PostgreSQL gives those rules a durable place close to the data.",
+      "sections": [
+        { "heading": "What belongs in the database schema?", "body": "Use relationships, nullability, uniqueness, and check constraints for invariants the application must never violate. Application validation improves feedback, while database constraints protect the final write." },
+        { "heading": "How do you choose an index?", "body": "Start from real query filters, joins, and ordering. An index can speed reads but costs storage and write work, so measure the query plan before adding one for every column." },
+        { "heading": "When is a transaction necessary?", "body": "Use a transaction when several writes form one business action and must succeed or fail together. Keep it short and avoid waiting on external services while database locks are held." },
+        { "heading": "How should migrations be deployed?", "body": "Review schema changes with the application version that uses them. For disruptive changes, add the new shape first, migrate existing data, switch readers and writers, then remove the old shape in a later release." },
+        { "heading": "What changes for chat history?", "body": "Conversations, participants, messages, and read state have different lifetimes and access rules. A relational model helps preserve message history while membership checks control which records a caller can retrieve." }
+      ]
+    },
+    "fa": {
+      "title": "مدل‌سازی داده با PostgreSQL",
+      "description": "سینا فاتح دربارهٔ طراحی رابطه‌ای، قیدها، ایندکس‌ها، تراکنش‌ها و مهاجرت امن داده در برنامه‌های وب.",
+      "intro": "مدل داده باید قواعدی را نگه دارد که حتی با رسیدن چند درخواست هم‌زمان هم نباید نقض شوند. PostgreSQL جای پایداری برای این قواعد در کنار داده فراهم می‌کند.",
+      "sections": [
+        { "heading": "چه قواعدی باید در شمای پایگاه داده باشند؟", "body": "رابطه‌ها، تهی‌پذیری، یکتایی و قیدهای بررسی برای اصولی مناسب‌اند که برنامه هرگز نباید نقض کند. اعتبارسنجی برنامه پیام بهتری می‌دهد و قید پایگاه داده از ثبت نهایی محافظت می‌کند." },
+        { "heading": "ایندکس را چگونه انتخاب کنیم؟", "body": "از فیلتر، اتصال جدول‌ها و ترتیب واقعی پرس‌وجوها شروع می‌کنم. ایندکس خواندن را سریع‌تر می‌کند اما هزینهٔ ذخیره‌سازی و نوشتن دارد؛ بنابراین قبل از افزودن آن، برنامهٔ اجرای پرس‌وجو را می‌سنجم." },
+        { "heading": "تراکنش چه زمانی لازم است؟", "body": "وقتی چند نوشتن یک عمل واحد را می‌سازند، باید با هم موفق یا ناموفق شوند. تراکنش را کوتاه نگه می‌دارم و هنگام نگه‌داشتن قفل پایگاه داده منتظر سرویس بیرونی نمی‌مانم." },
+        { "heading": "مهاجرت داده چگونه منتشر شود؟", "body": "تغییر شما باید با نسخهٔ برنامه بررسی شود. برای تغییرهای پرریسک، ابتدا ساختار تازه را می‌افزایم، دادهٔ قبلی را منتقل می‌کنم، خواندن و نوشتن را به آن می‌برم و ساختار قدیمی را در انتشار بعدی حذف می‌کنم." },
+        { "heading": "برای تاریخچهٔ گفت‌وگو چه چیزی تغییر می‌کند؟", "body": "گفت‌وگو، اعضا، پیام‌ها و وضعیت خواندن، عمر و قواعد دسترسی متفاوتی دارند. مدل رابطه‌ای تاریخچه را نگه می‌دارد و بررسی عضویت تعیین می‌کند کدام رکورد به درخواست‌کننده برسد." }
+      ]
+    }
+  },
+  {
+    "slug": "container-release-workflow",
+    "related": ["resume-as-code-platform", "self-hosted-server-deployment-infrastructure", "arista-exchange-website"],
+    "en": {
+      "title": "A repeatable container release workflow",
+      "description": "Sina Fateh's checklist for Docker builds, CI, image versions, secrets, health checks, and rollback on a Linux server.",
+      "intro": "A release is more than a successful Docker build. The same artifact should be testable, identifiable, deployable, and recoverable when a service behaves differently in production.",
+      "sections": [
+        { "heading": "What should CI verify?", "body": "Run the project's build and meaningful tests before publishing an image. Keep the source revision and image version linked so the running container can be traced back to a specific change." },
+        { "heading": "Why tag an image by version?", "body": "A version or commit-based tag identifies the exact artifact that passed checks. A mutable latest tag is convenient for browsing, but it is a poor rollback target on its own." },
+        { "heading": "Where should secrets live?", "body": "Runtime secrets belong in deployment configuration or a secret store, not in the image or repository. The application should fail clearly if required configuration is absent." },
+        { "heading": "How do you know deployment succeeded?", "body": "Check more than container startup: inspect health, proxy routing, HTTPS, a representative request, and logs. A running process may still be unable to reach its database or serve the public route." },
+        { "heading": "How do you roll back?", "body": "Keep the previous known-good image and its compatible configuration available. Redeploy that version, verify traffic, and investigate the failed release separately. Database changes need their own rollback plan." }
+      ]
+    },
+    "fa": {
+      "title": "روند تکرارپذیر انتشار کانتینر",
+      "description": "چک‌لیست سینا فاتح برای ساخت Docker، CI، نسخهٔ ایمیج، اسرار، بررسی سلامت و بازگشت نسخه روی سرور لینوکسی.",
+      "intro": "انتشار نرم‌افزار فقط موفق شدن ساخت Docker نیست. خروجی باید آزمودنی، قابل شناسایی، قابل استقرار و هنگام بروز مشکل قابل بازیابی باشد.",
+      "sections": [
+        { "heading": "CI چه چیزهایی را بررسی کند؟", "body": "ساخت پروژه و آزمون‌های معنادار باید پیش از انتشار ایمیج اجرا شوند. ارتباط میان نسخهٔ کد و ایمیج را نگه می‌دارم تا کانتینر در حال اجرا به یک تغییر مشخص قابل ردیابی باشد." },
+        { "heading": "چرا ایمیج به برچسب نسخه نیاز دارد؟", "body": "برچسب نسخه یا شناسهٔ commit دقیقاً مشخص می‌کند کدام خروجی آزمون شده است. برچسب متغیر latest برای مرور راحت است، اما به‌تنهایی مبنای خوبی برای بازگشت نیست." },
+        { "heading": "اطلاعات محرمانه کجا نگهداری شوند؟", "body": "رازهای زمان اجرا باید در پیکربندی استقرار یا مخزن امن قرار گیرند، نه داخل ایمیج یا مخزن کد. نبود پیکربندی ضروری نیز باید خطای روشن ایجاد کند." },
+        { "heading": "از موفقیت استقرار چگونه مطمئن شویم؟", "body": "فقط روشن شدن کانتینر کافی نیست. سلامت سرویس، مسیر پراکسی، HTTPS، یک درخواست واقعی و گزارش‌ها را بررسی می‌کنم؛ ممکن است فرایند روشن باشد اما پایگاه داده یا مسیر عمومی کار نکند." },
+        { "heading": "چگونه به نسخهٔ قبلی برگردیم؟", "body": "ایمیج سالم قبلی و پیکربندی سازگار آن را نگه می‌دارم. همان نسخه دوباره استقرار و ترافیک بررسی می‌شود؛ تغییرهای پایگاه داده نیز برنامهٔ بازگشت جداگانه می‌خواهند." }
+      ]
+    }
+  },
+  {
+    "slug": "private-file-delivery",
+    "related": ["private-real-time-chat-platform", "arista-exchange-website", "telegram-archive-viewer"],
+    "en": {
+      "title": "Private file delivery in web apps",
+      "description": "Sina Fateh on upload validation, private storage, authorization, safe downloads, and media access in web applications.",
+      "intro": "File handling crosses the boundary between user input, storage, and access control. I treat an upload as untrusted data and a download as a fresh authorization decision.",
+      "sections": [
+        { "heading": "What should be checked at upload?", "body": "Limit size, allow only the file types a feature needs, validate content rather than trusting the extension, and generate a server-controlled storage name. Reject failures before further processing." },
+        { "heading": "Why keep private files outside public assets?", "body": "A public asset URL bypasses application permissions. Private media should be served through a route that checks the caller and the parent record, as Pulse does for conversation attachments." },
+        { "heading": "Is an unguessable URL enough?", "body": "No. A long random URL may reduce accidental discovery but can be copied or leaked. The server still needs to decide whether the current caller may receive that file." },
+        { "heading": "How should downloads respond?", "body": "Return the expected content type and a safe content disposition. Avoid reflecting an untrusted filename into headers, and consider whether sensitive responses may be cached by a shared intermediary." },
+        { "heading": "What happens when a parent record is deleted?", "body": "Define whether its files are retained, quarantined, or removed. Database records and object storage can fall out of sync, so cleanup needs an explicit lifecycle rather than an assumption." }
+      ]
+    },
+    "fa": {
+      "title": "ارائهٔ امن فایل خصوصی در وب",
+      "description": "سینا فاتح دربارهٔ بررسی آپلود، ذخیره‌سازی خصوصی، مجوز دسترسی، دانلود امن و فایل‌های رسانه‌ای برنامه‌های وب.",
+      "intro": "کار با فایل از مرز ورودی کاربر، ذخیره‌سازی و کنترل دسترسی عبور می‌کند. آپلود را دادهٔ غیرقابل اعتماد و هر دانلود را تصمیم تازه‌ای دربارهٔ مجوز می‌بینم.",
+      "sections": [
+        { "heading": "هنگام آپلود چه چیزهایی بررسی شوند؟", "body": "حجم را محدود می‌کنم، فقط نوع فایل لازم را می‌پذیرم، محتوا را مستقل از پسوند بررسی می‌کنم و نام ذخیره‌سازی را در سرور می‌سازم. ورودی نامعتبر پیش از پردازش بیشتر رد می‌شود." },
+        { "heading": "چرا فایل خصوصی در مسیر عمومی نباشد؟", "body": "آدرس فایل عمومی از قواعد دسترسی برنامه عبور می‌کند. رسانهٔ خصوصی باید از مسیری ارائه شود که کاربر و رکورد والد را بررسی می‌کند؛ همان کاری که پالس برای پیوست گفت‌وگو انجام می‌دهد." },
+        { "heading": "آدرس غیرقابل حدس کافی است؟", "body": "نه. آدرس تصادفی بلند شاید کشف اتفاقی را کمتر کند، اما می‌تواند کپی یا افشا شود. سرور همچنان باید تعیین کند درخواست‌کننده اجازهٔ دریافت فایل را دارد یا نه." },
+        { "heading": "پاسخ دانلود چگونه ساخته شود؟", "body": "نوع محتوا و سربرگ دانلود باید درست و امن باشند. نام فایل تأییدنشده را مستقیم در سربرگ قرار نمی‌دهم و برای محتوای حساس، رفتار کش میانی را هم در نظر می‌گیرم." },
+        { "heading": "پس از حذف رکورد والد چه می‌شود؟", "body": "باید روشن باشد فایل‌های وابسته می‌مانند، قرنطینه می‌شوند یا حذف می‌شوند. رکورد پایگاه داده و محل ذخیرهٔ فایل ممکن است ناهماهنگ شوند، پس پاک‌سازی به چرخهٔ عمر مشخص نیاز دارد." }
+      ]
+    }
+  }
+]
