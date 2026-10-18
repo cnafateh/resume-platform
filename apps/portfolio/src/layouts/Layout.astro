@@ -11,33 +11,36 @@ interface Props {
   lang?: "en" | "fa";
   schema?: Record<string, unknown>;
   homeAlternate?: boolean;
+  bodyClass?: string;
 }
 
 const {
   title = `${basics.name} | Software Engineer, ASP.NET Core & Docker`,
-  description = "Sina Fateh (سینا فاتح, cnafateh) is a software engineer in Tehran working with ASP.NET Core, C#, Django, Docker, APIs, and deployment.",
+  description = `${basics.name} (سینا فاتح) — ${basics.about.slice(0, 135)}`,
   lang = "en",
   schema,
   homeAlternate = false,
+  bodyClass = "",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const githubHandle = basics.profiles?.find((profile) => profile.network === "GitHub")?.username;
 const personSchema = {
   "@type": "Person",
   "@id": personId,
-  name: "Sina Fateh",
-  alternateName: ["سینا فاتح", "Sina Fateh", "cnafateh"],
+  name: basics.name,
+  alternateName: ["سینا فاتح", githubHandle].filter(Boolean),
   url: `${siteUrl}/`,
-  jobTitle: "Software Engineer",
+  jobTitle: basics.label,
   description: basics.about,
   sameAs: (basics.profiles ?? []).map((profile) => profile.url),
-  knowsAbout: ["Software Engineering", "C#", "ASP.NET Core", "Python", "Django", "PostgreSQL", "Docker", "Linux", "REST APIs", "Redis", "WebSockets"],
+  knowsAbout: (data.skills ?? []).flatMap((group) => group.keywords ?? []).slice(0, 24),
 };
 const graph = {
   "@context": "https://schema.org",
   "@graph": [
     personSchema,
-    { "@type": "WebSite", "@id": `${siteUrl}/#website`, name: "Sina Fateh | سینا فاتح", url: `${siteUrl}/`, inLanguage: ["en", "fa"], publisher: { "@id": personId } },
+    { "@type": "WebSite", "@id": `${siteUrl}/#website`, name: `${basics.name} | سینا فاتح`, url: `${siteUrl}/`, inLanguage: ["en", "fa"], publisher: { "@id": personId } },
     { "@type": "WebPage", "@id": `${canonical}#webpage`, url: canonical, name: title, description, inLanguage: lang, isPartOf: { "@id": `${siteUrl}/#website` }, about: { "@id": personId } },
     ...(schema ? [schema] : []),
   ],
@@ -57,7 +60,7 @@ const graph = {
     />
 
     <meta name="description" content={description} />
-    <meta name="author" content="Sina Fateh" />
+    <meta name="author" content={basics.name} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     {homeAlternate && <>
@@ -69,13 +72,19 @@ const graph = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="Sina Fateh" />
+    <meta property="og:site_name" content={basics.name} />
+    <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${basics.name} portfolio preview`} />
     <meta property="og:locale" content={lang === "fa" ? "fa_IR" : "en_US"} />
     {homeAlternate && <meta property="og:locale:alternate" content={lang === "fa" ? "en_US" : "fa_IR"} />}
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
 
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
@@ -102,7 +111,7 @@ const graph = {
     />
   </head>
 
-  <body>
+  <body class={bodyClass}>
     <slot />
 
     <script is:inline>

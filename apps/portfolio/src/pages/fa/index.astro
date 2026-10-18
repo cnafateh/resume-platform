@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { projects, topics } from "../../data/seo";
 import { data } from "../../data/resume";
+import "../../styles/portfolio-experience.css";
 
 const topicNames: Record<string, string> = {
   "asp-net-core": "توسعه با ASP.NET Core",
@@ -11,7 +12,7 @@ const topicNames: Record<string, string> = {
 };
 ---
 
-<Layout lang="fa" homeAlternate title="سینا فاتح | مهندس نرم‌افزار، ASP.NET Core و Docker" description="سینا فاتح (Sina Fateh یا cnafateh) مهندس نرم‌افزار در تهران است. پروژه‌ها و تجربه‌های او در ASP.NET Core، سی‌شارپ، جنگو، API، داکر و استقرار سرویس‌ها را ببینید.">
+<Layout lang="fa" homeAlternate bodyClass="portfolio-v2 fa-page" title="سینا فاتح | مهندس نرم‌افزار، ASP.NET Core و Docker" description="سینا فاتح (Sina Fateh یا cnafateh) مهندس نرم‌افزار در تهران است. پروژه‌ها و تجربه‌های او در ASP.NET Core، سی‌شارپ، جنگو، API، داکر و استقرار سرویس‌ها را ببینید.">
   <main class="section-shell py-16">
     <nav aria-label="زبان" class="text-sm"><a class="underline" href="/" lang="en" dir="ltr">English</a></nav>
     <header class="mt-16 max-w-4xl">
