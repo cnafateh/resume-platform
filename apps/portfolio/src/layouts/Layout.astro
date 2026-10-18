@@ -2,52 +2,52 @@
 import "../styles/global.css";
 
 import { data } from "../data/resume";
+import { personId, siteUrl } from "../data/seo";
 const basics = data.basics ?? [];
 
 interface Props {
   title?: string;
   description?: string;
+  lang?: "en" | "fa";
+  schema?: Record<string, unknown>;
+  homeAlternate?: boolean;
 }
 
 const {
-  title = `${basics.name} - ${basics.label}`,
-  description = basics.about
+  title = `${basics.name} | Software Engineer, ASP.NET Core & Docker`,
+  description = "Sina Fateh (سینا فاتح, cnafateh) is a software engineer in Tehran working with ASP.NET Core, C#, Django, Docker, APIs, and deployment.",
+  lang = "en",
+  schema,
+  homeAlternate = false,
 } = Astro.props;
 
-        const personSchema = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Sina Fateh",
-      alternateName: [
-        "سینا فاتح",
-        "cnafateh"
-      ],
-      url: "https://sinafateh.ir",
-      jobTitle: "Backend Developer",
-      sameAs: [
-        "https://github.com/cnafateh",
-        "https://www.linkedin.com/in/cnafateh/"
-      ],
-      knowsAbout: [
-        "Backend Development",
-        "Python",
-        "Django",
-        "Django REST Framework",
-        "PostgreSQL",
-        "Docker",
-        "REST APIs",
-        "Redis",
-        "WebSockets",
-        "C#",
-        "ASP.NET Core"
-      ]
-    };
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const personSchema = {
+  "@type": "Person",
+  "@id": personId,
+  name: "Sina Fateh",
+  alternateName: ["سینا فاتح", "Sina Fateh", "cnafateh"],
+  url: `${siteUrl}/`,
+  jobTitle: "Software Engineer",
+  description: basics.about,
+  sameAs: (basics.profiles ?? []).map((profile) => profile.url),
+  knowsAbout: ["Software Engineering", "C#", "ASP.NET Core", "Python", "Django", "PostgreSQL", "Docker", "Linux", "REST APIs", "Redis", "WebSockets"],
+};
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    personSchema,
+    { "@type": "WebSite", "@id": `${siteUrl}/#website`, name: "Sina Fateh | سینا فاتح", url: `${siteUrl}/`, inLanguage: ["en", "fa"], publisher: { "@id": personId } },
+    { "@type": "WebPage", "@id": `${canonical}#webpage`, url: canonical, name: title, description, inLanguage: lang, isPartOf: { "@id": `${siteUrl}/#website` }, about: { "@id": personId } },
+    ...(schema ? [schema] : []),
+  ],
+};
 
 ---
 
 <!doctype html>
 
-<html lang="en">
+<html lang={lang} dir={lang === "fa" ? "rtl" : "ltr"}>
   <head>
     <meta charset="UTF-8" />
 
@@ -57,19 +57,28 @@ const {
     />
 
     <meta name="description" content={description} />
+    <meta name="author" content="Sina Fateh" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    {homeAlternate && <>
+      <link rel="alternate" hreflang="en" href={`${siteUrl}/`} />
+      <link rel="alternate" hreflang="fa" href={`${siteUrl}/fa/`} />
+      <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+    </>}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Sina Fateh" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={lang === "fa" ? "fa_IR" : "en_US"} />
+    {homeAlternate && <meta property="og:locale:alternate" content={lang === "fa" ? "en_US" : "fa_IR"} />}
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
     <title>{title}</title>
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={canonical} />
 
     <script is:inline>
       const storedTheme = localStorage.getItem("theme");
@@ -89,7 +98,7 @@ const {
     </script>
     <script
       type="application/ld+json"
-      set:html={JSON.stringify(personSchema)}
+      set:html={JSON.stringify(graph).replace(/</g, "\\u003c")}
     />
   </head>
 

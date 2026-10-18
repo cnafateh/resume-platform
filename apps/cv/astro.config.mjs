@@ -10,7 +10,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://cv.dzhuk.com',
+  site: 'https://cv.sinafateh.ir',
   integrations: [sitemap()],
 
   devToolbar: {

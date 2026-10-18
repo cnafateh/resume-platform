@@ -7,7 +7,7 @@ export interface Props {
     image?: string;
 }
 
-const {title, description, image = "/og-image.png"} = Astro.props;
+const {title, description, image = "/favicon.jpg"} = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(image, Astro.site);
@@ -16,10 +16,11 @@ const socialImageURL = new URL(image, Astro.site);
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.jpg"/>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg"/>
     <link rel="sitemap" href="/sitemap-index.xml"/>
     <title>{title}</title>
     <meta name="description" content={description}/>
+    <meta name="author" content="Sina Fateh"/>
     <link rel="canonical" href={canonicalURL.href} />
 
     <meta property="og:title" content={title}/>
@@ -27,11 +28,29 @@ const socialImageURL = new URL(image, Astro.site);
     <meta property="og:url" content={canonicalURL}/>
     <meta property="og:image" content={socialImageURL}/>
     <meta property="og:type" content="profile"/>
+    <meta property="og:site_name" content="Sina Fateh CV"/>
+    <meta property="og:locale" content="en_US"/>
 
-    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content={title}/>
     <meta name="twitter:description" content={description}/>
     <meta name="twitter:image" content={socialImageURL}/>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "@id": canonicalURL.href,
+      url: canonicalURL.href,
+      name: title,
+      description,
+      mainEntity: {
+        "@type": "Person",
+        "@id": "https://sinafateh.ir/#person",
+        name: "Sina Fateh",
+        alternateName: ["سینا فاتح", "cnafateh"],
+        url: "https://sinafateh.ir/",
+        sameAs: ["https://github.com/cnafateh/", "https://www.linkedin.com/in/cnafateh/"]
+      }
+    }).replace(/</g, "\\u003c")}/>
 </head>
 <body>
 <slot/>

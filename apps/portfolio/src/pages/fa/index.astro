@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { projects, topics } from "../../data/seo";
+import { data } from "../../data/resume";
+
+const topicNames: Record<string, string> = {
+  "asp-net-core": "توسعه با ASP.NET Core",
+  "docker-deployment": "داکر و استقرار نرم‌افزار",
+  "backend-engineering": "مهندسی بک‌اند و API",
+  "software-engineering": "مهندسی نرم‌افزار",
+};
+---
+
+<Layout lang="fa" homeAlternate title="سینا فاتح | مهندس نرم‌افزار، ASP.NET Core و Docker" description="سینا فاتح (Sina Fateh یا cnafateh) مهندس نرم‌افزار در تهران است. پروژه‌ها و تجربه‌های او در ASP.NET Core، سی‌شارپ، جنگو، API، داکر و استقرار سرویس‌ها را ببینید.">
+  <main class="section-shell py-16">
+    <nav aria-label="زبان" class="text-sm"><a class="underline" href="/" lang="en" dir="ltr">English</a></nav>
+    <header class="mt-16 max-w-4xl">
+      <p class="font-mono text-sm text-neutral-500">Sina Fateh · cnafateh</p>
+      <h1 class="mt-4 text-5xl font-semibold md:text-7xl">سینا فاتح</h1>
+      <p class="mt-5 text-2xl text-neutral-600 dark:text-neutral-400">مهندس نرم‌افزار و توسعه‌دهنده وب</p>
+      <p class="mt-8 text-lg leading-9 text-neutral-600 dark:text-neutral-400">من سینا فاتح هستم؛ در توسعه نرم‌افزارهای وب، سرویس‌های بک‌اند و استقرار آن‌ها کار می‌کنم. تمرکز فعلی من روی C#، دات‌نت و ASP.NET Core است و در پروژه‌هایم از Python، Django، PostgreSQL، Docker و Linux نیز استفاده کرده‌ام. این صفحه مسیر دسترسی به نمونه‌کارها، رزومه و یادداشت‌های فنی من است.</p>
+      <div class="mt-8 flex flex-wrap gap-5"><a class="underline" href="https://cv.sinafateh.ir/">رزومه سینا فاتح</a><a class="underline" href="https://github.com/cnafateh/">گیت‌هاب cnafateh</a><a class="underline" href={`mailto:${data.basics.email}`}>ارتباط ایمیلی</a></div>
+    </header>
+
+    <section class="mt-20" aria-labelledby="expertise-heading">
+      <h2 id="expertise-heading" class="text-3xl font-semibold">حوزه‌های کاری سینا فاتح</h2>
+      <div class="mt-6 grid gap-5 md:grid-cols-2">
+        <article class="rounded-2xl border border-black/10 p-6 dark:border-white/10"><h3 class="text-xl font-semibold">ASP.NET Core و C#</h3><p class="mt-3 leading-8 text-neutral-600 dark:text-neutral-400">ساخت برنامه‌های وب با MVC، لایه سرویس، اعتبارسنجی فرم‌ها، تزریق وابستگی و Entity Framework Core. نمونه عملی این کار را در پروژه TaskFlow می‌توان دید.</p></article>
+        <article class="rounded-2xl border border-black/10 p-6 dark:border-white/10"><h3 class="text-xl font-semibold">بک‌اند و API</h3><p class="mt-3 leading-8 text-neutral-600 dark:text-neutral-400">توسعه API با Django REST Framework، احراز هویت، دسترسی مبتنی بر نقش، PostgreSQL، Redis و ارتباط بلادرنگ با WebSocket در پروژه‌های واقعی.</p></article>
+        <article class="rounded-2xl border border-black/10 p-6 dark:border-white/10"><h3 class="text-xl font-semibold">Docker و استقرار</h3><p class="mt-3 leading-8 text-neutral-600 dark:text-neutral-400">کانتینرسازی برنامه‌ها، پیکربندی Nginx و پراکسی معکوس، HTTPS، دامنه، ساخت خودکار ایمیج و اجرای سرویس‌ها روی سرور لینوکسی.</p></article>
+        <article class="rounded-2xl border border-black/10 p-6 dark:border-white/10"><h3 class="text-xl font-semibold">مهندسی نرم‌افزار</h3><p class="mt-3 leading-8 text-neutral-600 dark:text-neutral-400">طراحی ساختار قابل نگهداری، تست رفتارهای مهم، جداسازی مسئولیت‌ها، CI/CD و توجه به عملکرد برنامه پس از انتشار.</p></article>
+      </div>
+    </section>
+
+    <section class="mt-20" aria-labelledby="projects-heading"><h2 id="projects-heading" class="text-3xl font-semibold">پروژه‌ها و نمونه‌کارها</h2><p class="mt-4 leading-8 text-neutral-600 dark:text-neutral-400">هر پروژه صفحه اختصاصی دارد و اطلاعات آن از فایل رزومه سایت به‌روزرسانی می‌شود.</p><ul class="mt-6 grid gap-3 md:grid-cols-2">{projects.map((project) => <li><a class="block rounded-2xl border border-black/10 p-5 dark:border-white/10" href={project.href}><strong dir="ltr" class="block text-lg">{project.name}</strong><span class="mt-2 block text-sm text-neutral-600 dark:text-neutral-400">{project.keywords?.slice(0, 4).join(" · ")}</span><span class="mt-3 block underline">مشاهده جزئیات پروژه</span></a></li>)}</ul></section>
+
+    <section class="mt-20" aria-labelledby="notes-heading"><h2 id="notes-heading" class="text-3xl font-semibold">یادداشت‌های کوتاه مهندسی</h2><p class="mt-4 leading-8 text-neutral-600 dark:text-neutral-400">توضیح‌های فنی کوتاه درباره زمینه‌های کاری من، همراه با پیوند به پروژه‌های مرتبط:</p><ul class="mt-6 grid gap-3 md:grid-cols-2">{topics.map((topic) => <li><a class="block rounded-2xl border border-black/10 p-5 underline dark:border-white/10" href={`/topics/${topic.slug}/`}>{topicNames[topic.slug]}</a></li>)}</ul></section>
+    <p class="mt-20 text-sm text-neutral-500">سینا فاتح · Sina Fateh · cnafateh · تهران</p>
+  </main>
+</Layout>

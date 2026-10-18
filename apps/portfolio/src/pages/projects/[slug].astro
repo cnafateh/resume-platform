@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { personId, projects, topics, siteUrl } from "../../data/seo";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const canonical = `${siteUrl}${project.href}`;
+const related = projects.filter((item) => item.slug !== project.slug && item.keywords?.some((keyword) => project.keywords?.includes(keyword))).slice(0, 3);
+const matchingTopics = topics.filter((topic) => topic.related.some((slug) => slug === project.slug));
+const schema = {
+  "@type": "CreativeWork",
+  "@id": `${canonical}#project`,
+  name: project.name,
+  description: project.description,
+  url: canonical,
+  author: { "@id": personId },
+  keywords: project.keywords?.join(", "),
+  ...(project.links?.github ? { codeRepository: project.links.github } : {}),
+  ...(project.links?.live ? { sameAs: project.links.live } : {}),
+};
+---
+
+<Layout title={`${project.name} | Sina Fateh`} description={`${project.description.slice(0, 150)}…`} schema={schema}>
+  <main class="section-shell py-16">
+    <nav aria-label="Breadcrumb" class="text-sm text-neutral-500"><a href="/" class="underline">Sina Fateh</a> <span aria-hidden="true">/</span> <a href="/#projects" class="underline">Projects</a> <span aria-hidden="true">/</span> {project.name}</nav>
+    <article class="mt-12 max-w-4xl">
+      <p class="font-mono text-xs uppercase tracking-widest text-neutral-500">Software project by Sina Fateh</p>
+      <h1 class="mt-3 text-4xl font-semibold leading-tight md:text-5xl">{project.name}</h1>
+      <p class="mt-8 text-lg leading-9 text-neutral-600 dark:text-neutral-400">{project.description}</p>
+      {project.keywords?.length > 0 && <section class="mt-12" aria-labelledby="stack-heading"><h2 id="stack-heading" class="text-2xl font-semibold">Technologies and focus</h2><ul class="mt-4 flex flex-wrap gap-2">{project.keywords.map((keyword) => <li class="rounded-full border border-black/10 px-3 py-1 text-sm dark:border-white/10">{keyword}</li>)}</ul></section>}
+      {(project.links?.live || project.links?.github) && <section class="mt-12" aria-labelledby="links-heading"><h2 id="links-heading" class="text-2xl font-semibold">Project links</h2><div class="mt-4 flex flex-wrap gap-5">{project.links?.live && <a class="underline" href={project.links.live} rel="noopener noreferrer">Live project ↗</a>}{project.links?.github && <a class="underline" href={project.links.github} rel="noopener noreferrer">Source code ↗</a>}</div></section>}
+    </article>
+    {matchingTopics.length > 0 && <section class="mt-16" aria-labelledby="topics-heading"><h2 id="topics-heading" class="text-2xl font-semibold">Related engineering notes</h2><ul class="mt-5 grid gap-3 md:grid-cols-2">{matchingTopics.map((topic) => <li><a class="block rounded-2xl border border-black/10 p-5 underline dark:border-white/10" href={`/topics/${topic.slug}/`}>{topic.title}</a></li>)}</ul></section>}
+    {related.length > 0 && <section class="mt-16" aria-labelledby="related-heading"><h2 id="related-heading" class="text-2xl font-semibold">Related projects</h2><ul class="mt-5 grid gap-3 md:grid-cols-2">{related.map((item) => <li><a class="block rounded-2xl border border-black/10 p-5 underline dark:border-white/10" href={item.href}>{item.name}</a></li>)}</ul></section>}
+    <p class="mt-16 text-sm"><a class="underline" href="/#projects">← All projects by Sina Fateh</a></p>
+  </main>
+</Layout>

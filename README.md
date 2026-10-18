@@ -564,6 +564,16 @@ git push
 
 The CI/CD pipeline handles rebuilding and publishing the applications.
 
+### Search indexing after a resume update
+
+The portfolio build creates a dedicated page at `/projects/<project-name>/` for every entry in `resume.json`. The generated sitemap includes those project pages, the English and Persian landing pages, and the engineering notes. Project names determine their URL slugs, so renaming a project changes its URL; keep names stable when possible.
+
+- Portfolio sitemap: https://sinafateh.ir/sitemap-index.xml
+- CV sitemap: https://cv.sinafateh.ir/sitemap-index.xml
+- Both `robots.txt` files advertise their respective sitemap.
+
+After deployment, submit the portfolio sitemap in the **Sitemaps** section of the verified `sinafateh.ir` property in Google Search Console. Submit the CV sitemap under the verified CV property or a domain property covering the subdomain. Use URL Inspection to request indexing for important new project pages. Sitemap inclusion makes URLs discoverable; search indexing and ranking are determined by Google.
+
 ---
 
 ## Deployment Strategy

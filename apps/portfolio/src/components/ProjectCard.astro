@@ -4,6 +4,7 @@ import {
   Github,
   Container
 } from "lucide-astro";
+import { slugify } from "../data/seo";
 
 interface Props {
   project: any;
@@ -13,6 +14,7 @@ const { project } = Astro.props;
 
 const live = project.links?.live;
 const github = project.links?.github;
+const detailUrl = `/projects/${slugify(project.name)}/`;
 ---
 
 <article
@@ -42,7 +44,7 @@ const github = project.links?.github;
         dark:text-white
       "
     >
-      {project.name}
+      <a href={detailUrl} class="hover:underline">{project.name}</a>
     </h3>
 
     {
@@ -116,6 +118,7 @@ const github = project.links?.github;
       dark:border-white/10
     "
   >
+    <a href={detailUrl} class="text-sm font-medium underline underline-offset-4">Project details</a>
 
     {
       live && (
