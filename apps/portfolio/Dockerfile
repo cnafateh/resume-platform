@@ -11,8 +11,8 @@ RUN npm ci
 
 COPY apps/portfolio ./
 
-# Shared resume.json from monorepo root
-COPY resume.json /resume.json
+# Shared content imported by src/data from the monorepo root.
+COPY resume.json resume.fa.json notes.json /
 
 RUN npm run build
 
