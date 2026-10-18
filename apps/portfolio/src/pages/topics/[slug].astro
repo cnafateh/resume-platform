@@ -21,9 +21,9 @@ const schema = {
 };
 ---
 
-<Layout title={`${topic.title} | ${data.basics.name}`} description={topic.description} schema={schema} bodyClass="portfolio-v2 editorial-page">
+<Layout title={`${topic.title} | ${data.basics.name}`} description={topic.description} schema={schema} alternatePath={`/topics/${topic.slug}/`} bodyClass="portfolio-v2 editorial-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <header class="inner-header"><a class="inner-brand" href="/">{data.basics.name}<span aria-hidden="true">✳</span></a><nav aria-label="Page navigation"><a href="/#work">Projects</a><a href="https://cv.sinafateh.ir/">CV ↗</a><a href={`mailto:${data.basics.email}`}>Contact ↗</a></nav></header>
+  <header class="inner-header"><a class="inner-brand" href="/">{data.basics.name}<span aria-hidden="true">✳</span></a><nav aria-label="Page navigation"><a href="/#work">Projects</a><a href={`/fa/topics/${topic.slug}/`} lang="fa" dir="rtl">فارسی</a><a href="https://cv.sinafateh.ir/">CV ↗</a><a href={`mailto:${data.basics.email}`}>Contact ↗</a></nav></header>
   <main id="main-content" class="inner-main">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span aria-current="page">{topic.title}</span></nav>
     <article class="note-article"><p class="inner-eyebrow">ENGINEERING NOTE / {String(topics.findIndex((item) => item.slug === topic.slug) + 1).padStart(2, "0")}</p><h1>{topic.title}</h1><p class="inner-lead">{topic.intro}</p><div class="note-questions">{topic.sections.map((section, index) => <section><span>{String(index + 1).padStart(2, "0")}</span><div><h2>{section.heading}</h2><p>{section.body}</p></div></section>)}</div></article>

@@ -11,6 +11,7 @@ interface Props {
   lang?: "en" | "fa";
   schema?: Record<string, unknown>;
   homeAlternate?: boolean;
+  alternatePath?: string;
   bodyClass?: string;
 }
 
@@ -20,6 +21,7 @@ const {
   lang = "en",
   schema,
   homeAlternate = false,
+  alternatePath,
   bodyClass = "",
 } = Astro.props;
 
@@ -68,6 +70,11 @@ const graph = {
       <link rel="alternate" hreflang="fa" href={`${siteUrl}/fa/`} />
       <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
     </>}
+    {alternatePath && <>
+      <link rel="alternate" hreflang="en" href={`${siteUrl}${alternatePath}`} />
+      <link rel="alternate" hreflang="fa" href={`${siteUrl}/fa${alternatePath}`} />
+      <link rel="alternate" hreflang="x-default" href={`${siteUrl}${alternatePath}`} />
+    </>}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -79,7 +86,7 @@ const graph = {
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={`${basics.name} portfolio preview`} />
     <meta property="og:locale" content={lang === "fa" ? "fa_IR" : "en_US"} />
-    {homeAlternate && <meta property="og:locale:alternate" content={lang === "fa" ? "en_US" : "fa_IR"} />}
+    {(homeAlternate || alternatePath) && <meta property="og:locale:alternate" content={lang === "fa" ? "en_US" : "fa_IR"} />}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

@@ -25,9 +25,9 @@ const schema = {
 };
 ---
 
-<Layout title={`${project.name} | ${data.basics.name}`} description={`${project.description.slice(0, 150)}…`} schema={schema} bodyClass="portfolio-v2 editorial-page">
+<Layout title={`${project.name} | ${data.basics.name}`} description={`${project.description.slice(0, 150)}…`} schema={schema} alternatePath={project.href} bodyClass="portfolio-v2 editorial-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <header class="inner-header"><a class="inner-brand" href="/">{data.basics.name}<span aria-hidden="true">✳</span></a><nav aria-label="Page navigation"><a href="/#work">All work</a><a href="https://cv.sinafateh.ir/">CV ↗</a><a href={`mailto:${data.basics.email}`}>Contact ↗</a></nav></header>
+  <header class="inner-header"><a class="inner-brand" href="/">{data.basics.name}<span aria-hidden="true">✳</span></a><nav aria-label="Page navigation"><a href="/#work">All work</a><a href={`/fa${project.href}`} lang="fa" dir="rtl">فارسی</a><a href="https://cv.sinafateh.ir/">CV ↗</a><a href={`mailto:${data.basics.email}`}>Contact ↗</a></nav></header>
   <main id="main-content" class="inner-main">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#work">Work</a><span>/</span><span aria-current="page">{project.name}</span></nav>
     <div class="inner-hero"><div><p class="inner-eyebrow">PROJECT / {String(projects.findIndex((item) => item.slug === project.slug) + 1).padStart(2, "0")}</p><h1>{project.name}</h1><p class="inner-lead">{project.description}</p><div class="inner-actions">{project.links?.live && <a href={project.links.live} target="_blank" rel="noopener noreferrer">View live project ↗</a>}{project.links?.github && <a href={project.links.github} target="_blank" rel="noopener noreferrer">Explore source ↗</a>}</div></div><div class="inner-art" aria-hidden="true"><span class="inner-art-ring"></span><span class="inner-art-core">{String(projects.findIndex((item) => item.slug === project.slug) + 1).padStart(2, "0")}</span><span class="inner-art-label">DESIGN / BUILD / SHIP</span></div></div>
