@@ -3,7 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { data } from "../../../data/resume";
 import { personId, projects, topics, siteUrl } from "../../../data/seo";
 import { faName, faProject, faProjectPath, faTopic, faTopicPath } from "../../../data/fa";
-import "@fontsource-variable/estedad/wght.css";
+import "@fontsource-variable/vazirmatn/wght.css";
 import "../../../styles/portfolio-experience.css";
 import "../../../styles/portfolio-fa.css";
 
@@ -35,11 +35,11 @@ const schema = {
   <header class="inner-header"><a class="inner-brand" href="/fa/">{faName}<span aria-hidden="true">✳</span></a><nav aria-label="ناوبری صفحه"><a href="/fa/#work">همهٔ پروژه‌ها</a><a href={project.href} lang="en" dir="ltr">English</a><a href={`mailto:${data.basics.email}`}>ارتباط ↗</a></nav></header>
   <main id="main-content" class="inner-main">
     <nav class="breadcrumbs" aria-label="مسیر صفحه"><a href="/fa/">خانه</a><span>/</span><a href="/fa/#work">پروژه‌ها</a><span>/</span><span aria-current="page">{copy.title}</span></nav>
-    <div class="inner-hero"><div><p class="inner-eyebrow">پروژه / {String(projects.findIndex((item) => item.slug === project.slug) + 1).padStart(2, "0")}</p><h1>{copy.title}</h1><p class="inner-lead">{copy.description}</p><div class="inner-actions">{project.links?.live && <a href={project.links.live} target="_blank" rel="noopener noreferrer">دیدن پروژهٔ زنده ↗</a>}{project.links?.github && <a href={project.links.github} target="_blank" rel="noopener noreferrer">دیدن کد پروژه ↗</a>}</div></div><div class="inner-art" aria-hidden="true"><span class="inner-art-ring"></span><span class="inner-art-core">{String(projects.findIndex((item) => item.slug === project.slug) + 1).padStart(2, "0")}</span><span class="inner-art-label">طراحی / توسعه / اجرا</span></div></div>
-    {project.keywords?.length > 0 && <section class="inner-section" aria-labelledby="stack-heading"><div class="inner-section-head"><span>۰۱ / فناوری</span><h2 id="stack-heading">ابزارها و زمینهٔ کار</h2></div><ul class="inner-tags">{project.keywords.map((keyword) => <li dir="ltr">{keyword}</li>)}</ul></section>}
+    <div class="inner-hero"><div><p class="inner-eyebrow">پروژه / {String(projects.findIndex((item) => item.slug === project.slug) + 1).padStart(2, "0")}</p><h1>{copy.title}</h1><p class="inner-lead">{copy.description}</p><div class="inner-actions">{project.links?.live && <a href={project.links.live} target="_blank" rel="noopener noreferrer">رفتن به سایت پروژه ↗</a>}{project.links?.github && <a href={project.links.github} target="_blank" rel="noopener noreferrer">دیدن کد در گیت‌هاب ↗</a>}</div></div><div class="inner-art" aria-hidden="true"><span class="inner-art-ring"></span><span class="inner-art-core">{String(projects.findIndex((item) => item.slug === project.slug) + 1).padStart(2, "0")}</span><span class="inner-art-label">طراحی / توسعه / اجرا</span></div></div>
+    {project.keywords?.length > 0 && <section class="inner-section" aria-labelledby="stack-heading"><div class="inner-section-head"><span>۰۱ / فناوری</span><h2 id="stack-heading">فناوری‌های این پروژه</h2></div><ul class="inner-tags">{project.keywords.map((keyword) => <li dir="ltr">{keyword}</li>)}</ul></section>}
     {matchingTopics.length > 0 && <section class="inner-section" aria-labelledby="topics-heading"><div class="inner-section-head"><span>۰۲ / بیشتر بخوانید</span><h2 id="topics-heading">یادداشت‌های مرتبط</h2></div><ul class="inner-link-list">{matchingTopics.map((topic) => <li><a href={faTopicPath(topic.slug)}>{faTopic(topic.slug).title}<span aria-hidden="true">↗</span></a></li>)}</ul></section>}
     {related.length > 0 && <section class="inner-section" aria-labelledby="related-heading"><div class="inner-section-head"><span>۰۳ / پروژه‌های دیگر</span><h2 id="related-heading">پروژه‌های مرتبط</h2></div><ul class="inner-link-list">{related.map((item) => <li><a href={faProjectPath(item.slug)}>{faProject(item.slug, item.name, item.description).title}<span aria-hidden="true">↗</span></a></li>)}</ul></section>}
     <a class="inner-back" href="/fa/#work">← دیدن همهٔ پروژه‌ها</a>
   </main>
-  <footer class="inner-footer"><span>{faName}</span><a href="/fa/">بازگشت به صفحهٔ اصلی ↗</a></footer>
+  <footer class="inner-footer"><span>{faName}</span><a href="/fa/">برگشت به خانه ↗</a></footer>
 </Layout>

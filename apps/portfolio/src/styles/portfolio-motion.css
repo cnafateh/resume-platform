@@ -288,7 +288,7 @@ body.portfolio-v2 .contact-section h2 { line-height: 1.08; }
   body.portfolio-v2 .site-header .mobile-nav a:nth-child(6) { --nav-order: 6; }
   body.portfolio-v2 .site-header .mobile-nav a:nth-child(7) { --nav-order: 7; }
   body.portfolio-v2 .site-header .mobile-nav a:nth-child(8) { --nav-order: 8; }
-  .portfolio-v2.fa-page .mobile-nav a { font-family: "Estedad Variable", Tahoma, sans-serif; letter-spacing: normal; font-size: clamp(26px, 5vw, 46px); }
+  .portfolio-v2.fa-page .mobile-nav a { font-family: "Vazirmatn Variable", Tahoma, sans-serif; letter-spacing: normal; font-size: clamp(26px, 5vw, 46px); }
   .portfolio-v2.fa-page .mobile-nav a.nav-secondary { font-size: 14px; }
 }
 @keyframes menu-arrive { from { opacity: 0; clip-path: circle(0 at 6% 5%); } to { opacity: 1; clip-path: circle(150% at 6% 5%); } }
