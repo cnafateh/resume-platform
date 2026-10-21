@@ -83,6 +83,13 @@ body.portfolio-v2.fa-detail {
 .portfolio-v2.fa-page .note-arrow { align-self: start; }
 .portfolio-v2.fa-page .contact-orbit { right: auto; left: -140px; }
 .portfolio-v2.fa-page .contact-email bdi { font-family: "Segoe UI", sans-serif; direction: ltr; unicode-bidi: isolate; }
+.portfolio-v2.fa-page .contact-email { transition: color .25s ease, border-color .25s ease; }
+.portfolio-v2.fa-page .contact-email:is(:hover, :focus-visible) { gap: 35px; color: #27503d; border-color: currentColor; }
+.portfolio-v2.fa-page .contact-email span { transition: transform .25s ease; }
+.portfolio-v2.fa-page .contact-email:is(:hover, :focus-visible) span { transform: translate(3px, -3px); }
+.portfolio-v2.fa-page .text-link[href^="mailto:"]:is(:hover, :focus-visible) { gap: 27px; }
+.portfolio-v2.fa-page .text-link[href^="mailto:"] span { transition: transform .25s ease; }
+.portfolio-v2.fa-page .text-link[href^="mailto:"]:is(:hover, :focus-visible) span { transform: translate(3px, -3px); }
 .portfolio-v2.fa-page .contact-section p { line-height: 2; }
 
 .portfolio-v2.fa-detail .inner-brand { font-size: 18px; }
