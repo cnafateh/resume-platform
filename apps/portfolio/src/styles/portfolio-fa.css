@@ -1,7 +1,7 @@
 /* Persian typography and RTL refinements for the portfolio and editorial pages. */
 body.portfolio-v2.fa-page,
 body.portfolio-v2.fa-detail {
-  font-family: "Estedad Variable", Tahoma, sans-serif;
+  font-family: "Vazirmatn Variable", Tahoma, sans-serif;
   font-synthesis: none;
 }
 
@@ -12,7 +12,7 @@ body.portfolio-v2.fa-detail {
 
 .portfolio-v2.fa-page :is(.hero h1, .display-heading, .contact-section h2),
 .portfolio-v2.fa-detail h1 {
-  font-family: "Estedad Variable", Tahoma, sans-serif;
+  font-family: "Vazirmatn Variable", Tahoma, sans-serif;
   font-weight: 700;
   letter-spacing: -.035em;
   line-height: 1.33;
@@ -46,8 +46,9 @@ body.portfolio-v2.fa-detail {
 .portfolio-v2.fa-page .project-visual-top,
 .portfolio-v2.fa-page .capability-count,
 .portfolio-v2.fa-page .about-meta span,
+.portfolio-v2.fa-page .note-item > span:first-child,
 .portfolio-v2.fa-page .scene-note {
-  font-family: "Estedad Variable", Tahoma, sans-serif;
+  font-family: "Vazirmatn Variable", Tahoma, sans-serif;
   letter-spacing: normal;
   font-size: 12px;
 }
@@ -88,7 +89,7 @@ body.portfolio-v2.fa-detail {
 .portfolio-v2.fa-detail .inner-header nav { font-size: 13px; }
 .portfolio-v2.fa-detail .breadcrumbs { font-size: 12px; }
 .portfolio-v2.fa-detail .inner-eyebrow,
-.portfolio-v2.fa-detail .inner-section-head > span { font-family: "Estedad Variable", sans-serif; font-size: 12px; letter-spacing: normal; }
+.portfolio-v2.fa-detail .inner-section-head > span { font-family: "Vazirmatn Variable", sans-serif; font-size: 12px; letter-spacing: normal; }
 .portfolio-v2.fa-detail h1 { font-size: clamp(44px, 4.5vw, 78px); }
 .portfolio-v2.fa-detail .inner-lead { line-height: 2.1; }
 .portfolio-v2.fa-detail .inner-section-head h2,

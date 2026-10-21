@@ -3,7 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { data } from "../../../data/resume";
 import { personId, projects, siteUrl, topics } from "../../../data/seo";
 import { faName, faProject, faProjectPath, faTopic, faTopicPath } from "../../../data/fa";
-import "@fontsource-variable/estedad/wght.css";
+import "@fontsource-variable/vazirmatn/wght.css";
 import "../../../styles/portfolio-experience.css";
 import "../../../styles/portfolio-fa.css";
 
@@ -31,10 +31,10 @@ const schema = {
   <header class="inner-header"><a class="inner-brand" href="/fa/">{faName}<span aria-hidden="true">✳</span></a><nav aria-label="ناوبری صفحه"><a href="/fa/#work">پروژه‌ها</a><a href={`/topics/${topic.slug}/`} lang="en" dir="ltr">English</a><a href={`mailto:${data.basics.email}`}>ارتباط ↗</a></nav></header>
   <main id="main-content" class="inner-main">
     <nav class="breadcrumbs" aria-label="مسیر صفحه"><a href="/fa/">خانه</a><span>/</span><a href="/fa/#notes">یادداشت‌ها</a><span>/</span><span aria-current="page">{copy.title}</span></nav>
-    <article class="note-article"><p class="inner-eyebrow">یادداشت مهندسی / {String(topics.findIndex((item) => item.slug === topic.slug) + 1).padStart(2, "0")}</p><h1>{copy.title}</h1><p class="inner-lead">{copy.intro}</p><details class="note-outline"><summary>در این یادداشت <span>{String(copy.sections.length).padStart(2, "0")} پرسش</span></summary><nav aria-label="پرسش‌های این یادداشت"><ol>{copy.sections.map((section, index) => <li><a href={`#question-${index + 1}`}>{section.heading}</a></li>)}</ol></nav></details><div class="note-questions">{copy.sections.map((section, index) => <section id={`question-${index + 1}`}><span>{String(index + 1).padStart(2, "0")}</span><div><h2>{section.heading}</h2><p>{section.body}</p></div></section>)}</div></article>
-    <section class="inner-section" aria-labelledby="project-heading"><div class="inner-section-head"><span>در عمل</span><h2 id="project-heading">پروژه‌های مرتبط</h2></div><ul class="inner-link-list">{related.map((project) => <li><a href={faProjectPath(project.slug)}>{faProject(project.slug, project.name, project.description).title}<span aria-hidden="true">↗</span></a></li>)}</ul></section>
-    <section class="inner-section" aria-labelledby="more-heading"><div class="inner-section-head"><span>ادامهٔ مطالعه</span><h2 id="more-heading">یادداشت‌های دیگر</h2></div><ul class="inner-link-list">{topics.filter((item) => item.slug !== topic.slug).map((item) => <li><a href={faTopicPath(item.slug)}>{faTopic(item.slug).title}<span aria-hidden="true">↗</span></a></li>)}</ul></section>
+    <article class="note-article"><p class="inner-eyebrow">یادداشت فنی / {String(topics.findIndex((item) => item.slug === topic.slug) + 1).padStart(2, "0")}</p><h1>{copy.title}</h1><p class="inner-lead">{copy.intro}</p><details class="note-outline"><summary>در این یادداشت <span>{String(copy.sections.length).padStart(2, "0")} پرسش</span></summary><nav aria-label="پرسش‌های این یادداشت"><ol>{copy.sections.map((section, index) => <li><a href={`#question-${index + 1}`}>{section.heading}</a></li>)}</ol></nav></details><div class="note-questions">{copy.sections.map((section, index) => <section id={`question-${index + 1}`}><span>{String(index + 1).padStart(2, "0")}</span><div><h2>{section.heading}</h2><p>{section.body}</p></div></section>)}</div></article>
+    <section class="inner-section" aria-labelledby="project-heading"><div class="inner-section-head"><span>در عمل</span><h2 id="project-heading">کجا از این‌ها استفاده کرده‌ام؟</h2></div><ul class="inner-link-list">{related.map((project) => <li><a href={faProjectPath(project.slug)}>{faProject(project.slug, project.name, project.description).title}<span aria-hidden="true">↗</span></a></li>)}</ul></section>
+    <section class="inner-section" aria-labelledby="more-heading"><div class="inner-section-head"><span>ادامهٔ مطالعه</span><h2 id="more-heading">بیشتر بخوانید</h2></div><ul class="inner-link-list">{topics.filter((item) => item.slug !== topic.slug).map((item) => <li><a href={faTopicPath(item.slug)}>{faTopic(item.slug).title}<span aria-hidden="true">↗</span></a></li>)}</ul></section>
     <a class="inner-back" href="/fa/#notes">← بازگشت به یادداشت‌ها</a>
   </main>
-  <footer class="inner-footer"><span>{faName}</span><a href="/fa/">بازگشت به صفحهٔ اصلی ↗</a></footer>
+  <footer class="inner-footer"><span>{faName}</span><a href="/fa/">برگشت به خانه ↗</a></footer>
 </Layout>
